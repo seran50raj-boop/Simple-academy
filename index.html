@@ -2982,6 +2982,9 @@ window.SIMPLE_PILOT_CONFIG = {
 if(new URLSearchParams(location.search).get("admin")==="1"){document.documentElement.dataset.simpleAdmin="1"}
 </script>
 <style>
+
+/* Admin route hard fallback: dashboard remains visible even if admin JS boot is delayed. */
+html[data-simple-admin="1"] #pilot-admin-view{display:block!important}
 html[data-simple-admin="1"] #profile-view,
 html[data-simple-admin="1"] #honor-view,
 html[data-simple-admin="1"] #facilitator-view,
