@@ -6953,10 +6953,13 @@ window.addEventListener('load',()=>{
   window.addEventListener("load",hideLearnerViews);
   const $=s=>document.querySelector(s);
   const cfg=window.SIMPLE_PILOT_CONFIG||{};
+  const ADMIN_EMAIL="seran50.raj@gmail.com";
   let dashboardRows=[];
   $("#admin-course-link").addEventListener("click",()=>{location.href=location.pathname});
   $("#admin-search").addEventListener("input",()=>renderTable(dashboardRows));
   $("#admin-export").addEventListener("click",exportCsv);
+  $("#admin-email").value=ADMIN_EMAIL;
+  $("#admin-email").readOnly=true;
   function fmtDate(v){if(!v)return"—";try{return new Intl.DateTimeFormat("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(v))}catch(e){return v}}
   function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
   function normalise(rows){
@@ -7017,13 +7020,18 @@ window.addEventListener('load',()=>{
     $("#admin-mode-banner").textContent="Central tracking is connected. Sign in with the administrator email authorised in your Supabase RLS policy; a 6-digit code will be emailed to you.";
     const sb=window.simplePilotBackend.adminClient();
     const {data:{session}}=await sb.auth.getSession();
-    if(session){$("#admin-auth-box").classList.add("hidden");await loadRemote()}
+    if(session){
+      const signedIn=(session.user?.email||"").toLowerCase();
+      if(signedIn===ADMIN_EMAIL){$("#admin-auth-box").classList.add("hidden");await loadRemote()}
+      else {await sb.auth.signOut();$("#admin-auth-message").textContent="This account is not authorised as the administrator."}
+    }
     $("#admin-refresh").addEventListener("click",loadRemote);
     $("#admin-signout").addEventListener("click",async()=>{await sb.auth.signOut();location.reload()});
     let pendingAdminEmail="";
     $("#admin-send-link").addEventListener("click",async()=>{
       const email=$("#admin-email").value.trim().toLowerCase();
       if(!email){$("#admin-auth-message").textContent="Enter the administrator email.";return}
+      if(email!==ADMIN_EMAIL){$("#admin-auth-message").textContent="This email is not authorised for administrator access.";return}
       pendingAdminEmail=email;
       $("#admin-auth-message").textContent="Sending your 6-digit admin code…";
       const {error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
@@ -7039,10 +7047,11 @@ window.addEventListener('load',()=>{
       $("#admin-auth-message").textContent="Verifying…";
       const {data,error}=await sb.auth.verifyOtp({email:pendingAdminEmail,token,type:"email"});
       if(error||!data?.session){$("#admin-auth-message").textContent="That code could not be verified.";return}
+      if((data.session.user?.email||"").toLowerCase()!==ADMIN_EMAIL){await sb.auth.signOut();$("#admin-auth-message").textContent="This account is not authorised as the administrator.";return}
       $("#admin-auth-box").classList.add("hidden");
       await loadRemote();
     });
-    sb.auth.onAuthStateChange((event,session)=>{if(session){$("#admin-auth-box").classList.add("hidden");setTimeout(loadRemote,50)}});
+    sb.auth.onAuthStateChange((event,session)=>{if(session&&(session.user?.email||"").toLowerCase()===ADMIN_EMAIL){$("#admin-auth-box").classList.add("hidden");setTimeout(loadRemote,50)}});
   }
   init();
 })();
@@ -7059,5 +7068,17 @@ document.getElementById("pilot-learner-signout")?.addEventListener("click",async
 });
 </script>
 
+
+<script id="simple-admin-final-route-fix">
+(()=>{
+ const isAdmin=new URLSearchParams(location.search).get("admin")==="1";
+ const admin=document.getElementById("pilot-admin-view");
+ if(isAdmin){
+   document.documentElement.dataset.simpleAdmin="1";
+   ["profile-view","honor-view","facilitator-view","module-map-view","lesson-view"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.setProperty("display","none","important")});
+   if(admin){admin.classList.remove("hidden");admin.style.setProperty("display","block","important");}
+ } else if(admin){admin.style.setProperty("display","none","important");}
+})();
+</script>
 </body>
 </html>
