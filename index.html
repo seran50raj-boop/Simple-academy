@@ -3588,7 +3588,7 @@ html[data-simple-admin="1"] #pilot-learner-signout{display:none!important}
  <div class="lp-hero"><div class="lp-credo">TWO-MODULE PILOT</div><h1 id="lp-title">Your <span>Learning Path.</span></h1><p>Complete Andragogy first, then unlock Experiential Learning. Your module progress is recorded for the pilot.</p></div>
  <div class="lp-summary"><div><small id="lp-learner">Welcome, learner</small><strong id="lp-overall">0% of your journey complete</strong></div><div class="lp-track" aria-label="Overall progress"><i id="lp-overall-fill" style="width:0%"></i></div></div>
  <div class="lp-route" id="lp-route" aria-label="Available modules"></div>
- <p class="lp-map-note">This pilot contains two modules. Progress is recorded for the administrator and also cached on this device so you can resume. Completion certificates are issued by SIMple Academy, not by an accrediting body.</p>
+ <p class="lp-map-note" id="lp-map-note">This pilot contains two modules. Progress is recorded for the administrator and also cached on this device so you can resume. Completion certificates are issued by SIMple Academy, not by an accrediting body.</p>
  </div>
 </section>
 <section aria-label="Andragogy learning module" class="lesson-view hidden" id="lesson-view">
@@ -4052,6 +4052,7 @@ html[data-simple-admin="1"] #pilot-learner-signout{display:none!important}
     };
 
     function canAdvanceFrom(panelId) {
+      if (window.SIMPLE_SUPERUSER === true) return true;
       if (panelId === "foundations") return window.lesson1Mastered === true;
       if (panelId === "assumptions") return activitySuccess.assumptions;
       if (panelId === "principles") return completedSections.has("principles") || (activitySuccess.principles && window.v49Ready?.() === true);
@@ -4564,6 +4565,10 @@ const v512Scenes={
     document.querySelectorAll(".nav-link").forEach(button => {
       button.addEventListener("click", () => {
         const currentPanel = document.querySelector(".learning-panel.active")?.id;
+        if (window.SIMPLE_SUPERUSER === true) {
+          setPanel(button.dataset.panel, false);
+          return;
+        }
         const targetIndex = panels.indexOf(button.dataset.panel);
         const currentIndex = panels.indexOf(currentPanel);
         if (completedSections.has(button.dataset.panel)) { setPanel(button.dataset.panel, false); return; }
@@ -4582,6 +4587,10 @@ const v512Scenes={
     document.querySelectorAll(".next-button").forEach(button => {
       button.addEventListener("click", () => {
         const currentPanel = button.closest(".learning-panel").id;
+        if (window.SIMPLE_SUPERUSER === true) {
+          setPanel(button.dataset.next, false);
+          return;
+        }
         if (!canAdvanceFrom(currentPanel)) {
           showGateMessage(currentPanel);
           return;
@@ -5451,7 +5460,7 @@ let state=state0(),currentKey='';
 function storageKey(){let id='guest';try{ id=document.getElementById('learner-name')?.value.trim()||document.getElementById('learner-greeting')?.textContent.replace('Learning profile:','').trim()||'pilot'; }catch(e){}return 'simple_academy_experiential_v1_'+id.toLowerCase().replace(/[^a-z0-9@._-]/g,'_');}
 function persist(){try{localStorage.setItem(currentKey,JSON.stringify(state));}catch(e){}}
 function restore(){const key=storageKey();if(currentKey===key)return;currentKey=key;try{let s=JSON.parse(localStorage.getItem(key)||'null');state=s?{...state0(),...s}:state0();}catch(e){state=state0();}state.step=Math.max(0,Math.min(7,Number(state.step)||0));paint();}
-function isValid(n){return [state.prediction==='b',state.lenses.length===3,state.cycles.length===4,state.designValid&&state.safeguards.length===3,state.example==='abstract',qs.every((_,i)=>state.answers[i]?.done),state.recallDone&&state.deweyDone,true][n];}
+function isValid(n){if(window.SIMPLE_SUPERUSER===true)return true;return [state.prediction==='b',state.lenses.length===3,state.cycles.length===4,state.designValid&&state.safeguards.length===3,state.example==='abstract',qs.every((_,i)=>state.answers[i]?.done),state.recallDone&&state.deweyDone,true][n];}
 function drawStep(){
  $$('.ex-stage').forEach((node,i)=>{let on=i===state.step;node.classList.toggle('active',on);node.setAttribute('aria-hidden',String(!on));});
  $('#ex-track').innerHTML=labels.map((s,i)=>'<i class="'+(i<=state.step?'ex-on':'')+'" title="'+s+'"></i>').join('');
@@ -5563,7 +5572,7 @@ $$('[data-ex-recall-dewey]').forEach(b=>b.addEventListener('click',()=>{
  if(state.deweyDone)return;if(b.dataset.exRecallDewey==='b'){state.deweyDone=true;$('#ex-recall-dewey-feedback').className='ex-feedback ex-good';}else{$('#ex-recall-dewey-feedback').textContent='Try again. Consider how an experience influences what the learner does and learns next.';$('#ex-recall-dewey-feedback').className='ex-feedback ex-warn';}persist();paintRecall();
 }));
 $('#ex-back').addEventListener('click',()=>{state.step=Math.max(0,state.step-1);persist();drawStep();root.scrollIntoView({behavior:'smooth',block:'start'});});
-$('#ex-next').addEventListener('click',()=>{if(!isValid(state.step)||state.step>=7)return;state.step++;if(state.step===7&&!state.done){state.done=true;window.dispatchEvent(new Event('simple-module2-complete'));}persist();drawStep();root.scrollIntoView({behavior:'smooth',block:'start'});});
+$('#ex-next').addEventListener('click',()=>{if(!isValid(state.step)||state.step>=7)return;state.step++;if(state.step===7&&!state.done&&window.SIMPLE_SUPERUSER!==true){state.done=true;window.dispatchEvent(new Event('simple-module2-complete'));}persist();drawStep();root.scrollIntoView({behavior:'smooth',block:'start'});});
 const observer=new MutationObserver(()=>{if(root.classList.contains('active')){if(lessonKicker)lessonKicker.textContent='THE SCIENCE BEHIND SIMULATION · EXPERIENTIAL LEARNING';restore();}else if(lessonKicker){lessonKicker.textContent=originalLessonKicker;}});observer.observe(root,{attributes:true,attributeFilter:['class']});
 restore();
 })();
@@ -5649,7 +5658,7 @@ function persist(){try{localStorage.setItem(scopeKey(),JSON.stringify(state));}c
 function good(node,text){node.textContent=text;node.classList.add('good');node.classList.remove('warn');}
 function warn(node,text){node.textContent=text;node.classList.add('warn');node.classList.remove('good');}
 function progress(){ $('#ca-track').innerHTML=labels.map((_,i)=>'<span class="'+(i<=state.step?'done':'')+'"></span>').join('');$('#ca-count').textContent=String(state.step+1).padStart(2,'0')+' / 09 · '+labels[state.step];}
-function canGo(i){switch(i){case 0:return state.orient==='reasoning';case 1:return state.methods.length===6;case 2:return state.mind.length===3;case 3:return state.labWins.length===3;case 4:return Object.keys(state.examples).length===3&&exampleRows.every((r,n)=>state.examples[n]===r.ans);case 5:return questions.every((_,n)=>state.answers[n]?.done);case 6:return state.reflection.trim().length>=8;case 7:return recallItems.every((r,n)=>state.recall[n]===r.ans);default:return true;}}
+function canGo(i){if(window.SIMPLE_SUPERUSER===true)return true;switch(i){case 0:return state.orient==='reasoning';case 1:return state.methods.length===6;case 2:return state.mind.length===3;case 3:return state.labWins.length===3;case 4:return Object.keys(state.examples).length===3&&exampleRows.every((r,n)=>state.examples[n]===r.ans);case 5:return questions.every((_,n)=>state.answers[n]?.done);case 6:return state.reflection.trim().length>=8;case 7:return recallItems.every((r,n)=>state.recall[n]===r.ans);default:return true;}}
 function draw(){progress();$$('.ca-step').forEach((p,i)=>p.classList.toggle('active',i===state.step));const hints=['Identify the educational problem.','Explore all six teaching methods.','Reveal three expert decisions.','Complete all three learner situations.','Match the three teaching moves.','Complete four challenging decisions.','Write one practical teaching change.','Complete all three Quick Recall choices.','Module complete.'];$('#ca-hint').textContent=hints[state.step];$('#ca-prev').disabled=state.step===0;$('#ca-next').hidden=state.step===8;$('#ca-next').disabled=!canGo(state.step);if(state.step===8)paintFinal();}
 function scroll(){root.scrollIntoView({behavior:'smooth',block:'start'});}
 function paintOrient(){const fb=$('#ca-orient-feedback');$$('[data-ca-orient]').forEach(b=>b.classList.toggle('selected',b.dataset.caOrient===state.orient));if(state.orient==='reasoning')good(fb,'Exactly. We must expose the expert’s diagnostic cues and decisions—not only the visible sequence of actions.');else if(state.orient)warn(fb,'Not quite. The trainee saw what the expert did, but not why. Try again.');else fb.textContent='';}
@@ -5665,7 +5674,7 @@ function paintReview(){$('#ca-review').innerHTML=questions.map((q,n)=>{let a=sta
 $('#ca-reflection').addEventListener('input',e=>{state.reflection=e.target.value;persist();draw();});
 function paintRecall(){$('#ca-recall').innerHTML=recallItems.map((r,n)=>'<div class="ca-recall-item"><h3>'+(n+1)+'. '+r.q+'</h3><div class="ca-recall-opts">'+r.opts.map(x=>'<button data-recalln="'+n+'" data-recallid="'+x+'" class="'+(state.recall[n]===x?'selected ':'')+(state.recall[n]===r.ans&&x===r.ans?'correct':'')+'" type="button">'+x+'</button>').join('')+'</div>'+(state.recall[n]===r.ans?'<small>✓ '+r.detail+'</small>':'')+'</div>').join('');$$('[data-recalln]').forEach(b=>b.addEventListener('click',()=>{state.recall[b.dataset.recalln]=b.dataset.recallid;persist();paintRecall();draw();}));let answered=Object.keys(state.recall).length,correct=recallItems.filter((r,n)=>state.recall[n]===r.ans).length;$('#ca-recall-feedback').textContent=answered===0?'':correct===3?'✓ All three recalled correctly.':'Keep reasoning: '+correct+' of 3 matched. Which method makes whose thinking visible?';}
 function paintFinal(){let first=questions.filter((q,n)=>state.answers[n]?.first===q.ans).length,retries=questions.filter((q,n)=>(state.answers[n]?.tries||0)>1).length;$('#ca-score').textContent=first+'/4';$('#ca-retries').textContent=retries;}
-$('#ca-review-module').addEventListener('click',()=>{state.step=0;persist();draw();scroll();});$('#ca-prev').addEventListener('click',()=>{state.step=Math.max(0,state.step-1);persist();render();scroll();});$('#ca-next').addEventListener('click',()=>{if(!canGo(state.step)||state.step>=8)return;state.step++;if(state.step===8&&!state.done){state.done=true;window.dispatchEvent(new Event('simple-module3-complete'));}persist();render();scroll();});
+$('#ca-review-module').addEventListener('click',()=>{state.step=0;persist();draw();scroll();});$('#ca-prev').addEventListener('click',()=>{state.step=Math.max(0,state.step-1);persist();render();scroll();});$('#ca-next').addEventListener('click',()=>{if(!canGo(state.step)||state.step>=8)return;state.step++;if(state.step===8&&!state.done&&window.SIMPLE_SUPERUSER!==true){state.done=true;window.dispatchEvent(new Event('simple-module3-complete'));}persist();render();scroll();});
 function render(){paintOrient();paintMethods();paintMind();paintLab();paintExamples();paintQuestion();paintReview();paintRecall();draw();}
 const observer=new MutationObserver(()=>{if(root.classList.contains('active')){restoreScoped();render();if(lessonKicker)lessonKicker.textContent='THE SCIENCE BEHIND SIMULATION · COGNITIVE APPRENTICESHIP';}else if(lessonKicker){lessonKicker.textContent=originalKicker;}});observer.observe(root,{attributes:true,attributeFilter:['class']});
 window.simpleShowModule3=()=>{restoreScoped();document.getElementById('lesson-view').classList.add('showing-standalone-module');document.querySelectorAll('.learning-panel').forEach(p=>p.classList.toggle('active',p.id==='apprenticeship'));document.querySelectorAll('.nav-link').forEach(b=>b.classList.toggle('active',b.dataset.panel==='apprenticeship'));render();scroll();};
@@ -6794,7 +6803,8 @@ render();
  const $=s=>document.querySelector(s);
  const modules=[
   {n:1,title:'Andragogy',subtitle:'The science of adult learning',duration:'~25 min',icon:'◈',id:'foundations',color:'#896ad6'},
-  {n:2,title:'Experiential Learning',subtitle:'Dewey · Kolb · Simulation design',duration:'~12 min',icon:'↻',id:'experiential',color:'#62bfb2'}
+  {n:2,title:'Experiential Learning',subtitle:'Dewey · Kolb · Simulation design',duration:'~12 min',icon:'↻',id:'experiential',color:'#62bfb2'},
+  {n:3,title:'Cognitive Apprenticeship',subtitle:'Making expert thinking visible',duration:'~15 min',icon:'◎',id:'apprenticeship',color:'#7854c6'}
  ];
  const name=()=>typeof learnerRecord!=='undefined'&&learnerRecord?.learner_name||'Learner';
  const id=()=>typeof learnerRecord!=='undefined'&&learnerRecord?.local_id||'guest';
@@ -6816,21 +6826,26 @@ render();
    return [m1,m2];
  }
  window.simplePilotModuleProgress=moduleProgress;
- const previewAccess=()=>window.SIMPLE_CREATOR_PREVIEW===true||new URLSearchParams(location.search).get('preview')==='1';
+ const superAccess=()=>window.SIMPLE_SUPERUSER===true;
+ const previewAccess=()=>superAccess()||window.SIMPLE_CREATOR_PREVIEW===true||new URLSearchParams(location.search).get('preview')==='1';
  const unlocked=n=>previewAccess()||n===1||(n===2&&(completedSections.has('assessment')||!!certRecord(1)));
  function renderMap(){
-   const perc=moduleProgress(),overall=Math.round((perc[0]+perc[1])/2);
-   $('#lp-learner').textContent='HELLO, '+name().toUpperCase();
-   $('#lp-overall').textContent=overall+'% of your journey complete';$('#lp-overall-fill').style.width=overall+'%';
-   $('#lp-route').innerHTML=modules.map((m,i)=>{
-     const p=perc[i],enabled=unlocked(m.n),finished=p===100;
-     const status=finished?'Completed':!enabled?'Unlocks next':p>0?'In progress':'Ready to begin';
-     return '<div class="lp-stop" data-n="'+m.n+'"><article class="lp-node"><span class="lp-number">MODULE '+String(m.n).padStart(2,'0')+'</span><div class="lp-stophead"><div class="lp-icon" aria-hidden="true">'+m.icon+'</div><span class="lp-state">'+status+'</span></div><h2>'+m.title+'</h2><p>'+m.subtitle+'</p><div class="lp-row"><span>◷ '+m.duration+' estimated</span><b>'+p+'% complete</b></div><div class="lp-bar"><i style="width:'+p+'%"></i></div><div class="lp-actions"><button class="lp-action" data-open-module="'+m.n+'" '+(!enabled?'disabled':'')+'>'+(!enabled?'Locked':finished?'Review module':p?'Resume module':'Start module')+' →</button>'+(finished?'<button class="lp-action lp-action-outline" data-certificate="'+m.n+'">✦ Certificate</button>':'')+'</div></article></div>';
+   const perc=moduleProgress(),overall=Math.round((perc[0]+perc[1])/2),isSuper=superAccess();
+   const visibleModules=modules.filter(m=>m.n<3||isSuper);
+   $('#lp-learner').textContent=isSuper?'ADMIN · SUPER-USER TEST MODE':'HELLO, '+name().toUpperCase();
+   $('#lp-overall').textContent=isSuper?'All course modules and progression gates are unlocked for testing.':overall+'% of your journey complete';
+   $('#lp-overall-fill').style.width=(isSuper?100:overall)+'%';
+   if($('#lp-map-note')) $('#lp-map-note').textContent=isSuper?'Administrator QA mode: Modules 1–3 are available without learner prerequisites. Testing navigation does not award learner completion certificates.':'This pilot contains two modules. Progress is recorded for the administrator and also cached on this device so you can resume. Completion certificates are issued by SIMple Academy, not by an accrediting body.';
+   $('#lp-route').innerHTML=visibleModules.map((m,i)=>{
+     const p=Number(perc[m.n-1]||0),enabled=isSuper||unlocked(m.n),finished=!isSuper&&p===100;
+     const status=isSuper?'Admin test access':finished?'Completed':!enabled?'Unlocks next':p>0?'In progress':'Ready to begin';
+     const action=isSuper?'Open module':!enabled?'Locked':finished?'Review module':p?'Resume module':'Start module';
+     return '<div class="lp-stop" data-n="'+m.n+'"><article class="lp-node"><span class="lp-number">MODULE '+String(m.n).padStart(2,'0')+'</span><div class="lp-stophead"><div class="lp-icon" aria-hidden="true">'+m.icon+'</div><span class="lp-state">'+status+'</span></div><h2>'+m.title+'</h2><p>'+m.subtitle+'</p><div class="lp-row"><span>◷ '+m.duration+' estimated</span><b>'+(isSuper?'UNLOCKED':p+'% complete')+'</b></div><div class="lp-bar"><i style="width:'+(isSuper?100:p)+'%"></i></div><div class="lp-actions"><button class="lp-action" data-open-module="'+m.n+'" '+(!enabled?'disabled':'')+'>'+action+' →</button>'+(!isSuper&&finished?'<button class="lp-action lp-action-outline" data-certificate="'+m.n+'">✦ Certificate</button>':'')+'</div></article></div>';
    }).join('');
  }
  function showMap(){if((typeof learnerRecord==='undefined'||!learnerRecord)&&!previewAccess())return;$('#lesson-view').classList.remove('showing-standalone-module');$('#module-map-view').classList.remove('hidden');$('#lesson-view').classList.add('hidden');$('#honor-view').classList.add('hidden');$('#facilitator-view').classList.add('hidden');$('#profile-view').classList.add('hidden');renderMap();window.scrollTo(0,0);}
  window.simpleOpenLearningMap=showMap;
- function openModule(n,forceStart=false){if(![1,2].includes(Number(n))||!unlocked(n))return;$('#module-map-view').classList.add('hidden');$('#lesson-view').classList.remove('hidden');if(n===1){const target=forceStart?'foundations':(['foundations','assumptions','principles','assessment'].find(k=>!completedSections.has(k))||'assessment');setPanel(target,false);}else if(n===2){setPanel('experiential',false);}window.scrollTo(0,0);}
+ function openModule(n,forceStart=false){if(![1,2,3].includes(Number(n))||(!superAccess()&&!unlocked(n)))return;$('#module-map-view').classList.add('hidden');$('#lesson-view').classList.remove('hidden');if(n===1){const target=(forceStart||superAccess())?'foundations':(['foundations','assumptions','principles','assessment'].find(k=>!completedSections.has(k))||'assessment');setPanel(target,false);}else if(n===2){setPanel('experiential',false);}else if(n===3){window.simpleShowModule3?.();}window.scrollTo(0,0);}
  window.simpleOpenModuleDirect=n=>{window.SIMPLE_CREATOR_PREVIEW=true;openModule(Number(n),true);};
  function showCertificate(n){if(!moduleProgress()[n-1]||moduleProgress()[n-1]<100)return;const cert=createCert(n);$('#cert-name').textContent=cert.learner;$('#cert-module').textContent='Module '+String(n).padStart(2,'0')+' · '+modules[n-1].title;$('#cert-institute').textContent=cert.institution?'Institution: '+cert.institution:'Institution not provided';$('#cert-date').textContent=new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'}).format(new Date(cert.completedAt||cert.issuedAt));$('#cert-date-label').textContent=cert.completedAt?'Date completed':'Date issued';$('#certificate-modal').classList.remove('hidden');document.body.style.overflow='hidden';$('#cert-close').focus();}
  window.simpleShowCertificate=showCertificate;
@@ -6839,11 +6854,11 @@ render();
  $('#lesson-map-button').addEventListener('click',showMap);
  $('#lp-back-registration').addEventListener('click',()=>{if(confirm('Return to registration? Your saved progress will remain on this browser.')){if($('#module-map-view'))$('#module-map-view').classList.add('hidden');$('#profile-view').classList.remove('hidden');window.scrollTo(0,0);}});
  $('#cert-close').addEventListener('click',closeCert);$('#cert-print').addEventListener('click',()=>window.print());$('#cert-return-map').addEventListener('click',()=>{closeCert();showMap();});$('#certificate-modal').addEventListener('click',e=>{if(e.target.id==='certificate-modal')closeCert();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#certificate-modal').classList.contains('hidden'))closeCert();});
- [['simple-module1-complete',1],['simple-module2-complete',2]].forEach(([event,n])=>window.addEventListener(event,()=>{const newlyCompleted=!certRecord(n);createCert(n,true);if(!$('#module-map-view').classList.contains('hidden'))renderMap();if(newlyCompleted)requestAnimationFrame(()=>showCertificate(n));}));
+ [['simple-module1-complete',1],['simple-module2-complete',2]].forEach(([event,n])=>window.addEventListener(event,()=>{if(superAccess()){if(!$('#module-map-view').classList.contains('hidden'))renderMap();return;}const newlyCompleted=!certRecord(n);createCert(n,true);if(!$('#module-map-view').classList.contains('hidden'))renderMap();if(newlyCompleted)requestAnimationFrame(()=>showCertificate(n));}));
 })();
 </script>
 
-<button type="button" id="v518-what-next" aria-controls="v518-help-toast" title="Get a hint about what to do next">Need a hint?</button>
+<button type="button" id="v518-what-next" aria-controls="v518-help-toast" title="Get a hint about what to do next" hidden>Need a hint?</button>
 <div id="v518-help-toast" role="status" aria-live="polite" hidden></div>
 
 
@@ -6890,7 +6905,7 @@ window.addEventListener('load',()=>{
   <div class="admin-shell">
     <div class="admin-top">
       <div><div class="admin-brand"><em>SIM</em>ple Academy</div><div class="admin-kicker">PILOT ADMIN DASHBOARD</div></div>
-      <button class="admin-home" id="admin-course-link" type="button">Open learner view</button>
+      <div style="display:flex;gap:.55rem;flex-wrap:wrap;justify-content:flex-end"><button class="admin-home" id="admin-super-link" type="button">Open super-user test mode</button><button class="admin-home" id="admin-course-link" type="button">Open learner view</button></div>
     </div>
     <div class="admin-hero">
       <div class="admin-kicker">MODULE 01 + MODULE 02 PILOT</div>
@@ -6956,6 +6971,7 @@ window.addEventListener('load',()=>{
   const ADMIN_EMAIL="seran50.raj@gmail.com";
   let dashboardRows=[];
   $("#admin-course-link").addEventListener("click",()=>{location.href=location.pathname});
+  $("#admin-super-link").addEventListener("click",()=>{location.href=location.pathname+"?test=1"});
   $("#admin-search").addEventListener("input",()=>renderTable(dashboardRows));
   $("#admin-export").addEventListener("click",exportCsv);
   $("#admin-email").value=ADMIN_EMAIL;
@@ -7054,6 +7070,64 @@ window.addEventListener('load',()=>{
     sb.auth.onAuthStateChange((event,session)=>{if(session&&(session.user?.email||"").toLowerCase()===ADMIN_EMAIL){$("#admin-auth-box").classList.add("hidden");setTimeout(loadRemote,50)}});
   }
   init();
+})();
+</script>
+
+<style id="simple-superuser-styles">
+html[data-simple-superuser="1"] #lesson-view{padding-top:4.4rem}
+#simple-super-toolbar{position:fixed;top:.7rem;left:50%;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:.45rem;max-width:calc(100vw - 1.2rem);padding:.45rem .55rem;border:1px solid #ded4ef;border-radius:999px;background:rgba(255,255,255,.96);box-shadow:0 8px 28px rgba(54,39,83,.16);backdrop-filter:blur(9px);font-family:Inter,Arial,sans-serif}
+#simple-super-toolbar strong{font-size:.72rem;letter-spacing:.08em;color:#6f54a8;white-space:nowrap;padding:0 .35rem}
+#simple-super-toolbar button{border:1px solid #dfd6eb;background:#fff;color:#4e4263;border-radius:999px;padding:.48rem .7rem;font-size:.73rem;font-weight:800;cursor:pointer;white-space:nowrap}
+#simple-super-toolbar button:hover{background:#f5effd;border-color:#bba7dc}
+#simple-super-toolbar .super-exit{background:#6d50ae;color:#fff;border-color:#6d50ae}
+@media(max-width:700px){#simple-super-toolbar{top:.4rem;border-radius:1rem;overflow-x:auto;justify-content:flex-start;width:calc(100vw - .8rem)}#simple-super-toolbar strong{display:none}html[data-simple-superuser="1"] #lesson-view{padding-top:4.8rem}}
+</style>
+<script id="simple-superuser-bootstrap">
+(()=>{
+ const ADMIN_EMAIL="seran50.raj@gmail.com";
+ const q=new URLSearchParams(location.search);
+ if(q.get("test")!=="1") return;
+ const addToolbar=()=>{
+   if(document.getElementById("simple-super-toolbar"))return;
+   const bar=document.createElement("div");
+   bar.id="simple-super-toolbar";
+   bar.setAttribute("role","toolbar");
+   bar.setAttribute("aria-label","Admin course testing controls");
+   bar.innerHTML='<strong>ADMIN TEST MODE</strong><button type="button" data-super-map>Learning Path</button><button type="button" data-super-module="1">Module 1</button><button type="button" data-super-module="2">Module 2</button><button type="button" data-super-module="3">Module 3</button><button type="button" data-super-replay>↻ Replay animation</button><button type="button" class="super-exit" data-super-exit>Dashboard</button>';
+   document.body.appendChild(bar);
+   bar.addEventListener("click",e=>{
+     const b=e.target.closest("button");if(!b)return;
+     if(b.hasAttribute("data-super-map")){window.simpleOpenLearningMap?.();return;}
+     if(b.dataset.superModule){if(Number(b.dataset.superModule)===3){document.getElementById("module-map-view")?.classList.add("hidden");document.getElementById("lesson-view")?.classList.remove("hidden");window.simpleShowModule3?.();}else window.simpleOpenModuleDirect?.(Number(b.dataset.superModule));return;}
+     if(b.hasAttribute("data-super-replay")){
+       const panel=document.querySelector(".learning-panel.active");
+       const panelId=panel?.id;
+       window.simpleRestartCourseAnimations?.(panelId);
+       panel?.querySelectorAll('.l1-scene-stage,.v512-anim-stage').forEach(stage=>window.simpleReplayAnimation?.(stage));
+       panel?.querySelectorAll('.ex-stage.active svg,.ca-step.active svg').forEach(svg=>{const clone=svg.cloneNode(true);svg.replaceWith(clone);});
+       return;
+     }
+     if(b.hasAttribute("data-super-exit")){location.href=location.pathname+"?admin=1";}
+   });
+ };
+ window.addEventListener("load",async()=>{
+   try{
+     const backend=window.simplePilotBackend;
+     if(!backend?.configured?.()){location.href=location.pathname+"?admin=1";return;}
+     const sb=backend.adminClient?.();
+     const {data:{session}}=await sb.auth.getSession();
+     if((session?.user?.email||"").toLowerCase()!==ADMIN_EMAIL){location.href=location.pathname+"?admin=1";return;}
+     window.SIMPLE_SUPERUSER=true;
+     window.SIMPLE_CREATOR_PREVIEW=true;
+     document.documentElement.dataset.simpleSuperuser="1";
+     addToolbar();
+     document.getElementById("profile-view")?.classList.add("hidden");
+     document.getElementById("honor-view")?.classList.add("hidden");
+     document.getElementById("facilitator-view")?.classList.add("hidden");
+     document.getElementById("pilot-admin-view")?.classList.add("hidden");
+     window.simpleOpenLearningMap?.();
+   }catch(err){console.warn("Admin test mode could not be verified",err);location.href=location.pathname+"?admin=1";}
+ });
 })();
 </script>
 
