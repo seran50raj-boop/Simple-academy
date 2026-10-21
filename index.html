@@ -7080,5 +7080,205 @@ document.getElementById("pilot-learner-signout")?.addEventListener("click",async
  } else if(admin){admin.style.setProperty("display","none","important");}
 })();
 </script>
+
+
+<!-- v5.43 mobile foundations animation hardening -->
+<style id="v543-mobile-foundations-motion-fix">
+/*
+  Mobile fix for the first two Andragogy/Foundation slides.
+  1) Do not hide the opening scene behind a portrait-only gate.
+  2) Re-assert the teaching animations after older prefers-reduced-motion rules.
+  3) Keep the visual inside the phone viewport without overlapping controls.
+*/
+@media (max-width: 950px){
+  .l1-intro-landscape-gate{display:none!important;}
+  .l1-intro-landscape-wrap #l1-intro-scene{
+    min-height:clamp(17rem,72vw,25rem)!important;
+    overflow:hidden!important;
+    padding:.45rem!important;
+  }
+  .l1-intro-landscape-wrap #l1-intro-scene > svg{
+    opacity:1!important;
+    pointer-events:auto!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:none!important;
+    aspect-ratio:1080 / 500;
+  }
+  .l1-intro-landscape-wrap > .v520-motion-controls{
+    display:flex!important;
+  }
+  #l1-history-scene{
+    min-height:clamp(15rem,66vw,21rem)!important;
+    padding:.45rem!important;
+  }
+  #l1-history-scene > svg{
+    width:100%!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:none!important;
+  }
+
+  /* These later, more specific rules intentionally win over the generic
+     reduced-motion fallback for these two teaching scenes. */
+  #l1-intro-scene .v513-rise,
+  #l1-history-scene .v513-rise{
+    opacity:0!important;
+    transform-box:fill-box!important;
+    transform-origin:center!important;
+    animation:v513Rise .68s cubic-bezier(.16,.82,.24,1) forwards!important;
+    animation-delay:var(--d,0s)!important;
+    -webkit-animation:v513Rise .68s cubic-bezier(.16,.82,.24,1) forwards!important;
+    -webkit-animation-delay:var(--d,0s)!important;
+  }
+  #l1-intro-scene .v513-slide,
+  #l1-history-scene .v513-slide{
+    opacity:0!important;
+    transform-box:fill-box!important;
+    transform-origin:center!important;
+    animation:v513Slide .78s cubic-bezier(.16,.82,.24,1) forwards!important;
+    animation-delay:var(--d,0s)!important;
+    -webkit-animation:v513Slide .78s cubic-bezier(.16,.82,.24,1) forwards!important;
+    -webkit-animation-delay:var(--d,0s)!important;
+  }
+  #l1-intro-scene .v513-reveal,
+  #l1-history-scene .v513-reveal{
+    opacity:0!important;
+    transform-box:fill-box!important;
+    transform-origin:center!important;
+    animation:v513Reveal .6s cubic-bezier(.2,.7,.2,1) forwards!important;
+    animation-delay:var(--d,0s)!important;
+    -webkit-animation:v513Reveal .6s cubic-bezier(.2,.7,.2,1) forwards!important;
+    -webkit-animation-delay:var(--d,0s)!important;
+  }
+  #l1-intro-scene .v513-draw,
+  #l1-history-scene .v513-draw{
+    stroke-dasharray:220!important;
+    stroke-dashoffset:220!important;
+    animation:v513Draw 1.05s cubic-bezier(.3,.7,.2,1) forwards!important;
+    animation-delay:var(--d,0s)!important;
+    -webkit-animation:v513Draw 1.05s cubic-bezier(.3,.7,.2,1) forwards!important;
+    -webkit-animation-delay:var(--d,0s)!important;
+  }
+  #l1-intro-scene .v513-flow,
+  #l1-history-scene .v513-flow{
+    stroke-dasharray:7 9!important;
+    animation:v513Flow 1.8s linear infinite!important;
+    animation-delay:var(--d,0s)!important;
+    -webkit-animation:v513Flow 1.8s linear infinite!important;
+    -webkit-animation-delay:var(--d,0s)!important;
+  }
+}
+</style>
+
+<script id="v543-mobile-foundations-motion-logic">
+(()=>{
+  const isFoundationStage=el=>el && (el.id==='l1-intro-scene' || el.id==='l1-history-scene');
+
+  function restartCssAnimations(stage){
+    if(!isFoundationStage(stage) || !stage.innerHTML.trim()) return;
+
+    /* Replacing the SVG node, rather than only toggling classes, gives iOS Safari
+       a genuinely new animation timeline after a hidden slide becomes visible. */
+    const svg=stage.querySelector(':scope > svg');
+    if(svg){
+      const fresh=svg.cloneNode(true);
+      svg.replaceWith(fresh);
+      void stage.offsetWidth;
+    }
+
+    /* Force every CSS animation timeline back to time zero where the browser
+       exposes Web Animations. This is a second layer; older WebKit simply ignores it. */
+    try{
+      stage.getAnimations?.({subtree:true}).forEach(anim=>{
+        try{anim.cancel(); anim.play();}catch(e){}
+      });
+    }catch(e){}
+
+    window.simpleFitAnimationText?.(stage);
+    stage.dataset.v543Restarted=String(Date.now());
+  }
+
+  function currentFoundationIndex(){
+    const slides=[...document.querySelectorAll('#foundations .l1-slide')];
+    return slides.findIndex(el=>!el.classList.contains('hidden'));
+  }
+
+  function restartCurrentFoundation(){
+    const idx=currentFoundationIndex();
+    if(idx===0) restartCssAnimations(document.getElementById('l1-intro-scene'));
+    if(idx===1) restartCssAnimations(document.getElementById('l1-history-scene'));
+  }
+
+  function restartAfterPaint(){
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      restartCurrentFoundation();
+      /* iOS Safari can promote the SVG layer one paint late after display:none. */
+      setTimeout(restartCurrentFoundation,140);
+    }));
+  }
+
+  const previousRestart=window.simpleRestartFoundationAnimation;
+  window.simpleRestartFoundationAnimation=(slideIndex)=>{
+    try{previousRestart?.(slideIndex);}catch(e){}
+    const idx=Number(slideIndex);
+    if(idx===0 || idx===1){
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        const stage=document.getElementById(idx===0?'l1-intro-scene':'l1-history-scene');
+        restartCssAnimations(stage);
+        setTimeout(()=>restartCssAnimations(stage),140);
+      }));
+    }
+  };
+
+  /* Explicitly restart when Previous/Continue reveals either of the first two slides. */
+  document.addEventListener('click',e=>{
+    if(e.target.closest?.('#l1-next,#l1-back')) setTimeout(restartAfterPaint,0);
+  },true);
+
+  /* Restart when Module 1 itself becomes visible, including return from learning path. */
+  if('MutationObserver' in window){
+    const foundations=document.getElementById('foundations');
+    if(foundations){
+      new MutationObserver(()=>{
+        if(foundations.classList.contains('active') && foundations.offsetParent!==null) restartAfterPaint();
+      }).observe(foundations,{attributes:true,attributeFilter:['class','style']});
+    }
+    document.querySelectorAll('#foundations .l1-slide').forEach(slide=>{
+      new MutationObserver(()=>{
+        if(!slide.classList.contains('hidden') && slide.offsetParent!==null) restartAfterPaint();
+      }).observe(slide,{attributes:true,attributeFilter:['class','style']});
+    });
+  }
+
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && entry.intersectionRatio>.08 && isFoundationStage(entry.target)){
+          restartCssAnimations(entry.target);
+        }
+      });
+    },{threshold:[0,.08,.3]});
+    ['l1-intro-scene','l1-history-scene'].forEach(id=>{
+      const el=document.getElementById(id); if(el) io.observe(el);
+    });
+  }
+
+  window.addEventListener('orientationchange',()=>setTimeout(restartAfterPaint,220));
+  window.addEventListener('resize',()=>{
+    clearTimeout(window.__simpleV543Resize);
+    window.__simpleV543Resize=setTimeout(restartAfterPaint,160);
+  },{passive:true});
+  window.addEventListener('pageshow',()=>setTimeout(restartAfterPaint,80));
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible') setTimeout(restartAfterPaint,80);
+  });
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',restartAfterPaint,{once:true});
+  else restartAfterPaint();
+})();
+</script>
+
 </body>
 </html>
