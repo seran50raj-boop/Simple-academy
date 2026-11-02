@@ -5013,7 +5013,7 @@ const v512Scenes={
       document.getElementById("comparison-slider-value").textContent = isAndragogy ? "Andragogy" : "Pedagogy";
     });
 
-    document.getElementById("glossary-button").addEventListener("click", () => {
+    document.getElementById("glossary-button")?.addEventListener("click", () => {
       document.getElementById("glossary-modal").classList.remove("hidden");
     });
 
@@ -6935,7 +6935,7 @@ render();
  window.simpleShowCertificate=showCertificate;
  function closeCert(){$('#certificate-modal').classList.add('hidden');document.body.style.overflow='';}
  document.addEventListener('click',e=>{const opener=e.target.closest('[data-open-module]');if(opener){openModule(Number(opener.dataset.openModule));return;}const cert=e.target.closest('[data-certificate]');if(cert){showCertificate(Number(cert.dataset.certificate));}});
- $('#lesson-map-button').addEventListener('click',showMap);
+ $('#lesson-map-button')?.addEventListener('click',showMap);
  $('#lp-back-registration').addEventListener('click',()=>{if(document.body.classList.contains('simple-rebuild-mode')){window.simpleRebuildOpen?.('foundations');return;}if(confirm('Return to registration? Your saved progress will remain on this browser.')){if($('#module-map-view'))$('#module-map-view').classList.add('hidden');$('#profile-view').classList.remove('hidden');window.scrollTo(0,0);}});
  $('#cert-close').addEventListener('click',closeCert);$('#cert-print').addEventListener('click',()=>window.print());$('#cert-return-map').addEventListener('click',()=>{closeCert();showMap();});$('#certificate-modal').addEventListener('click',e=>{if(e.target.id==='certificate-modal')closeCert();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#certificate-modal').classList.contains('hidden'))closeCert();});
  [['simple-module1-complete',1],['simple-module2-complete',2]].forEach(([event,n])=>window.addEventListener(event,()=>{if(superAccess()){if(!$('#module-map-view').classList.contains('hidden'))renderMap();return;}const newlyCompleted=!certRecord(n);createCert(n,true);if(!$('#module-map-view').classList.contains('hidden'))renderMap();if(newlyCompleted)requestAnimationFrame(()=>showCertificate(n));}));
@@ -7509,6 +7509,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
 
 <script id="v560-guided-focus-pages-script">
 (()=>{
+  if(document.body.classList.contains('clean-deck-v566')) return;
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const uniq=a=>[...new Set(a.filter(Boolean))];
   const arr=(root,sel)=>root?[...root.querySelectorAll(sel)]:[];
