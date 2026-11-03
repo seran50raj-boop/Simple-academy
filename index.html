@@ -3572,6 +3572,49 @@ body.clean-deck-v566 #experiential .ex-stage-anim .fadeF,
 body.clean-deck-v566 #experiential .ex-stage-anim .fadeG{animation:none!important;transform:none!important;opacity:1!important;stroke-dashoffset:0!important}
 @media(max-width:700px){.clean-concept-strip{grid-template-columns:1fr;gap:.55rem}.clean-concept-strip>div{min-height:0;grid-template-columns:auto 1fr;column-gap:.8rem;justify-items:start;text-align:left;padding:1rem}.clean-concept-strip span{grid-row:1/3;margin:0}.clean-concept-strip b,.clean-concept-strip small{align-self:center}.clean-yn-buttons{gap:.55rem}.clean-yn button{min-width:112px}}
 </style>
+
+<style id="v568-segoe-ui">
+/* v5.68 · Segoe UI typography */
+:root{
+  --simple-font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --simple-font-display:"Segoe UI Variable Display","Segoe UI Light","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+body,
+button,
+input,
+select,
+textarea,
+.clean-kicker,
+.clean-copy,
+.clean-note,
+.clean-yn,
+.clean-yn button,
+.clean-concept-strip,
+.l1-wrap,
+.ex-shell,
+.ca-shell{
+  font-family:var(--simple-font)!important;
+}
+.serif,
+.clean-title,
+.l1-title,
+.facilitator-heading,
+.lp-hero h1,
+.honor-card h2,
+.intro-pullquote{
+  font-family:var(--simple-font-display)!important;
+  font-weight:300!important;
+  letter-spacing:-.02em;
+}
+.clean-title{
+  font-weight:300!important;
+}
+.clean-concept-strip b,
+.clean-yn button,
+.clean-kicker{
+  font-family:var(--simple-font)!important;
+}
+</style>
 </head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
 <div id="clean-build-badge">V5.66 · CLEAN DECK</div>
@@ -7850,7 +7893,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,select,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();go('next')}if(e.key==='ArrowLeft'){e.preventDefault();go('back')}if(e.key==='Escape'){document.body.classList.remove('clean-jump-open')}});
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest?.('button,input,textarea,select,[role=button],[draggable=true]'))return;touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;touching=true},{passive:true});
  document.addEventListener('touchend',e=>{if(!touching)return;touching=false;const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?'next':'back')},{passive:true});
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.67 · LIGHT LEARNING'},120),{once:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.68 · SEGOE UI'},120),{once:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
 </script>\n</body>
