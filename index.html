@@ -3722,6 +3722,106 @@ body.clean-deck-v566 #foundations .l1-wrap{
   }
 }
 </style>
+
+<style id="v570-calm-motion">
+/* v5.70 · calm motion: preserve animation, remove visual noise */
+@keyframes v570SoftRise{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes v570SoftSlide{
+  from{opacity:0;transform:translateX(-12px)}
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes v570SoftScale{
+  from{opacity:0;transform:scale(.97)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes v570Tap{
+  0%{transform:scale(1)}
+  45%{transform:scale(.96)}
+  100%{transform:scale(1)}
+}
+
+/* Opening concept visual: gentle stagger, once */
+.clean-card.active .clean-concept-strip>div{
+  animation:v570SoftRise .45s cubic-bezier(.2,.75,.25,1) both!important;
+}
+.clean-card.active .clean-concept-strip>div:nth-child(1){animation-delay:.04s!important}
+.clean-card.active .clean-concept-strip>div:nth-child(2){animation-delay:.12s!important}
+.clean-card.active .clean-concept-strip>div:nth-child(3){animation-delay:.20s!important}
+
+/* Yes / No feedback gets a tiny interaction response */
+.clean-yn button.selected{
+  animation:v570Tap .2s ease both!important;
+}
+.clean-yn-feedback.good,
+.clean-yn-feedback.try{
+  animation:v570SoftRise .28s ease both!important;
+}
+
+/* Existing concept illustrations: keep motion, but make it one-shot and quiet */
+body.clean-deck-v566 .v512-scene .v512-drift,
+body.clean-deck-v566 .v512-scene .v512-pulse,
+body.clean-deck-v566 .v512-scene .v512-pop,
+body.clean-deck-v566 .v512-scene .v512-fade-cycle,
+body.clean-deck-v566 .v512-scene .v512-turn{
+  animation:v570SoftScale .5s ease both!important;
+}
+body.clean-deck-v566 .v512-scene .v512-slide-right,
+body.clean-deck-v566 .v512-scene .v512-slide-up{
+  animation:v570SoftSlide .55s ease both!important;
+}
+body.clean-deck-v566 .v512-scene .v512-connect{
+  animation:v570SoftRise .5s ease both!important;
+}
+
+/* Refined SVG scenes: reveal once rather than loop forever */
+body.clean-deck-v566 .v513-scene .v513-flow,
+body.clean-deck-v566 .v513-scene .v513-breathe,
+body.clean-deck-v566 .v513-scene .v513-float,
+body.clean-deck-v566 .v513-scene .v513-glow,
+body.clean-deck-v566 .v513-scene .v513-handoff,
+body.clean-deck-v566 .v513-scene .v513-converge-a,
+body.clean-deck-v566 .v513-scene .v513-converge-b,
+body.clean-deck-v566 .v513-scene .v513-orbit{
+  animation:v570SoftRise .55s cubic-bezier(.2,.75,.25,1) both!important;
+}
+
+/* Experiential-learning art: preserve a little life without constant movement */
+body.clean-deck-v566 #experiential .ex-stage-anim .pulse,
+body.clean-deck-v566 #experiential .ex-stage-anim .float,
+body.clean-deck-v566 #experiential .ex-stage-anim .blink,
+body.clean-deck-v566 #experiential .ex-stage-anim .dash,
+body.clean-deck-v566 #experiential .ex-stage-anim .draw,
+body.clean-deck-v566 #experiential .ex-stage-anim .pop,
+body.clean-deck-v566 #experiential .ex-stage-anim .bob,
+body.clean-deck-v566 #experiential .ex-stage-anim .glow,
+body.clean-deck-v566 #experiential .ex-stage-anim .shimmer,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeA,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeB,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeC,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeD,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeE,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeF,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeG{
+  animation:v570SoftRise .5s ease both!important;
+}
+
+/* Respect reduced-motion settings */
+@media(prefers-reduced-motion:reduce){
+  body.clean-deck-v566 .clean-concept-strip>div,
+  body.clean-deck-v566 .clean-yn button,
+  body.clean-deck-v566 .clean-yn-feedback,
+  body.clean-deck-v566 .v512-scene *,
+  body.clean-deck-v566 .v513-scene *,
+  body.clean-deck-v566 #experiential .ex-stage-anim *{
+    animation:none!important;
+    transform:none!important;
+    opacity:1!important;
+  }
+}
+</style>
 </head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
 <div id="clean-build-badge">V5.66 · CLEAN DECK</div>
@@ -8000,7 +8100,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,select,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();go('next')}if(e.key==='ArrowLeft'){e.preventDefault();go('back')}if(e.key==='Escape'){document.body.classList.remove('clean-jump-open')}});
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest?.('button,input,textarea,select,[role=button],[draggable=true]'))return;touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;touching=true},{passive:true});
  document.addEventListener('touchend',e=>{if(!touching)return;touching=false;const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?'next':'back')},{passive:true});
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.69 · INTER CARDS'},120),{once:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.70 · CALM MOTION'},120),{once:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
 </script>\n</body>
