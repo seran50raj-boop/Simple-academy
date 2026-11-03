@@ -8647,8 +8647,8 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  function renderRail(id){
   const rail=$('#clean-video-progress'),markers=$('.clean-video-markers',rail),fill=$('.clean-video-fill',rail);
   const def=deckDefs[id],cs=def?deckCards(id):[];
-  if(!rail||!markers||!fill||!def||!cs.length){if(rail)rail.hidden=true;return}
-  rail.hidden=false;
+  if(!rail||!markers||!fill||!def||!cs.length){document.body.classList.remove('clean-rail-active');if(rail)rail.hidden=true;return}
+  rail.hidden=false;document.body.classList.add('clean-rail-active');
   const idx=deckIndex[id], denom=Math.max(1,cs.length-1);
   fill.style.width=`${(idx/denom)*100}%`;
   markers.innerHTML='';
@@ -8727,7 +8727,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
     const cs=deckCards(id);$('#clean-progress').textContent=`Card ${deckIndex[id]+1} of ${cs.length}`;
     $('#clean-prev').disabled=id==='foundations'&&deckIndex[id]===0;$('#clean-next').disabled=false;renderRail(id);return;
   }
-  const rail=$('#clean-video-progress');if(rail)rail.hidden=true;
+  const rail=$('#clean-video-progress');document.body.classList.remove('clean-rail-active');if(rail)rail.hidden=true;
   $('#clean-progress').textContent=id==='assessment'?'Knowledge check':id==='experiential'?'Experiential learning':id==='apprenticeship'?'Cognitive apprenticeship':id;
   $('#clean-prev').disabled=false;$('#clean-next').disabled=false;
  }
