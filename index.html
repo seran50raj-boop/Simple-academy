@@ -3615,6 +3615,113 @@ textarea,
   font-family:var(--simple-font)!important;
 }
 </style>
+
+<style id="v569-inter-card-system">
+/* v5.69 · Inter + card-based learning surfaces */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --simple-font:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --simple-font-display:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --simple-card-bg:#fff;
+  --simple-card-border:#dfe7e3;
+  --simple-card-shadow:0 18px 50px rgba(23,49,53,.08);
+  --simple-card-radius:24px;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+.serif,
+.clean-title,
+.l1-title,
+.facilitator-heading,
+.lp-hero h1,
+.honor-card h2,
+.intro-pullquote,
+.clean-kicker,
+.clean-copy,
+.clean-note,
+.clean-yn,
+.clean-concept-strip,
+.l1-wrap,
+.ex-shell,
+.ca-shell{
+  font-family:var(--simple-font)!important;
+}
+
+.serif,
+.clean-title,
+.l1-title,
+.facilitator-heading,
+.lp-hero h1,
+.honor-card h2,
+.intro-pullquote{
+  font-weight:500!important;
+  letter-spacing:-.025em;
+}
+
+/* Primary card-deck slides */
+body.clean-deck-v566 .clean-card{
+  width:min(960px,100%);
+  margin:0 auto;
+  min-height:auto!important;
+  padding:clamp(2rem,4vw,3.4rem)!important;
+  border:1px solid var(--simple-card-border)!important;
+  border-radius:var(--simple-card-radius)!important;
+  background:var(--simple-card-bg)!important;
+  box-shadow:var(--simple-card-shadow)!important;
+}
+
+/* Other learning panels should visually read as cards too */
+body.clean-deck-v566 #foundations .l1-slide:not(.clean-opening-slide),
+body.clean-deck-v566 #assumptions .v45-concept-shell,
+body.clean-deck-v566 #principles .principle-detail,
+body.clean-deck-v566 #assessment .v50-shell,
+body.clean-deck-v566 #experiential .ex-shell,
+body.clean-deck-v566 #apprenticeship .ca-shell{
+  border:1px solid var(--simple-card-border)!important;
+  border-radius:var(--simple-card-radius)!important;
+  background:var(--simple-card-bg)!important;
+  box-shadow:var(--simple-card-shadow)!important;
+}
+
+/* Keep the warm page backdrop visible around the card */
+body.clean-deck-v566 .lesson-layout{
+  width:min(100% - 7rem,76rem)!important;
+}
+body.clean-deck-v566 #foundations .l1-wrap{
+  padding:1rem 0 2rem!important;
+}
+
+/* Slightly lighter sub-elements inside each card */
+.clean-concept-strip>div,
+.clean-yn,
+.clean-note,
+.l1-mini-check,
+.l1-tiny{
+  box-shadow:none!important;
+}
+
+/* Arrow placement now aligns to the card rather than the browser edge */
+#clean-prev{left:max(14px,calc(50vw - 585px))}
+#clean-next{right:max(14px,calc(50vw - 585px))}
+
+/* Mobile keeps the card look without wasting width */
+@media(max-width:820px){
+  body.clean-deck-v566 .lesson-layout{
+    width:100%!important;
+    padding:3.5rem .65rem 4.6rem!important;
+  }
+  body.clean-deck-v566 .clean-card{
+    width:100%;
+    padding:1.45rem 1rem 1.7rem!important;
+    border-radius:20px!important;
+  }
+}
+</style>
 </head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
 <div id="clean-build-badge">V5.66 · CLEAN DECK</div>
@@ -7893,7 +8000,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,select,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();go('next')}if(e.key==='ArrowLeft'){e.preventDefault();go('back')}if(e.key==='Escape'){document.body.classList.remove('clean-jump-open')}});
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest?.('button,input,textarea,select,[role=button],[draggable=true]'))return;touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;touching=true},{passive:true});
  document.addEventListener('touchend',e=>{if(!touching)return;touching=false;const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?'next':'back')},{passive:true});
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.68 · SEGOE UI'},120),{once:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.69 · INTER CARDS'},120),{once:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
 </script>\n</body>
