@@ -4214,9 +4214,98 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 @media(prefers-reduced-motion:reduce){
  .clean-carousel-track .clean-card{transition:none!important}.clean-card.is-current .v75-draw,.clean-card.is-current .v75-pop,.clean-card.is-current .v75-rise,.clean-card.is-current .v75-ripple{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}
 }
+</style><style id="v576-editorial-illustrations">
+/* v5.76 · original editorial flat-vector illustration language */
+.v76-scene{
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.98),rgba(250,252,251,.96) 48%,rgba(239,247,244,.92) 100%)!important;
+  border:1px solid #DCE8E4!important;
+}
+.v76-svg{width:100%;height:100%;max-width:760px;max-height:520px;overflow:visible}
+.v76-draw{stroke-dasharray:1400;stroke-dashoffset:1400}
+.v76-pop,.v76-rise,.v76-slide-left,.v76-slide-right,.v76-fade,.v76-glide{opacity:0;transform-box:fill-box;transform-origin:center}
+.clean-card.is-current .v76-draw{animation:v76Draw .9s cubic-bezier(.2,.72,.2,1) forwards}
+.clean-card.is-current .v76-pop{animation:v76Pop .58s cubic-bezier(.16,.86,.2,1) forwards}
+.clean-card.is-current .v76-rise{animation:v76Rise .66s cubic-bezier(.16,.86,.2,1) forwards}
+.clean-card.is-current .v76-slide-left{animation:v76SlideLeft .72s cubic-bezier(.16,.86,.2,1) forwards}
+.clean-card.is-current .v76-slide-right{animation:v76SlideRight .72s cubic-bezier(.16,.86,.2,1) forwards}
+.clean-card.is-current .v76-fade{animation:v76Fade .55s ease forwards}
+.clean-card.is-current .v76-glide{animation:v76Glide 1.1s .26s cubic-bezier(.16,.84,.22,1) forwards}
+@keyframes v76Draw{to{stroke-dashoffset:0}}
+@keyframes v76Pop{0%{opacity:0;transform:scale(.74)}72%{opacity:1;transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
+@keyframes v76Rise{0%{opacity:0;transform:translateY(34px) scale(.97)}100%{opacity:1;transform:none}}
+@keyframes v76SlideLeft{0%{opacity:0;transform:translateX(-46px)}100%{opacity:1;transform:none}}
+@keyframes v76SlideRight{0%{opacity:0;transform:translateX(46px)}100%{opacity:1;transform:none}}
+@keyframes v76Fade{from{opacity:0}to{opacity:1}}
+@keyframes v76Glide{0%{opacity:0;transform:translateX(-115px)}100%{opacity:1;transform:translateX(0)}}
+
+/* semantic sequencing: environment → people → action → supporting objects */
+.clean-card.is-current .v76-blob{animation-delay:0s}
+.clean-card.is-current .v76-door,
+.clean-card.is-current .v76-desk,
+.clean-card.is-current .v76-table,
+.clean-card.is-current .v76-seesaw,
+.clean-card.is-current .v76-sim-bed{animation-delay:.08s}
+.clean-card.is-current .v76-person,
+.clean-card.is-current .v76-walker,
+.clean-card.is-current .v76-educator,
+.clean-card.is-current .v76-guide-person,
+.clean-card.is-current .v76-learner-sim,
+.clean-card.is-current .v76-left-person,
+.clean-card.is-current .v76-right-person,
+.clean-card.is-current .v76-person-left,
+.clean-card.is-current .v76-person-right,
+.clean-card.is-current .v76-recap-person{animation-delay:.16s}
+.clean-card.is-current .v76-learner,
+.clean-card.is-current .v76-learner-person,
+.clean-card.is-current .v76-choice-station.right{animation-delay:.22s}
+.clean-card.is-current .v76-map-route,
+.clean-card.is-current .v76-path-main,
+.clean-card.is-current .v76-shield-check,
+.clean-card.is-current .v76-continuum,
+.clean-card.is-current .v76-monitor-wave,
+.clean-card.is-current .v76-route,
+.clean-card.is-current .v76-recap-link{animation-delay:.28s}
+.clean-card.is-current .v76-prop.p1,
+.clean-card.is-current .v76-memory-object.mo1,
+.clean-card.is-current .v76-choice-card.cc1,
+.clean-card.is-current .v76-shared-marker,
+.clean-card.is-current .v76-choice-card.c1,
+.clean-card.is-current .v76-block-left,
+.clean-card.is-current .v76-recap-scene.s1{animation-delay:.34s}
+.clean-card.is-current .v76-prop.p2,
+.clean-card.is-current .v76-memory-object.mo2,
+.clean-card.is-current .v76-choice-card.cc2,
+.clean-card.is-current .v76-choice-card.c2,
+.clean-card.is-current .v76-block-right,
+.clean-card.is-current .v76-recap-scene.s2{animation-delay:.45s}
+.clean-card.is-current .v76-prop.p3,
+.clean-card.is-current .v76-memory-object.mo3,
+.clean-card.is-current .v76-point,
+.clean-card.is-current .v76-safety-badge,
+.clean-card.is-current .v76-target,
+.clean-card.is-current .v76-recap-scene.s3{animation-delay:.56s}
+
+/* subtle living motion only after the explanatory entrance finishes */
+.clean-card.is-current .v76-point{animation:v76Pop .55s .52s both,v76Point 2.2s 1.2s ease-in-out infinite}
+.clean-card.is-current .v76-target{animation:v76Pop .6s .54s both,v76Target 3s 1.4s ease-in-out infinite}
+@keyframes v76Point{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+@keyframes v76Target{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* reduce legacy vector competition on the new scenes */
+.clean-card .v76-scene + .clean-card-copy{position:relative;z-index:2}
+@media(max-width:820px){
+ .v76-svg{max-height:320px}
+}
+@media(prefers-reduced-motion:reduce){
+ .clean-card.is-current .v76-draw,.clean-card.is-current .v76-pop,.clean-card.is-current .v76-rise,
+ .clean-card.is-current .v76-slide-left,.clean-card.is-current .v76-slide-right,.clean-card.is-current .v76-fade,.clean-card.is-current .v76-glide{
+  animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important
+ }
+}
 </style></head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
-<div id="clean-build-badge">V5.75 · ORBIT CAROUSEL + DIAGRAMS</div>
+<div id="clean-build-badge">V5.76 · EDITORIAL ILLUSTRATIONS</div>
 <button id="clean-jump" type="button" aria-expanded="false">Jump</button>
 <nav id="clean-jump-menu" aria-label="Free navigation">
  <button type="button" data-clean-panel="foundations">M1 · Foundations</button><button type="button" data-clean-panel="assumptions">M1 · Assumptions</button>
@@ -4364,74 +4453,91 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card active" data-clean-page="0">
   <div class="clean-card-layout">
-    <div class="clean-visual v75-art" aria-hidden="true">
-      <svg class="v75-svg" viewBox="0 0 720 520">
-        <defs>
-          <filter id="v75sh0" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#173135" flood-opacity=".10"/></filter>
-        </defs>
-        <circle class="v75-guide v75-draw" cx="360" cy="260" r="190" fill="none" stroke="#dbece7" stroke-width="3"/>
-        <circle class="v75-guide v75-draw d2" cx="360" cy="260" r="128" fill="none" stroke="#e9f4f0" stroke-width="2"/>
-        <g class="v75-person v75-pop" filter="url(#v75sh0)">
-          <circle cx="360" cy="222" r="38" fill="#f0c2a3"/>
-          <path d="M288 350c9-80 34-116 72-116s63 36 72 116" fill="#173135"/>
-          <path d="M320 285h80v65h-80z" rx="20" fill="#0fb6a6"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M108 118c73-74 194-79 265-20 57 47 73 126 151 149 72 22 128 84 108 155-24 85-130 106-232 90-95-15-158 10-240-29-112-54-142-253-52-345Z" fill="#E9F7F2"/>
+        <circle class="v76-orbit v76-draw" cx="380" cy="255" r="180" fill="none" stroke="#BFDCD3" stroke-width="3" stroke-dasharray="8 12"/>
+        <g class="v76-desk v76-rise">
+          <rect x="250" y="360" width="260" height="26" rx="13" fill="#173135"/>
+          <path d="M278 386v58M482 386v58" stroke="#173135" stroke-width="16" stroke-linecap="round"/>
+          <rect x="330" y="320" width="100" height="58" rx="10" fill="#fff" stroke="#A9D4C8" stroke-width="4"/>
+          <path d="M380 330v38" stroke="#0FB6A6" stroke-width="6" stroke-linecap="round"/>
         </g>
-        <path class="v75-spoke s1 v75-draw" d="M360 166V84" fill="none" stroke="#8dc9ba" stroke-width="5" stroke-linecap="round"/>
-        <path class="v75-spoke s2 v75-draw" d="M306 306 212 380" fill="none" stroke="#8dc9ba" stroke-width="5" stroke-linecap="round"/>
-        <path class="v75-spoke s3 v75-draw" d="M414 306 508 380" fill="none" stroke="#8dc9ba" stroke-width="5" stroke-linecap="round"/>
-        <g class="v75-node v75-pop n1">
-          <circle cx="360" cy="70" r="48" fill="#fff" stroke="#a7d5c9" stroke-width="4"/>
-          <circle cx="360" cy="70" r="22" fill="none" stroke="#087b72" stroke-width="5"/>
-          <path d="M360 44v14M360 82v14M334 70h14M372 70h14" stroke="#087b72" stroke-width="4" stroke-linecap="round"/>
+        <g class="v76-person v76-rise person-main">
+          <circle cx="382" cy="226" r="42" fill="#E6B798"/>
+          <path d="M318 346c10-82 32-119 64-119s54 37 64 119" fill="#234E4A"/>
+          <path d="M344 276h76v70h-76z" rx="22" fill="#0FB6A6"/>
+          <path d="M333 294l-62 38M431 294l60 38" stroke="#E6B798" stroke-width="18" stroke-linecap="round"/>
         </g>
-        <g class="v75-node v75-pop n2">
-          <circle cx="194" cy="392" r="48" fill="#fff" stroke="#a7d5c9" stroke-width="4"/>
-          <rect x="169" y="370" width="50" height="14" rx="7" fill="#0fb6a6"/>
-          <rect x="162" y="390" width="64" height="14" rx="7" fill="#95cfc1"/>
-          <rect x="175" y="410" width="38" height="14" rx="7" fill="#f58268"/>
+        <g class="v76-prop p1 v76-pop">
+          <circle cx="380" cy="76" r="52" fill="#fff" stroke="#A7D4C8" stroke-width="4"/>
+          <path d="M352 79c12-18 26-27 42-27 18 0 31 12 31 29 0 21-18 35-47 39" fill="none" stroke="#087B72" stroke-width="6" stroke-linecap="round"/>
+          <path d="M354 56l-12 22 23-3" fill="none" stroke="#087B72" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
         </g>
-        <g class="v75-node v75-pop n3">
-          <circle cx="526" cy="392" r="48" fill="#fff" stroke="#a7d5c9" stroke-width="4"/>
-          <circle cx="526" cy="392" r="26" fill="none" stroke="#087b72" stroke-width="5"/>
-          <circle cx="526" cy="392" r="11" fill="#f58268"/>
-          <path d="M526 352v13M526 419v13M486 392h13M553 392h13" stroke="#087b72" stroke-width="4" stroke-linecap="round"/>
+        <g class="v76-prop p2 v76-pop">
+          <circle cx="178" cy="318" r="52" fill="#fff" stroke="#E5B5A9" stroke-width="4"/>
+          <rect x="150" y="286" width="56" height="66" rx="10" fill="#FFF0EB" stroke="#D98270" stroke-width="4"/>
+          <path d="M162 306h31M162 323h23M162 340h31" stroke="#B95E4B" stroke-width="5" stroke-linecap="round"/>
         </g>
+        <g class="v76-prop p3 v76-pop">
+          <circle cx="582" cy="318" r="52" fill="#fff" stroke="#E8CD83" stroke-width="4"/>
+          <circle cx="582" cy="318" r="27" fill="none" stroke="#D2A23B" stroke-width="5"/>
+          <circle cx="582" cy="318" r="10" fill="#F58268"/>
+          <path d="M582 278v13M582 345v13M542 318h13M609 318h13" stroke="#D2A23B" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <path class="v76-link l1 v76-draw" d="M380 128v54" stroke="#93CDBE" stroke-width="5" stroke-linecap="round"/>
+        <path class="v76-link l2 v76-draw" d="M225 318c42 3 68 12 92 34" stroke="#E0A193" stroke-width="5" stroke-linecap="round"/>
+        <path class="v76-link l3 v76-draw" d="M535 318c-42 3-68 12-92 34" stroke="#D6B35D" stroke-width="5" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THE BIG IDEA</div>
       <h2 class="clean-title">What is Andragogy?</h2>
-      <p class="clean-copy">Think of the adult learner at the centre. Around them are three useful design lenses: <b>autonomy</b>, <b>experience</b> and <b>purpose</b>.</p>
+      <p class="clean-copy">Start with the adult learner. Around them are three useful design lenses: <b>autonomy</b>, <b>experience</b> and <b>purpose</b>.</p>
     </div>
   </div>
 </section>
 
   <section class="clean-card" data-clean-page="1">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v75-art" aria-hidden="true">
-      <svg class="v75-svg" viewBox="0 0 720 520">
-        <path class="v75-head-outline v75-draw" d="M360 72c-95 0-168 77-168 171 0 68 35 122 87 151v54h162v-54c52-29 87-83 87-151 0-94-73-171-168-171Z" fill="#fff" stroke="#9bcfc2" stroke-width="5"/>
-        <g class="v75-memory-card c1 v75-rise">
-          <rect x="260" y="178" width="82" height="54" rx="17" fill="#dff3ed" stroke="#8fc8ba" stroke-width="3"/>
-          <circle cx="286" cy="205" r="9" fill="#0fb6a6"/><path d="M306 195h22M306 208h16" stroke="#087b72" stroke-width="4" stroke-linecap="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M106 143c80-87 234-85 321-21 69 51 82 135 150 177 74 46 76 124 18 173-70 58-182 37-259 20-88-20-177 13-237-55-67-76-63-219 7-294Z" fill="#F8EFEA"/>
+        <g class="v76-door v76-rise">
+          <rect x="82" y="124" width="150" height="286" rx="18" fill="#fff" stroke="#DCC8BF" stroke-width="4"/>
+          <rect x="112" y="155" width="90" height="255" rx="10" fill="#F4E3DA"/>
+          <circle cx="185" cy="288" r="7" fill="#B96E5E"/>
         </g>
-        <g class="v75-memory-card c2 v75-rise">
-          <rect x="378" y="158" width="82" height="54" rx="17" fill="#fff0eb" stroke="#e0a294" stroke-width="3"/>
-          <path d="M398 185h40M418 170v30" stroke="#c36b59" stroke-width="5" stroke-linecap="round"/>
+        <g class="v76-walker v76-slide-right">
+          <circle cx="330" cy="204" r="38" fill="#D9A98C"/>
+          <path d="M280 331c8-79 25-112 52-112 30 0 48 35 55 112" fill="#173135"/>
+          <path d="M296 264h68v67h-68z" fill="#F58268"/>
+          <path d="M302 326l-29 91M360 326l42 91" stroke="#173135" stroke-width="18" stroke-linecap="round"/>
+          <path d="M291 275l-48 58M370 275l46 32" stroke="#D9A98C" stroke-width="17" stroke-linecap="round"/>
         </g>
-        <g class="v75-memory-card c3 v75-rise">
-          <rect x="304" y="260" width="112" height="62" rx="20" fill="#fff8df" stroke="#e2c26d" stroke-width="3"/>
-          <path d="M329 290h62" stroke="#bd8e27" stroke-width="5" stroke-linecap="round"/><circle cx="360" cy="290" r="11" fill="#e6ae48"/>
+        <g class="v76-bag v76-rise">
+          <rect x="420" y="318" width="118" height="88" rx="22" fill="#E7C46D"/>
+          <path d="M449 318c0-37 15-54 30-54s30 17 30 54" fill="none" stroke="#9A7620" stroke-width="10" stroke-linecap="round"/>
         </g>
-        <path class="v75-memory-link l1 v75-draw" d="M342 205h36" stroke="#c2d8d2" stroke-width="4" stroke-linecap="round"/>
-        <path class="v75-memory-link l2 v75-draw" d="M360 232v28" stroke="#c2d8d2" stroke-width="4" stroke-linecap="round"/>
-        <g class="v75-notblank v75-pop"><circle cx="360" cy="382" r="34" fill="#173135"/><path d="M346 382h28" stroke="#fff" stroke-width="7" stroke-linecap="round"/></g>
+        <g class="v76-memory-object mo1 v76-pop">
+          <rect x="438" y="256" width="54" height="42" rx="10" fill="#fff" stroke="#97CDBF" stroke-width="3"/>
+          <circle cx="454" cy="277" r="7" fill="#0FB6A6"/><path d="M468 269h14M468 281h10" stroke="#087B72" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g class="v76-memory-object mo2 v76-pop">
+          <circle cx="530" cy="265" r="24" fill="#FFF0EB" stroke="#E0A193" stroke-width="3"/>
+          <path d="M518 265h24M530 253v24" stroke="#B95E4B" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g class="v76-memory-object mo3 v76-pop">
+          <path d="M473 225l25-35 25 35Z" fill="#DFF3ED" stroke="#8FC8BA" stroke-width="3"/>
+          <circle cx="498" cy="211" r="5" fill="#087B72"/>
+        </g>
+        <path class="v76-memory-trail v76-draw" d="M477 248c-18-12-31-28-34-50M520 245c17-16 25-32 24-49" fill="none" stroke="#C4D9D3" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 10"/>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
       <h2 class="clean-title">Adults arrive as a blank slate.</h2>
-      <div class="clean-yn" data-answer="no" data-correct="Exactly. Adults already carry experiences, habits and mental models into new learning." data-wrong="Not quite. Adults usually arrive with substantial prior experience already shaping how they interpret new learning.">
+      <div class="clean-yn" data-answer="no" data-correct="Exactly. Adults arrive carrying experiences, habits and mental models that shape new learning." data-wrong="Not quite. Adults usually bring substantial prior experience into the learning situation.">
         <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
         <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
       </div>
@@ -4441,49 +4547,73 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="2">
   <div class="clean-card-layout">
-    <div class="clean-visual v75-art" aria-hidden="true">
-      <svg class="v75-svg" viewBox="0 0 720 520">
-        <circle class="v75-field v75-draw" cx="360" cy="260" r="176" fill="none" stroke="#dcece7" stroke-width="3" stroke-dasharray="9 12"/>
-        <g class="v75-person v75-pop">
-          <circle cx="360" cy="218" r="42" fill="#f0c2a3"/>
-          <path d="M286 376c10-95 36-137 74-137s64 42 74 137" fill="#173135"/>
-          <path d="M320 292h80v84h-80z" fill="#0fb6a6"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M122 131c97-61 240-44 310 23 54 52 63 123 143 154 89 34 91 121 28 169-68 52-172 29-253 18-92-13-195 30-253-41-64-79-58-271 25-323Z" fill="#EEF7F4"/>
+        <g class="v76-table v76-rise">
+          <ellipse cx="380" cy="349" rx="192" ry="52" fill="#D9EEE7"/>
+          <ellipse cx="380" cy="339" rx="192" ry="52" fill="#fff" stroke="#A9D4C8" stroke-width="4"/>
+          <path d="M278 373v77M482 373v77" stroke="#173135" stroke-width="15" stroke-linecap="round"/>
+          <rect x="287" y="305" width="186" height="68" rx="12" fill="#FFF8DF" stroke="#E0C66F" stroke-width="3"/>
+          <path class="v76-map-route v76-draw" d="M310 348c28-39 58-39 85-10 24 25 42 6 57-19" fill="none" stroke="#F58268" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="312" cy="348" r="7" fill="#173135"/><circle cx="452" cy="319" r="7" fill="#0FB6A6"/>
         </g>
-        <path class="v75-ray r1 v75-draw" d="M360 172V96" stroke="#8fc8ba" stroke-width="5" stroke-linecap="round"/>
-        <path class="v75-ray r2 v75-draw" d="M304 305 217 365" stroke="#8fc8ba" stroke-width="5" stroke-linecap="round"/>
-        <path class="v75-ray r3 v75-draw" d="M416 305 503 365" stroke="#8fc8ba" stroke-width="5" stroke-linecap="round"/>
-        <g class="v75-icon i1 v75-pop"><circle cx="360" cy="80" r="42" fill="#fff" stroke="#a7d5c9" stroke-width="4"/><path d="M339 80h42M360 59v42" stroke="#087b72" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v75-icon i2 v75-pop"><circle cx="198" cy="378" r="42" fill="#fff" stroke="#a7d5c9" stroke-width="4"/><path d="M177 365h42M184 380h28M190 395h16" stroke="#087b72" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v75-icon i3 v75-pop"><circle cx="522" cy="378" r="42" fill="#fff" stroke="#a7d5c9" stroke-width="4"/><circle cx="522" cy="378" r="22" fill="none" stroke="#087b72" stroke-width="5"/><circle cx="522" cy="378" r="8" fill="#f58268"/></g>
-        <circle class="v75-ripple rp1" cx="360" cy="260" r="86" fill="none" stroke="#0fb6a6" stroke-width="3" opacity=".24"/>
-        <circle class="v75-ripple rp2" cx="360" cy="260" r="118" fill="none" stroke="#0fb6a6" stroke-width="2" opacity=".14"/>
+        <g class="v76-educator v76-slide-left">
+          <circle cx="220" cy="203" r="38" fill="#E4B394"/>
+          <path d="M162 334c9-80 29-115 58-115s49 35 58 115" fill="#173135"/>
+          <path d="M186 263h68v71h-68z" fill="#597B77"/>
+          <path d="M252 282l76 47" stroke="#E4B394" stroke-width="17" stroke-linecap="round"/>
+        </g>
+        <g class="v76-learner v76-slide-right">
+          <circle cx="540" cy="203" r="38" fill="#C98F72"/>
+          <path d="M482 334c9-80 29-115 58-115s49 35 58 115" fill="#0FB6A6"/>
+          <path d="M506 263h68v71h-68z" fill="#F58268"/>
+          <path class="v76-point-arm" d="M508 282l-91 46" stroke="#C98F72" stroke-width="17" stroke-linecap="round"/>
+          <circle class="v76-point v76-pop" cx="410" cy="331" r="10" fill="#F58268"/>
+        </g>
+        <g class="v76-choice-card cc1 v76-pop"><rect x="318" y="103" width="70" height="52" rx="14" fill="#fff" stroke="#A7D4C8" stroke-width="3"/><path d="M334 129h38" stroke="#087B72" stroke-width="5" stroke-linecap="round"/></g>
+        <g class="v76-choice-card cc2 v76-pop"><rect x="398" y="103" width="70" height="52" rx="14" fill="#fff" stroke="#E1A294" stroke-width="3"/><circle cx="433" cy="129" r="11" fill="#F58268"/></g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THE CORE IDEA</div>
       <h2 class="clean-title">Start with the adult learner.</h2>
-      <p class="clean-copy">Design outward from the learner: where can they exercise choice, what experience do they already bring, and why does this learning matter now?</p>
+      <p class="clean-copy">The educator still brings expertise, but the learner can help shape the route: what matters, what they already know, and where practice should go next.</p>
     </div>
   </div>
 </section>
 
   <section class="clean-card" data-clean-page="3">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <g class="v74-bust left v74-pop"><circle cx="170" cy="190" r="44" fill="#f3c6a7"/><path d="M105 358c8-82 30-120 65-120s57 38 65 120" fill="#173135"/></g>
-        <g class="v74-bust right v74-pop"><circle cx="470" cy="190" r="44" fill="#d9ad91"/><path d="M405 358c8-82 30-120 65-120s57 38 65 120" fill="#0fb6a6"/></g>
-        <path class="v74-bridge v74-draw" d="M220 300 C275 230 365 230 420 300" fill="none" stroke="#8bc7b8" stroke-width="9" stroke-linecap="round"/>
-        <circle class="v74-bridge-dot d1 v74-pop" cx="270" cy="254" r="11" fill="#e6ae48"/>
-        <circle class="v74-bridge-dot d2 v74-pop" cx="320" cy="238" r="11" fill="#f58268"/>
-        <circle class="v74-bridge-dot d3 v74-pop" cx="370" cy="254" r="11" fill="#e6ae48"/>
-        <path class="v74-arrow v74-draw" d="M286 388h68m0 0-18-16m18 16-18 16" fill="none" stroke="#607477" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M96 162c67-82 195-96 279-43 68 43 93 122 173 145 88 26 121 105 73 166-54 69-158 68-250 49-91-19-169 16-239-49-78-72-103-187-36-268Z" fill="#ECF6F3"/>
+        <path class="v76-path-main v76-draw" d="M123 393c92-14 117-92 205-102 89-10 124 72 215 54 38-8 66-30 94-63" fill="none" stroke="#9CCFC2" stroke-width="18" stroke-linecap="round"/>
+        <path class="v76-path-center v76-draw" d="M123 393c92-14 117-92 205-102 89-10 124 72 215 54 38-8 66-30 94-63" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 14"/>
+        <g class="v76-guide-person v76-slide-left">
+          <circle cx="218" cy="217" r="38" fill="#E4B394"/>
+          <path d="M163 341c9-81 28-116 55-116s46 35 55 116" fill="#173135"/>
+          <path d="M188 267h60v74h-60z" fill="#607477"/>
+          <path d="M248 281l71 21" stroke="#E4B394" stroke-width="16" stroke-linecap="round"/>
+        </g>
+        <g class="v76-learner-person v76-slide-right">
+          <circle cx="508" cy="219" r="38" fill="#C98F72"/>
+          <path d="M452 343c9-82 29-116 56-116s47 34 56 116" fill="#0FB6A6"/>
+          <path d="M478 269h60v74h-60z" fill="#F58268"/>
+          <path d="M478 286l-65 22" stroke="#C98F72" stroke-width="16" stroke-linecap="round"/>
+        </g>
+        <g class="v76-shared-marker v76-pop">
+          <circle cx="365" cy="298" r="28" fill="#fff" stroke="#E4C86B" stroke-width="4"/>
+          <path d="M354 298h22M365 287v22" stroke="#B68A25" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <circle class="v76-destination v76-pop" cx="624" cy="289" r="26" fill="#173135"/>
+        <path d="m613 289 8 9 18-21" fill="none" stroke="#0FB6A6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
       <h2 class="clean-title">Andragogy means adults should always teach themselves.</h2>
-      <div class="clean-yn" data-answer="no" data-correct="Correct. Learner direction can increase without removing expert teaching, structure or feedback." data-wrong="No. Andragogy does not mean abandoning teaching or structure.">
+      <div class="clean-yn" data-answer="no" data-correct="Correct. The educator can remain a guide, expert and source of feedback while the learner has meaningful direction." data-wrong="No. Andragogy does not mean abandoning teaching or structure.">
         <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
         <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
       </div>
@@ -4493,46 +4623,67 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="4">
   <div class="clean-card-layout">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <g class="v74-soft v74-pop">
-          <path d="M95 136c53-40 131-32 167 15 26 33 20 80-5 110-29 35-28 69 1 99-58 25-134 18-171-26-29-35-22-86 6-116 20-21 17-53 2-82Z" fill="#dff4ee" stroke="#8fc8ba" stroke-width="4"/>
-          <path d="M123 194c32-18 70-18 105 0M120 240c40-17 79-17 118 0M122 286c31-17 65-17 99 0" fill="none" stroke="#087b72" stroke-width="6" stroke-linecap="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M104 111c94-61 227-38 287 33 50 58 52 133 124 172 76 41 83 118 30 170-61 60-164 47-255 26-89-21-177 13-236-60-68-84-42-282 50-341Z" fill="#F4F8F6"/>
+        <g class="v76-flex-side v76-slide-left">
+          <path d="M102 358c47-73 87-98 124-77 35 20 33 65 71 76 29 9 56-11 86-54" fill="none" stroke="#0FB6A6" stroke-width="22" stroke-linecap="round"/>
+          <circle cx="121" cy="345" r="30" fill="#fff" stroke="#8FC8BA" stroke-width="4"/>
+          <circle cx="378" cy="306" r="30" fill="#fff" stroke="#8FC8BA" stroke-width="4"/>
+          <g class="v76-flex-person">
+            <circle cx="210" cy="194" r="34" fill="#E4B394"/>
+            <path d="M165 306c7-70 23-100 45-100s38 30 45 100" fill="#0FB6A6"/>
+          </g>
         </g>
-        <g class="v74-rigid v74-pop">
-          <rect x="386" y="128" width="160" height="70" rx="8" fill="#fff2ee" stroke="#dfa08f" stroke-width="4"/>
-          <rect x="386" y="207" width="160" height="70" rx="8" fill="#fff2ee" stroke="#dfa08f" stroke-width="4"/>
-          <rect x="386" y="286" width="160" height="70" rx="8" fill="#fff2ee" stroke="#dfa08f" stroke-width="4"/>
-          <path d="M416 163h100M416 242h100M416 321h100" stroke="#b96e5e" stroke-width="7" stroke-linecap="round"/>
+        <g class="v76-rigid-side v76-slide-right">
+          <rect x="490" y="154" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
+          <rect x="490" y="222" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
+          <rect x="490" y="290" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
+          <g class="v76-rigid-person">
+            <circle cx="566" cy="113" r="31" fill="#C98F72"/>
+            <path d="M524 150c7-54 22-76 42-76s35 22 42 76" fill="#173135"/>
+          </g>
         </g>
-        <g class="v74-not v74-pop"><circle cx="320" cy="242" r="36" fill="#173135"/><path d="M300 242h40" stroke="#fff" stroke-width="8" stroke-linecap="round"/></g>
+        <g class="v76-not-equal v76-pop"><circle cx="432" cy="255" r="40" fill="#173135"/><path d="M415 244h34M415 266h34" stroke="#fff" stroke-width="7" stroke-linecap="round"/><path d="M449 230l-35 50" stroke="#F58268" stroke-width="7" stroke-linecap="round"/></g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">IMPORTANT NUANCE</div>
       <h2 class="clean-title">Assumptions, not rules.</h2>
-      <p class="clean-copy">Andragogy describes useful tendencies to consider—not a rigid formula that fits every adult, every task or every context.</p>
+      <p class="clean-copy">Use andragogy as a flexible lens. It should help you make better design decisions, not force every adult learner into the same pattern.</p>
     </div>
   </div>
 </section>
 
   <section class="clean-card" data-clean-page="5">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <path class="v74-shield v74-pop" d="M320 78 442 122v104c0 86-46 142-122 182-76-40-122-96-122-182V122Z" fill="#173135"/>
-        <path class="v74-check v74-draw" d="m274 237 30 31 65-75" fill="none" stroke="#0fb6a6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="v74-path p1 v74-draw" d="M86 214c72-50 112-56 160-28" fill="none" stroke="#e6ae48" stroke-width="7" stroke-linecap="round"/>
-        <path class="v74-path p2 v74-draw" d="M554 214c-72-50-112-56-160-28" fill="none" stroke="#f58268" stroke-width="7" stroke-linecap="round"/>
-        <circle class="v74-choice c1 v74-pop" cx="102" cy="212" r="30" fill="#fff" stroke="#e6ae48" stroke-width="5"/>
-        <circle class="v74-choice c2 v74-pop" cx="538" cy="212" r="30" fill="#fff" stroke="#f58268" stroke-width="5"/>
-        <path class="v74-choice-icon" d="M89 212h26M102 199v26M525 212h26" stroke="#607477" stroke-width="5" stroke-linecap="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M118 123c95-57 221-44 292 20 57 52 68 125 140 157 75 33 101 99 67 160-43 78-150 83-248 58-89-22-181 11-245-60-75-84-91-277-6-335Z" fill="#EEF7F4"/>
+        <g class="v76-shield v76-pop">
+          <path d="M380 96 475 130v83c0 70-36 117-95 151-59-34-95-81-95-151v-83Z" fill="#173135"/>
+          <path class="v76-shield-check v76-draw" d="m341 224 24 25 52-60" fill="none" stroke="#0FB6A6" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="v76-choice-station left v76-slide-left">
+          <circle cx="172" cy="191" r="36" fill="#E4B394"/>
+          <path d="M124 307c8-72 24-103 48-103s40 31 48 103" fill="#0FB6A6"/>
+          <rect x="85" y="336" width="174" height="72" rx="20" fill="#fff" stroke="#A8D3C8" stroke-width="4"/>
+          <path d="M116 372h112" stroke="#087B72" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <g class="v76-choice-station right v76-slide-right">
+          <circle cx="588" cy="191" r="36" fill="#C98F72"/>
+          <path d="M540 307c8-72 24-103 48-103s40 31 48 103" fill="#F58268"/>
+          <rect x="501" y="336" width="174" height="72" rx="20" fill="#fff" stroke="#E2A396" stroke-width="4"/>
+          <circle cx="588" cy="372" r="19" fill="none" stroke="#B95E4B" stroke-width="5"/>
+        </g>
+        <path class="v76-choice-link left v76-draw" d="M258 372c42 0 61-18 75-49" fill="none" stroke="#BFDCD3" stroke-width="5" stroke-linecap="round"/>
+        <path class="v76-choice-link right v76-draw" d="M502 372c-42 0-61-18-75-49" fill="none" stroke="#E5B5A9" stroke-width="5" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
       <h2 class="clean-title">Can an educator still set non-negotiable safety standards?</h2>
-      <div class="clean-yn" data-answer="yes" data-correct="Yes. Learner autonomy and firm safety standards can coexist." data-wrong="They can. Andragogy changes how decisions are shared; it does not require safety standards to disappear.">
+      <div class="clean-yn" data-answer="yes" data-correct="Yes. Learners can have meaningful choices about practice while essential safety standards remain fixed." data-wrong="They can. Andragogy changes how decisions are shared; it does not require safety standards to disappear.">
         <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
         <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
       </div>
@@ -4542,25 +4693,27 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="6">
   <div class="clean-card-layout">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <g class="v74-wordtile t1 v74-slide">
-          <rect x="78" y="145" width="210" height="190" rx="34" fill="#fff" stroke="#b9dcd2" stroke-width="4"/>
-          <path d="M120 288c48-68 95-68 143 0" fill="none" stroke="#0fb6a6" stroke-width="8" stroke-linecap="round"/>
-          <circle cx="192" cy="210" r="30" fill="#173135"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M119 122c84-51 201-43 272 17 60 50 84 127 160 148 80 23 108 98 66 161-48 72-145 80-233 59-95-23-190 12-255-58-76-82-100-272-10-327Z" fill="#F7F3EA"/>
+        <g class="v76-adult-icon v76-slide-left">
+          <circle cx="236" cy="192" r="44" fill="#E4B394"/>
+          <path d="M174 333c10-89 32-129 62-129s52 40 62 129" fill="#173135"/>
+          <path d="M204 266h64v67h-64z" fill="#0FB6A6"/>
         </g>
-        <g class="v74-wordtile t2 v74-slide">
-          <rect x="352" y="145" width="210" height="190" rx="34" fill="#fff" stroke="#b9dcd2" stroke-width="4"/>
-          <path d="M392 228h130M457 178v100" stroke="#087b72" stroke-width="8" stroke-linecap="round"/>
-          <path d="m432 200 25-22 25 22" fill="none" stroke="#f58268" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="v76-guide-hand v76-slide-right">
+          <path d="M470 208c20-15 43-5 54 11l38 56c9 14 6 31-7 41-14 11-31 8-42-6l-14-18-25 22c-16 14-39 13-53-3-14-16-12-40 4-54Z" fill="#F3C5A6"/>
+          <path d="M450 275c35-37 72-59 111-67" fill="none" stroke="#173135" stroke-width="11" stroke-linecap="round"/>
+          <path d="m548 191 18 14-21 10" fill="#173135"/>
         </g>
-        <path class="v74-plus v74-draw" d="M320 218v44M298 240h44" stroke="#607477" stroke-width="7" stroke-linecap="round"/>
+        <path class="v76-join v76-draw" d="M330 262h84" stroke="#E2C76F" stroke-width="8" stroke-linecap="round"/>
+        <circle class="v76-join-dot v76-pop" cx="372" cy="262" r="13" fill="#F58268"/>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">UNPACK THE WORD</div>
       <h2 class="clean-title">Andragogy points toward leading adults in learning.</h2>
-      <p class="clean-copy"><b>andr-</b> refers to the adult; <b>-agogy</b> refers to leading or guiding. The word itself signals the adult-learning tradition.</p>
+      <p class="clean-copy">The word combines the idea of the adult learner with guidance or leading. The useful emphasis is not “leave adults alone,” but “design learning with the adult learner in mind.”</p>
     </div>
   </div>
 </section>
@@ -4610,43 +4763,62 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="9">
   <div class="clean-card-layout">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <defs><linearGradient id="axisgrad9" x1="0" x2="1"><stop offset="0" stop-color="#173135"/><stop offset=".5" stop-color="#9bcfc2"/><stop offset="1" stop-color="#0fb6a6"/></linearGradient></defs>
-        <path class="v74-axis v74-draw" d="M112 250H528" fill="none" stroke="url(#axisgrad9)" stroke-width="12" stroke-linecap="round"/>
-        <g class="v74-axis-node n1 v74-pop"><circle cx="128" cy="250" r="28" fill="#173135"/><path d="M116 250h24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v74-axis-node n2 v74-pop"><circle cx="320" cy="250" r="31" fill="#fff" stroke="#8fc8ba" stroke-width="7"/><circle cx="320" cy="250" r="9" fill="#0fb6a6"/></g>
-        <g class="v74-axis-node n3 v74-pop"><circle cx="512" cy="250" r="28" fill="#0fb6a6"/><path d="M500 250h24M512 238v24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v74-side-icons v74-pop">
-          <path d="M110 145h36v36h-36z" fill="#eef4f2" stroke="#9bb5ae" stroke-width="3"/><path d="M493 145h38v38l-19 16-19-16z" fill="#e7f7f2" stroke="#8fc8ba" stroke-width="3"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M97 126c90-58 220-46 291 19 59 54 75 128 151 157 81 32 100 111 55 169-52 67-150 69-238 50-92-20-186 14-251-59-76-86-95-279-8-336Z" fill="#EDF7F4"/>
+        <path class="v76-continuum v76-draw" d="M135 344H625" stroke="#A5D2C7" stroke-width="18" stroke-linecap="round"/>
+        <circle class="v76-knob v76-glide" cx="380" cy="344" r="28" fill="#173135"/>
+        <g class="v76-left-person v76-slide-left">
+          <circle cx="190" cy="206" r="38" fill="#E4B394"/>
+          <path d="M136 329c8-80 27-113 54-113s46 33 54 113" fill="#173135"/>
+          <path d="M158 264h64v65h-64z" fill="#607477"/>
+          <rect x="110" y="362" width="160" height="48" rx="18" fill="#fff" stroke="#A8D3C8" stroke-width="4"/>
+          <path d="M140 386h100" stroke="#087B72" stroke-width="5" stroke-linecap="round"/>
         </g>
-        <path class="v74-mid-arrows v74-draw" d="M220 168h70m60 0h70" fill="none" stroke="#c3d8d2" stroke-width="5" stroke-linecap="round"/>
+        <g class="v76-right-person v76-slide-right">
+          <circle cx="570" cy="206" r="38" fill="#C98F72"/>
+          <path d="M516 329c8-80 27-113 54-113s46 33 54 113" fill="#0FB6A6"/>
+          <path d="M538 264h64v65h-64z" fill="#F58268"/>
+          <rect x="490" y="362" width="160" height="48" rx="18" fill="#fff" stroke="#E1A294" stroke-width="4"/>
+          <circle cx="570" cy="386" r="14" fill="none" stroke="#B95E4B" stroke-width="4"/>
+        </g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THINK CONTINUUM</div>
       <h2 class="clean-title">Learner direction is not all-or-none.</h2>
-      <p class="clean-copy">A course can keep essential structure while still giving learners meaningful choices about goals, sequence, examples or practice routes.</p>
+      <p class="clean-copy">The balance can shift. Some decisions remain educator-led, some can be shared, and some can move toward the learner.</p>
     </div>
   </div>
 </section>
 
   <section class="clean-card" data-clean-page="10">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <path class="v74-balance-beam v74-draw" d="M150 220h340" fill="none" stroke="#173135" stroke-width="10" stroke-linecap="round"/>
-        <path class="v74-balance-post v74-draw" d="M320 220v128M280 348h80" fill="none" stroke="#607477" stroke-width="9" stroke-linecap="round"/>
-        <g class="v74-pan p1 v74-pop"><path d="M130 250h110l-18 58H148Z" fill="#fff" stroke="#9bcfc2" stroke-width="4"/><path d="M150 250l35-62 35 62" fill="none" stroke="#9bcfc2" stroke-width="4"/></g>
-        <g class="v74-pan p2 v74-pop"><path d="M400 250h110l-18 58h-74Z" fill="#fff" stroke="#e2a197" stroke-width="4"/><path d="M420 250l35-62 35 62" fill="none" stroke="#e2a197" stroke-width="4"/></g>
-        <circle class="v74-pivot v74-pop" cx="320" cy="220" r="22" fill="#0fb6a6"/>
-        <path class="v74-equal v74-draw" d="M285 130h70M285 155h70" stroke="#e6ae48" stroke-width="7" stroke-linecap="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M99 115c90-53 216-40 288 24 61 53 75 131 153 156 80 25 111 101 68 163-50 71-155 77-245 55-91-22-181 16-247-57-77-84-105-287-17-341Z" fill="#F5F8F7"/>
+        <g class="v76-seesaw v76-rise">
+          <path d="M180 310h400" stroke="#173135" stroke-width="16" stroke-linecap="round"/>
+          <path d="M380 310 330 414h100Z" fill="#607477"/>
+        </g>
+        <g class="v76-person-left v76-pop">
+          <circle cx="245" cy="214" r="36" fill="#E4B394"/>
+          <path d="M198 308c8-66 24-94 47-94s39 28 47 94" fill="#173135"/>
+          <rect x="214" y="252" width="62" height="56" fill="#607477"/>
+        </g>
+        <g class="v76-person-right v76-pop">
+          <circle cx="515" cy="214" r="36" fill="#C98F72"/>
+          <path d="M468 308c8-66 24-94 47-94s39 28 47 94" fill="#0FB6A6"/>
+          <rect x="484" y="252" width="62" height="56" fill="#F58268"/>
+        </g>
+        <g class="v76-block-left v76-slide-left"><rect x="133" y="338" width="112" height="62" rx="15" fill="#fff" stroke="#A8D3C8" stroke-width="4"/><path d="M158 370h62" stroke="#087B72" stroke-width="5" stroke-linecap="round"/></g>
+        <g class="v76-block-right v76-slide-right"><rect x="515" y="338" width="112" height="62" rx="15" fill="#fff" stroke="#E1A294" stroke-width="4"/><circle cx="571" cy="369" r="16" fill="#F58268"/></g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
       <h2 class="clean-title">Structure and learner autonomy can exist together.</h2>
-      <div class="clean-yn" data-answer="yes" data-correct="Exactly. The useful question is which decisions should be shared in this context." data-wrong="They can coexist. Andragogy is not the absence of structure.">
+      <div class="clean-yn" data-answer="yes" data-correct="Exactly. The design problem is not choosing one side; it is deciding which decisions should sit where." data-wrong="They can coexist. Andragogy is not the absence of structure.">
         <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
         <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
       </div>
@@ -4656,41 +4828,66 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="11">
   <div class="clean-card-layout">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <rect class="v74-monitor v74-pop" x="190" y="110" width="260" height="190" rx="26" fill="#173135"/>
-        <path class="v74-wave v74-draw" d="M224 210h42l15-34 22 70 24-49 18 13h66" fill="none" stroke="#0fb6a6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="v74-monitor-stand v74-draw" d="M320 300v52M270 352h100" stroke="#607477" stroke-width="8" stroke-linecap="round"/>
-        <g class="v74-choice-chip c1 v74-pop"><circle cx="118" cy="178" r="48" fill="#fff" stroke="#b9dcd2" stroke-width="4"/><path d="M98 178h40M118 158v40" stroke="#087b72" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v74-choice-chip c2 v74-pop"><circle cx="522" cy="178" r="48" fill="#fff" stroke="#e3aa9d" stroke-width="4"/><path d="M500 178h44" stroke="#b96e5e" stroke-width="5" stroke-linecap="round"/></g>
-        <path class="v74-link l1 v74-draw" d="M166 178h24M450 178h24" stroke="#c5d9d3" stroke-width="5" stroke-linecap="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M110 116c94-48 213-37 287 29 60 52 72 128 148 158 81 32 98 108 54 168-50 68-148 73-240 51-91-22-182 14-246-55-76-82-99-307-3-351Z" fill="#EEF7F4"/>
+        <g class="v76-sim-bed v76-rise">
+          <rect x="322" y="296" width="240" height="70" rx="22" fill="#fff" stroke="#AACFC5" stroke-width="4"/>
+          <circle cx="367" cy="284" r="30" fill="#E9B99A"/>
+          <path d="M397 304h126" stroke="#D7E8E3" stroke-width="30" stroke-linecap="round"/>
+          <path d="M352 366v44M536 366v44" stroke="#173135" stroke-width="12" stroke-linecap="round"/>
+        </g>
+        <g class="v76-monitor v76-slide-right">
+          <rect x="528" y="132" width="128" height="104" rx="16" fill="#173135"/>
+          <path class="v76-monitor-wave v76-draw" d="M548 188h18l8-18 12 38 14-26 9 6h27" fill="none" stroke="#0FB6A6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M592 236v42" stroke="#607477" stroke-width="9" stroke-linecap="round"/>
+        </g>
+        <g class="v76-learner-sim v76-slide-left">
+          <circle cx="215" cy="204" r="38" fill="#C98F72"/>
+          <path d="M158 334c9-81 29-117 57-117s48 36 57 117" fill="#0FB6A6"/>
+          <path d="M184 264h62v70h-62z" fill="#173135"/>
+          <path d="M245 285l73 36" stroke="#C98F72" stroke-width="16" stroke-linecap="round"/>
+        </g>
+        <g class="v76-choice-card c1 v76-pop"><rect x="108" y="375" width="116" height="52" rx="16" fill="#fff" stroke="#A7D4C8" stroke-width="4"/><path d="M132 401h68" stroke="#087B72" stroke-width="5" stroke-linecap="round"/></g>
+        <g class="v76-choice-card c2 v76-pop"><rect x="238" y="375" width="116" height="52" rx="16" fill="#fff" stroke="#E1A294" stroke-width="4"/><circle cx="296" cy="401" r="14" fill="#F58268"/></g>
+        <g class="v76-safety-badge v76-pop"><circle cx="615" cy="356" r="35" fill="#173135"/><path d="m597 356 12 13 25-29" fill="none" stroke="#0FB6A6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">APPLY IT</div>
       <h2 class="clean-title">A simulation can be both structured and andragogical.</h2>
-      <p class="clean-copy">Keep the performance standard fixed, but let learners choose which case to practise first or which skill they want to repeat.</p>
+      <p class="clean-copy">Keep the safety outcome fixed, while allowing meaningful choices about what to practise first, which case to attempt, or what to repeat.</p>
     </div>
   </div>
 </section>
 
   <section class="clean-card" data-clean-page="12">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <circle class="v74-route-start v74-pop" cx="120" cy="240" r="44" fill="#173135"/>
-        <circle class="v74-route-end v74-pop" cx="520" cy="240" r="48" fill="#0fb6a6"/>
-        <path class="v74-route r1 v74-draw" d="M164 240 C235 240 245 145 320 145 S405 240 472 240" fill="none" stroke="#e6ae48" stroke-width="7" stroke-linecap="round"/>
-        <path class="v74-route r2 v74-draw" d="M164 240 C235 240 245 335 320 335 S405 240 472 240" fill="none" stroke="#f58268" stroke-width="7" stroke-linecap="round"/>
-        <g class="v74-waypoint w1 v74-pop"><circle cx="320" cy="145" r="26" fill="#fff" stroke="#e6ae48" stroke-width="5"/><path d="M308 145h24" stroke="#607477" stroke-width="4"/></g>
-        <g class="v74-waypoint w2 v74-pop"><circle cx="320" cy="335" r="26" fill="#fff" stroke="#f58268" stroke-width="5"/><path d="M308 335h24" stroke="#607477" stroke-width="4"/></g>
-        <path class="v74-end-check v74-draw" d="m501 240 13 13 27-31" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M96 131c96-62 228-44 302 18 61 50 81 128 157 154 80 28 103 106 60 168-50 72-154 80-245 57-91-23-185 10-252-60-78-83-113-276-22-337Z" fill="#F3F8F6"/>
+        <path class="v76-route route1 v76-draw" d="M160 374c63-118 151-131 220-42 60 76 104 72 205-38" fill="none" stroke="#E6AE48" stroke-width="14" stroke-linecap="round"/>
+        <path class="v76-route route2 v76-draw" d="M160 374c80-39 107 29 197 10 86-18 126-108 228-90" fill="none" stroke="#F58268" stroke-width="14" stroke-linecap="round"/>
+        <g class="v76-route-person p1 v76-slide-left">
+          <circle cx="143" cy="330" r="30" fill="#E4B394"/>
+          <path d="M102 406c6-55 20-77 41-77s35 22 41 77" fill="#173135"/>
+        </g>
+        <g class="v76-route-person p2 v76-slide-left">
+          <circle cx="195" cy="407" r="30" fill="#C98F72"/>
+          <path d="M154 484c6-55 20-77 41-77s35 22 41 77" fill="#0FB6A6"/>
+        </g>
+        <g class="v76-target v76-pop">
+          <circle cx="604" cy="269" r="66" fill="#fff" stroke="#A7D4C8" stroke-width="5"/>
+          <circle cx="604" cy="269" r="42" fill="none" stroke="#A7D4C8" stroke-width="5"/>
+          <circle cx="604" cy="269" r="18" fill="#0FB6A6"/>
+          <path d="m590 269 10 11 23-27" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
       </svg>
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
       <h2 class="clean-title">Different learning pathways can still lead to the same required standard.</h2>
-      <div class="clean-yn" data-answer="yes" data-correct="Yes. Pathway flexibility does not require lowering the final standard." data-wrong="They can. The pathway may vary while the required outcome remains fixed.">
+      <div class="clean-yn" data-answer="yes" data-correct="Yes. The route can flex while the required outcome remains fixed." data-wrong="They can. Pathway flexibility does not require lowering the final standard.">
         <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
         <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
       </div>
@@ -4700,14 +4897,29 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="13">
   <div class="clean-card-layout">
-    <div class="clean-visual v74-art" aria-hidden="true">
-      <svg class="v74-svg" viewBox="0 0 640 480">
-        <circle class="v74-ring outer v74-draw" cx="320" cy="235" r="160" fill="none" stroke="#c9e2da" stroke-width="4"/>
-        <circle class="v74-ring inner v74-draw" cx="320" cy="235" r="112" fill="none" stroke="#9dcfc3" stroke-width="4"/>
-        <g class="v74-recap-node n1 v74-pop"><circle cx="320" cy="92" r="42" fill="#fff" stroke="#9bcfc2" stroke-width="4"/><path d="M302 95h36M320 77v36" stroke="#087b72" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v74-recap-node n2 v74-pop"><circle cx="190" cy="310" r="42" fill="#fff" stroke="#e2a197" stroke-width="4"/><path d="M170 298h40M176 318h28" stroke="#b96e5e" stroke-width="5" stroke-linecap="round"/></g>
-        <g class="v74-recap-node n3 v74-pop"><circle cx="450" cy="310" r="42" fill="#fff" stroke="#e6c77a" stroke-width="4"/><circle cx="450" cy="310" r="18" fill="none" stroke="#c99c34" stroke-width="5"/><circle cx="450" cy="310" r="6" fill="#c99c34"/></g>
-        <g class="v74-recap-check v74-pop"><circle cx="320" cy="235" r="64" fill="#173135"/><path d="m286 236 24 24 47-54" fill="none" stroke="#0fb6a6" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <div class="clean-visual v76-scene" aria-hidden="true">
+      <svg class="v76-svg" viewBox="0 0 760 520">
+        <path class="v76-blob v76-fade" d="M110 111c93-48 216-34 287 31 60 55 72 127 150 156 81 31 99 111 53 170-51 67-149 72-240 51-91-21-181 14-245-58-76-85-99-303-5-350Z" fill="#EEF7F4"/>
+        <g class="v76-recap-person v76-rise">
+          <circle cx="380" cy="240" r="42" fill="#E4B394"/>
+          <path d="M312 372c10-91 33-132 68-132s58 41 68 132" fill="#173135"/>
+          <path d="M342 300h76v72h-76z" fill="#0FB6A6"/>
+        </g>
+        <g class="v76-recap-scene s1 v76-pop">
+          <circle cx="380" cy="90" r="55" fill="#fff" stroke="#A7D4C8" stroke-width="4"/>
+          <path d="M356 92h48M380 68v48" stroke="#087B72" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <g class="v76-recap-scene s2 v76-pop">
+          <circle cx="190" cy="352" r="55" fill="#fff" stroke="#E1A294" stroke-width="4"/>
+          <rect x="162" y="322" width="56" height="62" rx="10" fill="#FFF0EB"/><path d="M174 342h32M174 357h24M174 372h32" stroke="#B95E4B" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <g class="v76-recap-scene s3 v76-pop">
+          <circle cx="570" cy="352" r="55" fill="#fff" stroke="#E3C66E" stroke-width="4"/>
+          <circle cx="570" cy="352" r="28" fill="none" stroke="#C39A32" stroke-width="5"/><circle cx="570" cy="352" r="10" fill="#F58268"/>
+        </g>
+        <path class="v76-recap-link l1 v76-draw" d="M380 145v48" stroke="#A9D4C8" stroke-width="5"/>
+        <path class="v76-recap-link l2 v76-draw" d="M238 343c37-15 65-7 88 16" stroke="#E0A193" stroke-width="5" stroke-linecap="round"/>
+        <path class="v76-recap-link l3 v76-draw" d="M522 343c-37-15-65-7-88 16" stroke="#D7B75D" stroke-width="5" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="clean-card-copy">
@@ -9084,7 +9296,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
    dragging=false;dragDx=0;
  },{passive:true});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
- window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.75 · ORBIT CAROUSEL + DIAGRAMS'},120),{once:true});
+ window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.76 · EDITORIAL ILLUSTRATIONS'},120),{once:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
 </script>\n</body>
