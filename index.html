@@ -3518,6 +3518,60 @@ html[data-simple-admin="1"] #pilot-learner-signout{display:none!important}
   #profile-view .pilot-login-form .field{font-size:.9rem}
 }
 </style>
+
+<style id="v567-light-learning">
+/* v5.67 · lighter motion + interspersed yes/no checks */
+body.clean-deck-v566 .clean-copy-short{max-width:720px}
+.clean-concept-strip{width:min(820px,100%);margin:1.6rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.clean-concept-strip>div{min-height:150px;padding:1.2rem;border:1px solid #dce7e2;border-radius:18px;background:#fffdf8;display:grid;align-content:center;justify-items:center;text-align:center;box-shadow:0 9px 24px rgba(23,49,53,.05)}
+.clean-concept-strip span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;margin-bottom:.7rem;background:#e6f6f2;color:#087b72;font-weight:900}
+.clean-concept-strip b{font:800 1.05rem/1.2 Inter,Arial,sans-serif;color:#173135;margin-bottom:.35rem}
+.clean-concept-strip small{max-width:180px;color:#607477;line-height:1.45}
+.clean-yn{width:min(660px,100%);margin:1.2rem auto 0;text-align:center}
+.clean-yn-buttons{display:flex;justify-content:center;gap:.8rem}
+.clean-yn button{min-width:130px;border:1px solid #cfded8;border-radius:999px;padding:.9rem 1.4rem;background:#fff;color:#315652;font-weight:850;font-size:1rem;transition:transform .14s ease,border-color .14s ease,background .14s ease}
+.clean-yn button:hover{transform:translateY(-1px);border-color:#8fc8bd}
+.clean-yn button.selected{border-color:#0a8d82;background:#e9f8f4;color:#086e66}
+.clean-yn button.correct{border-color:#4d9b78;background:#edf8f1;color:#286846}
+.clean-yn button.wrong{border-color:#d58c7e;background:#fff1ed;color:#9a5146}
+.clean-yn-feedback{min-height:2.6rem;margin:1rem auto 0;max-width:560px;color:#607477;line-height:1.5}
+.clean-yn-feedback.good{color:#286846;font-weight:750}.clean-yn-feedback.try{color:#9a5146;font-weight:700}
+
+/* Keep the useful one-time reveals; remove continuous/ambient motion. */
+body.clean-deck-v566 .v512-scene .v512-drift,
+body.clean-deck-v566 .v512-scene .v512-pulse,
+body.clean-deck-v566 .v512-scene .v512-slide-right,
+body.clean-deck-v566 .v512-scene .v512-slide-up,
+body.clean-deck-v566 .v512-scene .v512-connect,
+body.clean-deck-v566 .v512-scene .v512-pop,
+body.clean-deck-v566 .v512-scene .v512-fade-cycle,
+body.clean-deck-v566 .v512-scene .v512-turn,
+body.clean-deck-v566 .v513-scene .v513-flow,
+body.clean-deck-v566 .v513-scene .v513-breathe,
+body.clean-deck-v566 .v513-scene .v513-float,
+body.clean-deck-v566 .v513-scene .v513-glow,
+body.clean-deck-v566 .v513-scene .v513-handoff,
+body.clean-deck-v566 .v513-scene .v513-converge-a,
+body.clean-deck-v566 .v513-scene .v513-converge-b,
+body.clean-deck-v566 .v513-scene .v513-orbit,
+body.clean-deck-v566 #experiential .ex-stage-anim .pulse,
+body.clean-deck-v566 #experiential .ex-stage-anim .float,
+body.clean-deck-v566 #experiential .ex-stage-anim .blink,
+body.clean-deck-v566 #experiential .ex-stage-anim .dash,
+body.clean-deck-v566 #experiential .ex-stage-anim .draw,
+body.clean-deck-v566 #experiential .ex-stage-anim .pop,
+body.clean-deck-v566 #experiential .ex-stage-anim .bob,
+body.clean-deck-v566 #experiential .ex-stage-anim .glow,
+body.clean-deck-v566 #experiential .ex-stage-anim .shimmer,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeA,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeB,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeC,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeD,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeE,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeF,
+body.clean-deck-v566 #experiential .ex-stage-anim .fadeG{animation:none!important;transform:none!important;opacity:1!important;stroke-dashoffset:0!important}
+@media(max-width:700px){.clean-concept-strip{grid-template-columns:1fr;gap:.55rem}.clean-concept-strip>div{min-height:0;grid-template-columns:auto 1fr;column-gap:.8rem;justify-items:start;text-align:left;padding:1rem}.clean-concept-strip span{grid-row:1/3;margin:0}.clean-concept-strip b,.clean-concept-strip small{align-self:center}.clean-yn-buttons{gap:.55rem}.clean-yn button{min-width:112px}}
+</style>
 </head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
 <div id="clean-build-badge">V5.66 · CLEAN DECK</div>
@@ -3664,35 +3718,59 @@ html[data-simple-admin="1"] #pilot-learner-signout{display:none!important}
   <section class="clean-card active" data-clean-page="0">
     <div class="clean-kicker">THE BIG IDEA</div>
     <h2 class="clean-title">What is Andragogy?</h2>
-    <div class="clean-animation-wrap"><div class="l1-scene-shell l1-intro-landscape-wrap">
-<div aria-live="polite" class="l1-intro-landscape-gate">
-<div aria-hidden="true" class="rotate-icon">↻</div>
-<strong>Rotate your phone to landscape</strong>
-<p>This visual is deliberately wide so the three-step flow stays readable. Turn your phone sideways to continue exploring it.</p>
-</div>
-<div aria-live="polite" class="l1-scene-stage" id="l1-intro-scene"></div><div class="l1-scene-toolbar"><div><div class="l1-intro-manual-cue">Choose one concept to explore. Move on only when you are ready.</div><div aria-label="Explore the core ideas" class="l1-chipgroup"><button class="l1-chip active" data-intro-focus="autonomy" type="button">Autonomy</button><button class="l1-chip" data-intro-focus="experience" type="button">Experience</button><button class="l1-chip" data-intro-focus="purpose" type="button">Purpose</button></div></div><button class="l1-replay-btn" id="l1-intro-replay" type="button">↻ Replay scene</button></div><div aria-live="polite" class="l1-small-feedback" id="l1-intro-detail">Adults often expect to participate in decisions about what and how they learn.</div><div class="l1-chunk-note">Learner-paced · Choose Autonomy, Experience or Purpose. Nothing advances until you choose it.</div></div><div class="l1-explore-meter" id="l1-intro-meter"><span>Explore the three ideas · <b id="l1-intro-count">1 / 3</b></span><span aria-hidden="true" class="l1-explore-dots"><i class="seen"></i><i></i><i></i></span></div><div class="l1-progressive" hidden="" id="l1-intro-insight"><strong>Put them together</strong><p>Andragogy is not simply “letting adults choose.” It asks the educator to consider autonomy, prior experience and immediate purpose when designing learning.</p></div></div>
+    <p class="clean-copy clean-copy-short">A simple way to think about adult learning is to start with three things adults often bring into the room.</p>
+    <div class="clean-concept-strip" aria-label="Three ideas often important in adult learning">
+      <div><span>A</span><b>Autonomy</b><small>A say in how learning happens</small></div>
+      <div><span>E</span><b>Experience</b><small>Prior knowledge worth using</small></div>
+      <div><span>P</span><b>Purpose</b><small>A reason to learn it now</small></div>
+    </div>
   </section>
+
   <section class="clean-card" data-clean-page="1">
+    <div class="clean-kicker">YES OR NO?</div>
+    <h2 class="clean-title">Adults arrive as a blank slate.</h2>
+    <div class="clean-yn" data-answer="no" data-correct="Exactly. Adults bring prior experiences, habits and mental models into new learning." data-wrong="Not quite. Adults usually bring substantial prior experience into the learning situation.">
+      <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
+      <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
+    </div>
+  </section>
+
+  <section class="clean-card" data-clean-page="2">
     <div class="clean-kicker">THE CORE IDEA</div>
     <h2 class="clean-title">Start with the adult learner.</h2>
     <p class="clean-copy">Andragogy is an approach to understanding <b>how adults learn</b>. It draws attention to learner autonomy, experience and the need to see a purpose in learning.</p>
   </section>
-  <section class="clean-card" data-clean-page="2">
+
+  <section class="clean-card" data-clean-page="3">
+    <div class="clean-kicker">YES OR NO?</div>
+    <h2 class="clean-title">Andragogy means adults should always teach themselves.</h2>
+    <div class="clean-yn" data-answer="no" data-correct="Correct. Learner direction can increase without removing expert teaching, structure or feedback." data-wrong="No. Andragogy does not mean abandoning teaching or structure.">
+      <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
+      <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
+    </div>
+  </section>
+
+  <section class="clean-card" data-clean-page="4">
     <div class="clean-kicker">IMPORTANT NUANCE</div>
     <h2 class="clean-title">Assumptions, not rules.</h2>
-    <p class="clean-note l1-note">It describes useful assumptions about adult learners—not rules that fit every adult in every situation.</p>
+    <p class="clean-note l1-note">Andragogy describes useful assumptions about adult learners—not fixed rules that fit every adult in every situation.</p>
   </section>
-  <section class="clean-card" data-clean-page="3">
-    <div class="clean-kicker">QUICK CHECK</div>
-    <h2 class="clean-title">Which interpretation fits best?</h2>
-    <div class="l1-mini-check" data-l1-check="intro"><div class="l1-mini-check-head"><span>QUICK CHECK</span><span>Low stakes · instant feedback</span></div><h3>Which statement best captures the idea of Andragogy?</h3><div class="l1-mini-options"><button class="l1-mini-option" data-answer="0" type="button">Adults should always teach themselves.</button><button class="l1-mini-option" data-answer="1" type="button">Adult learning often benefits from autonomy, experience and clear purpose.</button><button class="l1-mini-option" data-answer="2" type="button">Adults no longer need structured teaching.</button></div><div aria-live="polite" class="l1-mini-feedback">Choose the best interpretation.</div></div>
+
+  <section class="clean-card" data-clean-page="5">
+    <div class="clean-kicker">YES OR NO?</div>
+    <h2 class="clean-title">Can an educator still set non-negotiable safety standards?</h2>
+    <div class="clean-yn" data-answer="yes" data-correct="Yes. Learner autonomy and firm safety standards can coexist." data-wrong="They can. Andragogy changes how decisions are shared; it does not require safety standards to disappear.">
+      <div class="clean-yn-buttons"><button type="button" data-yn="yes">Yes</button><button type="button" data-yn="no">No</button></div>
+      <p class="clean-yn-feedback" aria-live="polite">Choose one.</p>
+    </div>
   </section>
-  <section class="clean-card" data-clean-page="4">
+
+  <section class="clean-card" data-clean-page="6">
     <div class="clean-kicker">UNPACK THE WORD</div>
     <h2 class="clean-title">Where does “Andragogy” come from?</h2>
     <div class="l1-tiny"><b>Tap to unpack the word</b><div class="l1-word-row"><button class="l1-reveal" data-reveal="andra">andr- <span>+</span></button><button class="l1-reveal" data-reveal="agogy">-agogy <span>+</span></button></div><div aria-live="polite" class="l1-small-feedback" id="l1-word-detail">Choose either part to reveal its meaning.</div></div>
   </section>
-</div>
+</div></div>
 </div>
 <div class="l1-slide hidden" data-l1-slide="1">
 <span class="l1-pill">THE HISTORY</span><h2 class="serif">One term, two important names</h2><p class="l1-lead">Explore each milestone. The person who used the term and the person associated with the modern model are <b>not the same</b>.</p>
@@ -7747,7 +7825,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  const cards=()=>$$('#clean-f0-deck .clean-card');
  const visible=el=>!!(el && !el.hidden && el.offsetParent!==null);
  function forceLesson(){['profile-view','facilitator-view','honor-view','module-map-view','pilot-admin-view'].forEach(id=>$('#'+id)?.classList.add('hidden'));$('#lesson-view')?.classList.remove('hidden');}
- function showF0(i,dir){const cs=cards();if(!cs.length)return;f0=Math.max(0,Math.min(i,cs.length-1));cs.forEach((c,n)=>{c.classList.remove('active','from-left','from-right');if(n===f0){c.classList.add('active');if(dir)c.classList.add(dir==='next'?'from-right':'from-left');}});$('#clean-progress').textContent=`Card ${f0+1} of ${cs.length}`;$('#clean-prev').disabled=f0===0;$('#clean-next').disabled=false;if(f0===0)setTimeout(()=>{$('#l1-intro-replay')?.click();window.simpleReplayAnimation?.($('#l1-intro-scene'));},80);window.scrollTo({top:0,behavior:'instant'});}
+ function showF0(i,dir){const cs=cards();if(!cs.length)return;f0=Math.max(0,Math.min(i,cs.length-1));cs.forEach((c,n)=>{c.classList.remove('active','from-left','from-right');if(n===f0){c.classList.add('active');if(dir)c.classList.add(dir==='next'?'from-right':'from-left');}});$('#clean-progress').textContent=`Card ${f0+1} of ${cs.length}`;$('#clean-prev').disabled=f0===0;$('#clean-next').disabled=false;window.scrollTo({top:0,behavior:'instant'});}
  function activePanel(){return $('.learning-panel.active')?.id||'foundations';}
  function directPanel(id){forceLesson();$$('.learning-panel').forEach(p=>p.classList.toggle('active',p.id===id));$('#lesson-view')?.classList.toggle('showing-standalone-module',id==='experiential'||id==='apprenticeship');document.body.classList.remove('clean-jump-open');$('#clean-jump')?.setAttribute('aria-expanded','false');if(id==='foundations'){const slides=$$('#foundations .l1-slide');slides.forEach((x,n)=>x.classList.toggle('hidden',n!==0));showF0(0);}window.simpleRestartCourseAnimations?.(id);setTimeout(sync,50);}
  function clickVisible(sel){const el=$$(sel).find(visible);if(el && !el.disabled){el.click();return true}return false}
@@ -7758,10 +7836,21 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  function sync(){forceLesson();const id=activePanel();const onF0=id==='foundations'&&visible($('#clean-f0-deck'));if(onF0){const cs=cards();$('#clean-progress').textContent=`Card ${f0+1} of ${cs.length}`;$('#clean-prev').disabled=f0===0;$('#clean-next').disabled=false}else{$('#clean-progress').textContent=id==='foundations'?'Foundations':id==='assumptions'?'Five assumptions':id==='principles'?'Four principles':id==='assessment'?'Knowledge check':id==='experiential'?'Experiential learning':'Cognitive apprenticeship';$('#clean-prev').disabled=false;$('#clean-next').disabled=false}}
  function boot(){forceLesson();directPanel('foundations');showF0(0);sync();}
  $('#clean-prev')?.addEventListener('click',()=>go('back'));$('#clean-next')?.addEventListener('click',()=>go('next'));$('#clean-jump')?.addEventListener('click',()=>{const o=document.body.classList.toggle('clean-jump-open');$('#clean-jump').setAttribute('aria-expanded',String(o));});$('#clean-jump-menu')?.addEventListener('click',e=>{const b=e.target.closest('[data-clean-panel]');if(b)directPanel(b.dataset.cleanPanel)});
+ document.addEventListener('click',e=>{
+   const btn=e.target.closest?.('.clean-yn button[data-yn]');
+   if(!btn)return;
+   const box=btn.closest('.clean-yn'), answer=box?.dataset.answer;
+   if(!box||!answer)return;
+   const correct=btn.dataset.yn===answer;
+   box.querySelectorAll('button[data-yn]').forEach(b=>b.classList.remove('selected','correct','wrong'));
+   btn.classList.add('selected',correct?'correct':'wrong');
+   const fb=box.querySelector('.clean-yn-feedback');
+   if(fb){fb.textContent=correct?box.dataset.correct:box.dataset.wrong;fb.className='clean-yn-feedback '+(correct?'good':'try');}
+ });
  document.addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,select,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();go('next')}if(e.key==='ArrowLeft'){e.preventDefault();go('back')}if(e.key==='Escape'){document.body.classList.remove('clean-jump-open')}});
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest?.('button,input,textarea,select,[role=button],[draggable=true]'))return;touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;touching=true},{passive:true});
  document.addEventListener('touchend',e=>{if(!touching)return;touching=false;const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?'next':'back')},{passive:true});
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.66 · CLEAN DECK ✓'},120),{once:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.67 · LIGHT LEARNING'},120),{once:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
 </script>\n</body>
