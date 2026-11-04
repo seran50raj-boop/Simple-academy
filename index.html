@@ -35,7 +35,7 @@ body.clean-jump-open #clean-jump-menu{display:grid}
 </style>
 
 <meta charset="utf-8"/>
-<meta name="simple-build" content="5.83"/>
+<meta name="simple-build" content="5.84"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
@@ -4580,9 +4580,16 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
   .clean-copy{font-size:1rem!important;line-height:1.48!important}
   .clean-side-arrow{top:47%!important}
 }
+</style><style id="v584-approved-human-art">
+.v584-approved-scene{position:relative!important;overflow:hidden!important;background:#f8fbfa!important;border:1px solid #d9e7e2!important;border-radius:28px!important;box-shadow:0 18px 42px rgba(23,49,53,.08)!important}
+.v584-approved-art{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important;transform:none!important}
+.clean-card.is-current .v584-approved-art{animation:v584SceneIn .7s cubic-bezier(.18,.82,.2,1) both}
+@keyframes v584SceneIn{from{opacity:.25;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+@media(max-width:820px){.v584-approved-scene{min-height:260px!important;height:100%!important}.v584-approved-art{object-fit:cover!important;object-position:50% 50%!important}}
+@media(prefers-reduced-motion:reduce){.clean-card.is-current .v584-approved-art{animation:none!important}}
 </style></head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
-<div id="clean-build-badge">V5.83 · MOBILE + SIGNATURE FIX</div>
+<div id="clean-build-badge">V5.84 · APPROVED HUMAN ART</div>
 <button id="clean-jump" type="button" aria-expanded="false">Jump</button>
 <nav id="clean-jump-menu" aria-label="Free navigation">
  <button type="button" data-clean-panel="foundations">M1 · Foundations</button><button type="button" data-clean-panel="assumptions">M1 · Assumptions</button>
@@ -4730,37 +4737,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card active" data-clean-page="0">
   <div class="clean-card-layout">
-    <div class="clean-visual v80-live-scene" aria-label="Animated adult learner scene">
-      <img class="v80-scene-base" src="assets/card1-signature.webp?v=583" alt="" draggable="false" decoding="async" fetchpriority="high">
-
-      <div class="v80-case-pop" aria-hidden="true">
-        <div class="v80-case-thumb"></div>
-        <div class="v80-case-lines"><i></i><i></i></div>
-      </div>
-
-      <div class="v80-choice-layer" aria-hidden="true">
-        <div class="v80-choice v80-choice-a">
-          <span class="v80-play"></span>
-          <i></i><i></i>
-        </div>
-        <div class="v80-choice v80-choice-b">
-          <span class="v80-people"><b></b><b></b><b></b></span>
-          <i></i><i></i>
-        </div>
-        <span class="v80-choice-spark s1"></span>
-        <span class="v80-choice-spark s2"></span>
-        <span class="v80-choice-spark s3"></span>
-      </div>
-
-      <div class="v80-monitor-live" aria-hidden="true">
-        <svg viewBox="0 0 160 70" preserveAspectRatio="none">
-          <path class="v80-monitor-grid" d="M0 35H160"/>
-          <path class="v80-ecg" d="M0 38H36L43 24L51 52L62 16L74 43L84 29L96 38H160"/>
-        </svg>
-      </div>
-
-      <div class="v80-steam" aria-hidden="true"><i></i><i></i></div>
-      <div class="v80-ambient-glow" aria-hidden="true"></div>
+    <div class="clean-visual v584-approved-scene" aria-label="Adult learners in a clinical learning discussion">
+      <img class="v584-approved-art" src="assets/card1-signature-v584.svg" alt="Illustrated group of adult healthcare learners discussing a case together" draggable="false" decoding="async" fetchpriority="high">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THE BIG IDEA</div>
@@ -9932,7 +9910,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('touchend',settleTouch,{passive:true});
  document.addEventListener('touchcancel',settleTouch,{passive:true});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
- window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.83 · MOBILE + SIGNATURE FIX'},120),{once:true});
+ window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.84 · APPROVED HUMAN ART'},120),{once:true});
  window.addEventListener('resize',()=>{const id=activePanel();if(deckDefs[id])requestAnimationFrame(()=>setOrbit(id,deckIndex[id],false));},{passive:true});
  window.addEventListener('orientationchange',()=>setTimeout(()=>{const id=activePanel();if(deckDefs[id])setOrbit(id,deckIndex[id],false)},180),{passive:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
