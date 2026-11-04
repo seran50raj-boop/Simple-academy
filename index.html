@@ -35,7 +35,7 @@ body.clean-jump-open #clean-jump-menu{display:grid}
 </style>
 
 <meta charset="utf-8"/>
-<meta name="simple-build" content="5.80"/>
+<meta name="simple-build" content="5.81"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
@@ -4502,9 +4502,17 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
   .clean-card.is-current .v80-scene-base,.clean-card.is-current .v80-case-pop,.clean-card.is-current .v80-choice-a,.clean-card.is-current .v80-choice-b,.clean-card.is-current .v80-choice-spark,.clean-card.is-current .v80-ecg,.clean-card.is-current .v80-steam i,.clean-card.is-current .v80-ambient-glow{animation:none!important}
   .v80-case-pop,.v80-choice{opacity:1!important}
 }
+</style><style id="v581-question-gating">
+.clean-side-arrow:disabled{opacity:.28!important;cursor:not-allowed!important;pointer-events:auto!important}
+.clean-video-marker.locked{cursor:not-allowed!important;opacity:.42!important}
+.clean-video-marker.locked::before{background:#eef3f1!important;border-color:#c7d5d0!important}
+.clean-yn.needs-answer{animation:v581QuestionNudge .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes v581QuestionNudge{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}55%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.clean-yn.needs-answer .clean-yn-buttons button{box-shadow:0 0 0 3px rgba(245,130,104,.12)}
+@media(prefers-reduced-motion:reduce){.clean-yn.needs-answer{animation:none!important}}
 </style></head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
-<div id="clean-build-badge">V5.80 · LIVE SIGNATURE CARD</div>
+<div id="clean-build-badge">V5.81 · ANSWER-GATED FLOW</div>
 <button id="clean-jump" type="button" aria-expanded="false">Jump</button>
 <nav id="clean-jump-menu" aria-label="Free navigation">
  <button type="button" data-clean-panel="foundations">M1 · Foundations</button><button type="button" data-clean-panel="assumptions">M1 · Assumptions</button>
@@ -9680,6 +9688,20 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  const trackOf=id=>deckRoot(id)?.querySelector('.clean-carousel-track');
  const deckCards=id=>deckDefs[id]?[...((trackOf(id)||deckRoot(id))?.querySelectorAll('.clean-card')||[])]:[];
  const cardKind=c=>c?.querySelector('.clean-yn')?'question':'info';
+ const isAnswered=c=>{
+   const q=c?.querySelector('.clean-yn');
+   return !q||q.dataset.answered==='true'||!!q.querySelector('button[data-yn].selected');
+ };
+ const maxReachable=cs=>{
+   for(let i=0;i<cs.length;i++) if(cardKind(cs[i])==='question'&&!isAnswered(cs[i])) return i;
+   return Math.max(0,cs.length-1);
+ };
+ function nudgeQuestion(card){
+   const q=card?.querySelector('.clean-yn');if(!q)return;
+   q.classList.remove('needs-answer');void q.offsetWidth;q.classList.add('needs-answer');
+   const fb=q.querySelector('.clean-yn-feedback');
+   if(fb&&!q.querySelector('button[data-yn].selected')){fb.textContent='Choose Yes or No to continue.';fb.className='clean-yn-feedback try';}
+ }
  function ensureTrack(id){
    const root=deckRoot(id);if(!root)return;
    root.classList.add('clean-carousel-viewport');
@@ -9732,17 +9754,25 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
   const def=deckDefs[id],cs=def?deckCards(id):[];
   if(!rail||!markers||!fill||!def||!cs.length){document.body.classList.remove('clean-rail-active');if(rail)rail.hidden=true;return}
   rail.hidden=false;document.body.classList.add('clean-rail-active');
-  const idx=deckIndex[id],denom=Math.max(1,cs.length-1);fill.style.width=`${(idx/denom)*100}%`;markers.innerHTML='';
+  const idx=deckIndex[id],denom=Math.max(1,cs.length-1),max=maxReachable(cs);
+  fill.style.width=`${(idx/denom)*100}%`;markers.innerHTML='';
   cs.forEach((c,n)=>{
-   const b=document.createElement('button');b.type='button';b.className='clean-video-marker'+(n<idx?' past':'')+(n===idx?' current':'');
+   const locked=n>max;
+   const b=document.createElement('button');b.type='button';
+   b.className='clean-video-marker'+(n<idx?' past':'')+(n===idx?' current':'')+(locked?' locked':'');
    b.dataset.kind=cardKind(c);b.dataset.railIndex=String(n);b.style.left=`${(n/denom)*100}%`;
-   b.setAttribute('aria-label',`${cardKind(c)==='question'?'Question':'Information'} card ${n+1} of ${cs.length}`);b.setAttribute('role','listitem');markers.appendChild(b);
+   b.disabled=locked;
+   b.setAttribute('aria-disabled',String(locked));
+   b.setAttribute('aria-label',`${cardKind(c)==='question'?'Question':'Information'} card ${n+1} of ${cs.length}${locked?' — locked':''}`);
+   b.setAttribute('role','listitem');markers.appendChild(b);
   });
- }
- function showDeck(id,i,dir,instant=false){
+ } function showDeck(id,i,dir,instant=false){
   ensureTrack(id);const cs=deckCards(id);if(!cs.length)return;
   const next=Math.max(0,Math.min(i,cs.length-1));deckIndex[id]=next;paintCards(id);setOrbit(id,next,!instant);
-  $('#clean-progress').textContent=`Card ${next+1} of ${cs.length}`;$('#clean-prev').disabled=id==='foundations'&&next===0;$('#clean-next').disabled=false;renderRail(id);window.scrollTo({top:0,behavior:'instant'});
+  $('#clean-progress').textContent=`Card ${next+1} of ${cs.length}`;
+  $('#clean-prev').disabled=id==='foundations'&&next===0;
+  $('#clean-next').disabled=!isAnswered(cs[next]);
+  renderRail(id);window.scrollTo({top:0,behavior:'instant'});
  }
  function activePanel(){return $('.learning-panel.active')?.id||'foundations';}
  function directPanel(id){
@@ -9757,9 +9787,10 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
   const id=activePanel(),def=deckDefs[id];
   if(def&&visible(deckRoot(id))){
    const cs=deckCards(id),idx=deckIndex[id];
+   if(dir==='next'&&!isAnswered(cs[idx])){nudgeQuestion(cs[idx]);$('#clean-next').disabled=true;return}
    if(dir==='next'&&idx<cs.length-1){showDeck(id,idx+1,'next');return}
    if(dir==='back'&&idx>0){showDeck(id,idx-1,'back');return}
-   if(dir==='next'&&idx===cs.length-1){directPanel(def.next);return}
+   if(dir==='next'&&idx===cs.length-1){if(!isAnswered(cs[idx])){nudgeQuestion(cs[idx]);return}directPanel(def.next);return}
    if(dir==='back'&&idx===0&&def.prev){directPanel(def.prev);showDeck(def.prev,deckCards(def.prev).length-1,'back',true);return}
   }
   if(id==='assessment'){
@@ -9771,18 +9802,26 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  }
  function sync(){
   forceLesson();const id=activePanel(),def=deckDefs[id];
-  if(def&&visible(deckRoot(id))){ensureTrack(id);paintCards(id);setOrbit(id,deckIndex[id],true);const cs=deckCards(id);$('#clean-progress').textContent=`Card ${deckIndex[id]+1} of ${cs.length}`;$('#clean-prev').disabled=id==='foundations'&&deckIndex[id]===0;$('#clean-next').disabled=false;renderRail(id);return}
+  if(def&&visible(deckRoot(id))){ensureTrack(id);paintCards(id);setOrbit(id,deckIndex[id],true);const cs=deckCards(id);$('#clean-progress').textContent=`Card ${deckIndex[id]+1} of ${cs.length}`;$('#clean-prev').disabled=id==='foundations'&&deckIndex[id]===0;$('#clean-next').disabled=!isAnswered(cs[deckIndex[id]]);renderRail(id);return}
   document.body.classList.remove('clean-rail-active');const rail=$('#clean-video-progress');if(rail)rail.hidden=true;$('#clean-progress').textContent=id==='assessment'?'Knowledge check':id==='experiential'?'Experiential learning':id==='apprenticeship'?'Cognitive apprenticeship':id;$('#clean-prev').disabled=false;$('#clean-next').disabled=false;
  }
  function boot(){forceLesson();ensureTracks();directPanel('foundations');sync()}
  $('#clean-prev')?.addEventListener('click',()=>go('back'));$('#clean-next')?.addEventListener('click',()=>go('next'));
  $('#clean-jump')?.addEventListener('click',()=>{const o=document.body.classList.toggle('clean-jump-open');$('#clean-jump').setAttribute('aria-expanded',String(o))});
  $('#clean-jump-menu')?.addEventListener('click',e=>{const b=e.target.closest('[data-clean-panel]');if(b)directPanel(b.dataset.cleanPanel)});
- $('#clean-video-progress')?.addEventListener('click',e=>{const b=e.target.closest('.clean-video-marker');if(!b)return;const id=activePanel();if(deckDefs[id])showDeck(id,Number(b.dataset.railIndex))});
+ $('#clean-video-progress')?.addEventListener('click',e=>{
+   const b=e.target.closest('.clean-video-marker');if(!b||b.disabled)return;
+   const id=activePanel();if(!deckDefs[id])return;
+   const cs=deckCards(id),target=Number(b.dataset.railIndex),max=maxReachable(cs);
+   if(target>max){nudgeQuestion(cs[max]);return}
+   showDeck(id,target,target>deckIndex[id]?'next':'back');
+ });
  document.addEventListener('click',e=>{
   const btn=e.target.closest?.('.clean-yn button[data-yn]');if(!btn)return;const box=btn.closest('.clean-yn'),answer=box?.dataset.answer;if(!box||!answer)return;
   const correct=btn.dataset.yn===answer;box.querySelectorAll('button[data-yn]').forEach(b=>b.classList.remove('selected','correct','wrong'));btn.classList.add('selected',correct?'correct':'wrong');
+  box.dataset.answered='true';box.classList.remove('needs-answer');
   const fb=box.querySelector('.clean-yn-feedback');if(fb){fb.textContent=correct?box.dataset.correct:box.dataset.wrong;fb.className='clean-yn-feedback '+(correct?'good':'try')}
+  const id=activePanel();if(deckDefs[id]){const cs=deckCards(id),idx=deckIndex[id];if(cs[idx]?.contains(box))$('#clean-next').disabled=false;renderRail(id)}
  });
  document.addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,select,[contenteditable=true]'))return;if(e.key==='ArrowRight'){e.preventDefault();go('next')}if(e.key==='ArrowLeft'){e.preventDefault();go('back')}if(e.key==='Escape')document.body.classList.remove('clean-jump-open')});
  document.addEventListener('touchstart',e=>{
@@ -9810,15 +9849,18 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
    const threshold=mobile?Math.min(72,window.innerWidth*.15):Math.min(92,window.innerWidth*.18);
    const velocityGate=mobile?.38:.55;
    trackOf(id)?.classList.remove('dragging');
-   if((dragDx<-threshold||velocity<-velocityGate)&&deckIndex[id]<deckCards(id).length-1)showDeck(id,deckIndex[id]+1,'next');
-   else if((dragDx>threshold||velocity>velocityGate)&&deckIndex[id]>0)showDeck(id,deckIndex[id]-1,'back');
+   const cs=deckCards(id),idx=deckIndex[id];
+   if((dragDx<-threshold||velocity<-velocityGate)&&idx<cs.length-1){
+     if(isAnswered(cs[idx]))showDeck(id,idx+1,'next');else{nudgeQuestion(cs[idx]);setOrbit(id,idx,true);$('#clean-next').disabled=true;}
+   }
+   else if((dragDx>threshold||velocity>velocityGate)&&idx>0)showDeck(id,idx-1,'back');
    else setOrbit(id,deckIndex[id],true);
    dragging=false;dragDx=0;
  }
  document.addEventListener('touchend',settleTouch,{passive:true});
  document.addEventListener('touchcancel',settleTouch,{passive:true});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
- window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.80 · LIVE SIGNATURE CARD'},120),{once:true});
+ window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.81 · ANSWER-GATED FLOW'},120),{once:true});
  window.addEventListener('resize',()=>{const id=activePanel();if(deckDefs[id])requestAnimationFrame(()=>setOrbit(id,deckIndex[id],false));},{passive:true});
  window.addEventListener('orientationchange',()=>setTimeout(()=>{const id=activePanel();if(deckDefs[id])setOrbit(id,deckIndex[id],false)},180),{passive:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
