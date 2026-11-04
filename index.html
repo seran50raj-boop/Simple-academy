@@ -35,7 +35,7 @@ body.clean-jump-open #clean-jump-menu{display:grid}
 </style>
 
 <meta charset="utf-8"/>
-<meta name="simple-build" content="5.84"/>
+<meta name="simple-build" content="5.85"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
@@ -4587,9 +4587,76 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 @keyframes v584SceneIn{from{opacity:.25;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
 @media(max-width:820px){.v584-approved-scene{min-height:260px!important;height:100%!important}.v584-approved-art{object-fit:cover!important;object-position:50% 50%!important}}
 @media(prefers-reduced-motion:reduce){.clean-card.is-current .v584-approved-art{animation:none!important}}
+</style><style id="v585-signature-scenes">
+/* First-five Foundations visual reset: real editorial adult scenes only. */
+#clean-f0-deck .v585-scene{
+  position:relative!important;
+  overflow:hidden!important;
+  background:#f7fbf9!important;
+  border:1px solid #d8e7e1!important;
+  border-radius:28px!important;
+  box-shadow:0 16px 40px rgba(23,49,53,.08)!important;
+  isolation:isolate;
+}
+#clean-f0-deck .v585-scene img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:scale(1.01);
+  transition:transform 900ms cubic-bezier(.2,.75,.2,1),filter 500ms ease;
+}
+#clean-f0-deck .clean-card.is-current .v585-scene img{
+  animation:v585SceneIn .8s cubic-bezier(.18,.82,.2,1) both;
+}
+@keyframes v585SceneIn{
+  from{opacity:.72;transform:scale(1.055)}
+  to{opacity:1;transform:scale(1.01)}
+}
+
+/* Question markers are diamonds, not placeholder question marks. */
+.clean-video-marker[data-kind="question"]::after{content:""!important}
+.clean-video-marker[data-kind="question"]::before{
+  width:11px!important;height:11px!important;border-radius:3px!important;
+  transform:rotate(45deg)!important;
+  border-color:#e18f7c!important;background:#fff7f3!important;
+}
+.clean-video-marker[data-kind="question"].past::before,
+.clean-video-marker[data-kind="question"].current::before{
+  background:#f58268!important;border-color:#c86855!important;
+}
+.clean-video-marker[data-kind="question"].current::before{transform:rotate(45deg) scale(1.3)!important}
+
+/* Keep the real scene dominant without swallowing the text on phone. */
+@media(max-width:820px){
+  #clean-f0-deck .clean-card-layout{
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(260px,38svh) auto!important;
+    gap:.7rem!important;
+    padding:.55rem .55rem 4.1rem!important;
+  }
+  #clean-f0-deck .v585-scene{
+    min-height:260px!important;
+    height:38svh!important;
+    max-height:390px!important;
+    border-radius:20px!important;
+  }
+  #clean-f0-deck .v585-scene img{
+    object-fit:cover!important;
+    object-position:center center!important;
+    transform:none!important;
+  }
+  #clean-f0-deck .clean-card-copy{
+    padding:.15rem .7rem .65rem!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #clean-f0-deck .clean-card.is-current .v585-scene img{animation:none!important}
+}
 </style></head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
-<div id="clean-build-badge">V5.84 · APPROVED HUMAN ART</div>
+<div id="clean-build-badge">V5.85 · SIGNATURE SCENES</div>
 <button id="clean-jump" type="button" aria-expanded="false">Jump</button>
 <nav id="clean-jump-menu" aria-label="Free navigation">
  <button type="button" data-clean-panel="foundations">M1 · Foundations</button><button type="button" data-clean-panel="assumptions">M1 · Assumptions</button>
@@ -4737,8 +4804,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card active" data-clean-page="0">
   <div class="clean-card-layout">
-    <div class="clean-visual v584-approved-scene" aria-label="Adult learners in a clinical learning discussion">
-      <img class="v584-approved-art" src="assets/card1-signature-v584.svg" alt="Illustrated group of adult healthcare learners discussing a case together" draggable="false" decoding="async" fetchpriority="high">
+    <div class="clean-visual v585-scene" aria-label="Adult learner connecting prior experiences with new learning">
+      <img src="assets/v566-asset-11.jpg?v=585" alt="" draggable="false" decoding="async" fetchpriority="high">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THE BIG IDEA</div>
@@ -4750,58 +4817,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="1">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v79-scene" aria-hidden="true">
-      <svg class="v79-svg" viewBox="0 0 820 560">
-        <path class="v79-bg v79-fade" d="M102 137c90-78 252-91 356-26 79 49 103 123 184 150 92 31 126 112 78 179-55 77-170 92-276 66-107-26-202 12-286-52-92-70-144-235-56-317Z" fill="#F8EFEA"/>
-
-        <g class="v79-door v79-rise">
-          <rect x="88" y="95" width="183" height="330" rx="24" fill="#fff" stroke="#D9C5BC" stroke-width="4"/>
-          <rect x="120" y="128" width="119" height="297" rx="14" fill="#F3DED4"/>
-          <circle cx="219" cy="279" r="8" fill="#B96E5E"/>
-          <path d="M120 421h119" stroke="#CBA99A" stroke-width="5"/>
-        </g>
-
-        <g class="v79-room v79-rise">
-          <rect x="578" y="126" width="155" height="96" rx="18" fill="#fff" stroke="#A8D3C8" stroke-width="4"/>
-          <path d="M605 155h101M605 178h69M605 201h86" stroke="#9DCFC3" stroke-width="5" stroke-linecap="round"/>
-          <path d="M560 430h170" stroke="#173135" stroke-width="16" stroke-linecap="round"/>
-          <path d="M598 430v48M692 430v48" stroke="#173135" stroke-width="14" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-walker v79-walk-in">
-          <path d="M300 208c4-50 37-83 81-83 36 0 65 28 69 67-19-7-38-15-54-30-20 23-51 36-96 46Z" fill="#273F3E"/>
-          <circle cx="378" cy="208" r="42" fill="#D9A98C"/>
-          <circle cx="363" cy="213" r="4" fill="#173135"/><circle cx="393" cy="213" r="4" fill="#173135"/>
-          <path d="M368 230c8 5 15 5 22 0" fill="none" stroke="#A35E4B" stroke-width="3" stroke-linecap="round"/>
-          <path d="M315 350c9-86 31-124 63-124s54 38 63 124" fill="#F58268"/>
-          <path d="M344 282h68v68h-68z" fill="#173135"/>
-          <path d="M335 344l-31 108M407 344l48 108" stroke="#173135" stroke-width="19" stroke-linecap="round"/>
-          <path d="M329 282l-57 57M422 285l46 38" stroke="#D9A98C" stroke-width="18" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-bag v79-bag-in">
-          <rect x="478" y="329" width="125" height="98" rx="24" fill="#E6AE48"/>
-          <path d="M510 329c0-40 17-59 31-59s31 19 31 59" fill="none" stroke="#8D6A1C" stroke-width="11" stroke-linecap="round"/>
-          <circle cx="507" cy="382" r="7" fill="#8D6A1C"/>
-        </g>
-
-        <g class="v79-experience-card ec1 v79-card-float">
-          <rect x="474" y="226" width="72" height="54" rx="12" fill="#fff" stroke="#A7D4C8" stroke-width="3"/>
-          <circle cx="495" cy="253" r="9" fill="#0FB6A6"/>
-          <path d="M512 245h20M512 258h14" stroke="#607477" stroke-width="4" stroke-linecap="round"/>
-        </g>
-        <g class="v79-experience-card ec2 v79-card-float">
-          <rect x="551" y="248" width="72" height="54" rx="12" fill="#FFF0EB" stroke="#E1A294" stroke-width="3"/>
-          <path d="M573 275h28M587 261v28" stroke="#B95E4B" stroke-width="5" stroke-linecap="round"/>
-        </g>
-        <g class="v79-experience-card ec3 v79-card-float">
-          <rect x="523" y="177" width="72" height="54" rx="12" fill="#FFF8DF" stroke="#E2C76F" stroke-width="3"/>
-          <path d="M540 203h38" stroke="#C49A32" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="559" cy="203" r="9" fill="#E6AE48"/>
-        </g>
-
-        <path class="v79-trail v79-draw" d="M499 329c-8-22-6-36 2-49M559 330c7-17 8-29 4-40" fill="none" stroke="#D5C7BE" stroke-width="4" stroke-dasharray="8 10" stroke-linecap="round"/>
-      </svg>
+    <div class="clean-visual v585-scene" aria-label="Adult clinicians reflecting on prior simulation experience">
+      <img src="assets/v566-asset-23.webp?v=585" alt="" draggable="false" decoding="async">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
@@ -4816,54 +4833,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="2">
   <div class="clean-card-layout">
-    <div class="clean-visual v79-scene" aria-hidden="true">
-      <svg class="v79-svg" viewBox="0 0 820 560">
-        <path class="v79-bg v79-fade" d="M88 135c89-83 243-97 353-37 85 47 112 126 192 153 89 31 127 105 84 175-50 82-169 102-276 75-105-26-202 9-282-52-94-72-155-231-71-314Z" fill="#EDF7F4"/>
-
-        <g class="v79-board v79-rise">
-          <rect x="548" y="92" width="188" height="144" rx="22" fill="#fff" stroke="#A8D3C8" stroke-width="4"/>
-          <rect x="574" y="122" width="50" height="40" rx="8" fill="#FFF8DF"/>
-          <rect x="633" y="122" width="50" height="40" rx="8" fill="#FFF0EB"/>
-          <rect x="604" y="174" width="50" height="40" rx="8" fill="#DFF3ED"/>
-          <path d="M598 142h-8M647 162v12M629 194h-17" stroke="#9BCFC2" stroke-width="4" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-round-table v79-rise">
-          <ellipse cx="405" cy="390" rx="228" ry="66" fill="#CFE9E1"/>
-          <ellipse cx="405" cy="375" rx="228" ry="66" fill="#fff" stroke="#A8D3C8" stroke-width="4"/>
-          <path d="M300 421v70M510 421v70" stroke="#173135" stroke-width="18" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-educator v79-slide-left">
-          <path d="M171 208c6-48 38-78 78-78 37 0 65 27 72 65-21-4-40-12-57-25-21 23-52 34-93 38Z" fill="#273F3E"/>
-          <circle cx="247" cy="212" r="42" fill="#E4B394"/>
-          <circle cx="232" cy="218" r="4" fill="#173135"/><circle cx="262" cy="218" r="4" fill="#173135"/>
-          <path d="M237 235c7 5 14 5 21 0" fill="none" stroke="#A35E4B" stroke-width="3" stroke-linecap="round"/>
-          <path d="M184 352c10-88 32-128 63-128s53 40 63 128" fill="#173135"/>
-          <path d="M215 287h64v65h-64z" fill="#607477"/>
-          <path d="M278 303l79 56" stroke="#E4B394" stroke-width="17" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-learner v79-slide-right">
-          <path d="M519 206c7-46 37-75 75-75 36 0 64 27 70 64-18-2-36-9-52-21-22 20-52 31-93 32Z" fill="#1F4844"/>
-          <circle cx="592" cy="212" r="42" fill="#C98F72"/>
-          <circle cx="577" cy="218" r="4" fill="#173135"/><circle cx="607" cy="218" r="4" fill="#173135"/>
-          <path d="M582 235c7 5 14 5 21 0" fill="none" stroke="#8E4E3E" stroke-width="3" stroke-linecap="round"/>
-          <path d="M529 352c10-88 32-128 63-128s53 40 63 128" fill="#0FB6A6"/>
-          <path d="M560 287h64v65h-64z" fill="#F58268"/>
-          <path d="M557 303l-92 57" stroke="#C98F72" stroke-width="17" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-map v79-map-in">
-          <rect x="298" y="325" width="214" height="98" rx="14" fill="#FFF8DF" stroke="#E1C873" stroke-width="3"/>
-          <path class="v79-route1 v79-draw" d="M327 392c34-49 69-50 104-8 23 28 38 13 55-14" fill="none" stroke="#F58268" stroke-width="6" stroke-linecap="round"/>
-          <path class="v79-route2 v79-draw" d="M327 372c39-18 73-10 103 15 20 16 37 16 56 1" fill="none" stroke="#0FB6A6" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="327" cy="392" r="7" fill="#173135"/>
-          <circle class="v79-choice-dot v79-pop-late" cx="486" cy="370" r="10" fill="#F58268"/>
-          <rect x="344" y="339" width="38" height="25" rx="5" fill="#fff" opacity=".9"/>
-          <rect x="401" y="339" width="38" height="25" rx="5" fill="#fff" opacity=".9"/>
-        </g>
-      </svg>
+    <div class="clean-visual v585-scene" aria-label="Adult clinical team planning learning together">
+      <img src="assets/v566-asset-24.webp?v=585" alt="" draggable="false" decoding="async">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">THE CORE IDEA</div>
@@ -4875,48 +4846,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="3">
   <div class="clean-card-layout clean-card-layout-question">
-    <div class="clean-visual v79-scene" aria-hidden="true">
-      <svg class="v79-svg" viewBox="0 0 820 560">
-        <path class="v79-bg v79-fade" d="M96 132c85-82 235-94 342-36 82 44 112 118 198 149 93 34 126 113 78 182-55 79-173 95-277 69-104-25-200 12-284-52-93-70-144-230-57-312Z" fill="#EEF7F4"/>
-
-        <path class="v79-ground v79-rise" d="M73 437c142-67 265-57 373-12 101 42 195 42 305-12v95H73Z" fill="#DDEFE9"/>
-        <path class="v79-path v79-draw" d="M124 457c107-24 174-76 232-130 54-51 111-80 180-78 76 2 123 29 179 73" fill="none" stroke="#fff" stroke-width="68" stroke-linecap="round"/>
-        <path class="v79-pathline v79-draw" d="M124 457c107-24 174-76 232-130 54-51 111-80 180-78 76 2 123 29 179 73" fill="none" stroke="#B9DCD3" stroke-width="4" stroke-dasharray="10 12" stroke-linecap="round"/>
-
-        <g class="v79-sign v79-pop-late">
-          <path d="M590 131v149" stroke="#173135" stroke-width="12" stroke-linecap="round"/>
-          <path d="M590 151h106l-25 25 25 25H590Z" fill="#F58268"/>
-          <path d="M590 216h-100l24 24-24 24h100Z" fill="#E6AE48"/>
-        </g>
-
-        <g class="v79-learner-walk v79-walk-forward">
-          <path d="M446 269c6-43 35-70 70-70 34 0 59 24 66 57-18-2-34-8-49-18-19 18-46 28-87 31Z" fill="#1F4844"/>
-          <circle cx="513" cy="271" r="38" fill="#C98F72"/>
-          <circle cx="500" cy="276" r="4" fill="#173135"/><circle cx="527" cy="276" r="4" fill="#173135"/>
-          <path d="M445 403c9-78 29-114 68-114 31 0 50 36 59 114" fill="#0FB6A6"/>
-          <path d="M482 339h61v64h-61z" fill="#F58268"/>
-          <path d="M478 396l-34 91M543 396l43 84" stroke="#173135" stroke-width="17" stroke-linecap="round"/>
-          <path d="M470 338l-54 38M549 338l52 21" stroke="#C98F72" stroke-width="16" stroke-linecap="round"/>
-        </g>
-
-        <g class="v79-guide-walk v79-walk-guide">
-          <path d="M285 303c5-40 31-66 64-66 31 0 56 23 62 54-17-3-33-8-46-18-18 17-45 27-80 30Z" fill="#273F3E"/>
-          <circle cx="346" cy="305" r="36" fill="#E4B394"/>
-          <path d="M286 421c8-74 26-107 60-107 28 0 46 33 54 107" fill="#173135"/>
-          <path d="M318 365h56v56h-56z" fill="#607477"/>
-          <path d="M315 416l-29 78M376 416l37 74" stroke="#173135" stroke-width="16" stroke-linecap="round"/>
-          <path d="M375 358l46-13" stroke="#E4B394" stroke-width="15" stroke-linecap="round"/>
-          <g class="v79-guide-map">
-            <rect x="407" y="324" width="62" height="45" rx="7" fill="#fff" stroke="#E1C873" stroke-width="3"/>
-            <path d="M421 351c13-17 23-17 33 0" fill="none" stroke="#F58268" stroke-width="4" stroke-linecap="round"/>
-          </g>
-        </g>
-
-        <g class="v79-destination v79-pop-late">
-          <circle cx="706" cy="306" r="31" fill="#173135"/>
-          <path d="m692 306 10 11 22-26" fill="none" stroke="#0FB6A6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
-      </svg>
+    <div class="clean-visual v585-scene" aria-label="Structured clinical simulation with adult learners and educator support">
+      <img src="assets/v566-asset-25.webp?v=585" alt="" draggable="false" decoding="async">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">YES OR NO?</div>
@@ -4931,29 +4862,8 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 
   <section class="clean-card" data-clean-page="4">
   <div class="clean-card-layout">
-    <div class="clean-visual v76-scene" aria-hidden="true">
-      <svg class="v76-svg" viewBox="0 0 760 520">
-        <path class="v76-blob v76-fade" d="M104 111c94-61 227-38 287 33 50 58 52 133 124 172 76 41 83 118 30 170-61 60-164 47-255 26-89-21-177 13-236-60-68-84-42-282 50-341Z" fill="#F4F8F6"/>
-        <g class="v76-flex-side v76-slide-left">
-          <path d="M102 358c47-73 87-98 124-77 35 20 33 65 71 76 29 9 56-11 86-54" fill="none" stroke="#0FB6A6" stroke-width="22" stroke-linecap="round"/>
-          <circle cx="121" cy="345" r="30" fill="#fff" stroke="#8FC8BA" stroke-width="4"/>
-          <circle cx="378" cy="306" r="30" fill="#fff" stroke="#8FC8BA" stroke-width="4"/>
-          <g class="v76-flex-person">
-            <circle cx="210" cy="194" r="34" fill="#E4B394"/>
-            <path d="M165 306c7-70 23-100 45-100s38 30 45 100" fill="#0FB6A6"/>
-          </g>
-        </g>
-        <g class="v76-rigid-side v76-slide-right">
-          <rect x="490" y="154" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
-          <rect x="490" y="222" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
-          <rect x="490" y="290" width="150" height="58" rx="8" fill="#FFEFEA" stroke="#E3A395" stroke-width="4"/>
-          <g class="v76-rigid-person">
-            <circle cx="566" cy="113" r="31" fill="#C98F72"/>
-            <path d="M524 150c7-54 22-76 42-76s35 22 42 76" fill="#173135"/>
-          </g>
-        </g>
-        <g class="v76-not-equal v76-pop"><circle cx="432" cy="255" r="40" fill="#173135"/><path d="M415 244h34M415 266h34" stroke="#fff" stroke-width="7" stroke-linecap="round"/><path d="M449 230l-35 50" stroke="#F58268" stroke-width="7" stroke-linecap="round"/></g>
-      </svg>
+    <div class="clean-visual v585-scene" aria-label="Adult healthcare team learning through a realistic clinical simulation">
+      <img src="assets/v566-asset-22.webp?v=585" alt="" draggable="false" decoding="async">
     </div>
     <div class="clean-card-copy">
       <div class="clean-kicker">IMPORTANT NUANCE</div>
@@ -9910,7 +9820,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('touchend',settleTouch,{passive:true});
  document.addEventListener('touchcancel',settleTouch,{passive:true});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
- window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.84 · APPROVED HUMAN ART'},120),{once:true});
+ window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.85 · SIGNATURE SCENES'},120),{once:true});
  window.addEventListener('resize',()=>{const id=activePanel();if(deckDefs[id])requestAnimationFrame(()=>setOrbit(id,deckIndex[id],false));},{passive:true});
  window.addEventListener('orientationchange',()=>setTimeout(()=>{const id=activePanel();if(deckDefs[id])setOrbit(id,deckIndex[id],false)},180),{passive:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
