@@ -35,6 +35,10 @@ body.clean-jump-open #clean-jump-menu{display:grid}
 </style>
 
 <meta charset="utf-8"/>
+<meta name="simple-build" content="5.80"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>SIMple Academy — Pilot M1 + M2</title>
 <style>
@@ -9819,5 +9823,17 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  window.addEventListener('orientationchange',()=>setTimeout(()=>{const id=activePanel();if(deckDefs[id])setOrbit(id,deckIndex[id],false)},180),{passive:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
 })();
-</script>\n</body>
+</script>\n<script id="simple-build-check">
+(()=>{try{
+ const local=document.querySelector('meta[name="simple-build"]')?.content||'';
+ const u=new URL('version.json',location.href);u.searchParams.set('_ts',Date.now());
+ fetch(u,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(v=>{
+   if(!v?.build||v.build===local)return;
+   const next=new URL(location.href);
+   next.searchParams.set('_build',v.build);
+   location.replace(next.toString());
+ }).catch(()=>{});
+}catch(_){}})();
+</script>
+</body>
 </html>
