@@ -35,7 +35,7 @@ body.clean-jump-open #clean-jump-menu{display:grid}
 </style>
 
 <meta charset="utf-8"/>
-<meta name="simple-build" content="5.82"/>
+<meta name="simple-build" content="5.83"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
@@ -4526,9 +4526,63 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
 @media(max-width:820px){
   .v80-scene-base{object-fit:cover!important;object-position:52% 50%!important;transform:scale(1.02)!important}
 }
+</style><style id="v583-mobile-signature-polish">
+/* v5.83 — real mobile carousel + visually dominant signature artwork */
+.v80-live-scene,.v79-scene{
+  border-radius:28px!important;
+  border:1px solid #d9e7e2!important;
+  box-shadow:0 18px 42px rgba(23,49,53,.08)!important;
+}
+.v80-scene-base{object-fit:cover!important;object-position:center!important}
+.clean-carousel-track .clean-card-layout{
+  grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr)!important;
+  gap:clamp(1.4rem,3vw,3.2rem)!important;
+  align-items:center!important;
+}
+.clean-card-copy{max-width:34rem!important}
+@media(max-width:820px){
+  #clean-f0-deck.clean-carousel-viewport,.clean-subdeck.clean-carousel-viewport{
+    perspective:none!important;
+    perspective-origin:50% 50%!important;
+  }
+  .clean-carousel-track{transform-style:flat!important}
+  .clean-carousel-track .clean-card{
+    width:calc(100vw - .5rem)!important;
+    height:calc(100svh - .5rem)!important;
+    border-radius:22px!important;
+    filter:none!important;
+  }
+  .clean-carousel-track .clean-card.is-neighbor{opacity:.14!important}
+  .clean-carousel-track .clean-card:not(.is-current):not(.is-neighbor){opacity:0!important}
+  .clean-carousel-track .clean-card-layout{
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(245px,52svh) auto!important;
+    gap:.7rem!important;
+    width:100%!important;
+    height:100%!important;
+    padding:.55rem .55rem 4.35rem!important;
+    overflow:auto!important;
+    border-radius:22px!important;
+  }
+  .clean-visual{
+    min-height:245px!important;
+    height:100%!important;
+    border-radius:20px!important;
+  }
+  .v80-scene-base{
+    object-fit:cover!important;
+    object-position:center center!important;
+    transform:none!important;
+  }
+  .v79-svg{width:112%!important;max-width:none!important;max-height:none!important;transform:translateX(-5%) scale(1.03)}
+  .clean-card-copy{max-width:none!important;padding:.2rem .65rem .55rem!important}
+  .clean-title{font-size:clamp(1.8rem,8vw,2.55rem)!important;line-height:1.02!important;margin-bottom:.65rem!important}
+  .clean-copy{font-size:1rem!important;line-height:1.48!important}
+  .clean-side-arrow{top:47%!important}
+}
 </style></head>
 <body class="simple-rebuild-mode simple-guided-pages clean-deck-v566" data-template-id="__page-root">
-<div id="clean-build-badge">V5.82 · SIGNATURE ASSET FIX</div>
+<div id="clean-build-badge">V5.83 · MOBILE + SIGNATURE FIX</div>
 <button id="clean-jump" type="button" aria-expanded="false">Jump</button>
 <nav id="clean-jump-menu" aria-label="Free navigation">
  <button type="button" data-clean-panel="foundations">M1 · Foundations</button><button type="button" data-clean-panel="assumptions">M1 · Assumptions</button>
@@ -4677,7 +4731,7 @@ body.clean-deck-v566 #principles>:not(#clean-principle-deck){display:none!import
   <section class="clean-card active" data-clean-page="0">
   <div class="clean-card-layout">
     <div class="clean-visual v80-live-scene" aria-label="Animated adult learner scene">
-      <img class="v80-scene-base" src="assets/card1-signature.webp" alt="" draggable="false" decoding="async" fetchpriority="high">
+      <img class="v80-scene-base" src="assets/card1-signature.webp?v=583" alt="" draggable="false" decoding="async" fetchpriority="high">
 
       <div class="v80-case-pop" aria-hidden="true">
         <div class="v80-case-thumb"></div>
@@ -9733,16 +9787,18 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  function orbitTransform(delta){
    const vw=Math.max(320,window.innerWidth);
    const mobile=vw<=820;
-   const radius=mobile
-     ? Math.max(250,Math.min(360,vw*.78))
-     : Math.min(1180,Math.max(560,vw*.88));
    const clamped=Math.max(-2.75,Math.min(2.75,delta));
-   const stepAngle=mobile?47:54;
-   const angle=clamped*stepAngle,rad=angle*Math.PI/180;
+   if(mobile){
+     const x=clamped*vw*.94;
+     const scale=Math.max(.90,1-Math.abs(clamped)*.045);
+     return `translate3d(calc(-50% + ${x.toFixed(1)}px),-50%,0) scale(${scale.toFixed(3)})`;
+   }
+   const radius=Math.min(1180,Math.max(560,vw*.88));
+   const angle=clamped*54,rad=angle*Math.PI/180;
    const x=Math.sin(rad)*radius;
    const z=(Math.cos(rad)-1)*radius;
-   const rot=-angle*(mobile?.62:.78);
-   const scale=Math.max(mobile?.78:.72,1-Math.abs(clamped)*(mobile?.055:.075));
+   const rot=-angle*.78;
+   const scale=Math.max(.72,1-Math.abs(clamped)*.075);
    return `translate3d(calc(-50% + ${x.toFixed(1)}px),-50%,${z.toFixed(1)}px) rotateY(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
  }
  function setOrbit(id,position,animate=true){
@@ -9876,7 +9932,7 @@ body.simple-guided-pages #assumptions #v45-match-stage:not(.sf-focus-hidden){min
  document.addEventListener('touchend',settleTouch,{passive:true});
  document.addEventListener('touchcancel',settleTouch,{passive:true});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
- window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.82 · SIGNATURE ASSET FIX'},120),{once:true});
+ window.addEventListener('load',()=>setTimeout(()=>{boot();$('#clean-build-badge').textContent='V5.83 · MOBILE + SIGNATURE FIX'},120),{once:true});
  window.addEventListener('resize',()=>{const id=activePanel();if(deckDefs[id])requestAnimationFrame(()=>setOrbit(id,deckIndex[id],false));},{passive:true});
  window.addEventListener('orientationchange',()=>setTimeout(()=>{const id=activePanel();if(deckDefs[id])setOrbit(id,deckIndex[id],false)},180),{passive:true});
  const mo=new MutationObserver(()=>requestAnimationFrame(sync));mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','disabled']});
