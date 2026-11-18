@@ -28,6 +28,45 @@
 .map-actions{display:flex;align-items:center;flex-direction:column;gap:10px;margin-top:24px}.map-actions .nav{min-width:180px}.map-actions small{color:#59736e}
 @media(max-width:740px){.header-actions{gap:7px}.map-link{font-size:.8rem;padding:8px}.map-screen{padding:22px 12px}.map-screen h1{font-size:2.15rem}.route-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,1fr);grid-template-areas:"a b" "d c" "e f";height:480px;margin:15px auto}.route-path-desktop{display:none}.route-path-mobile{display:block}.stop-marker{height:58px;width:58px}.stop-kind{font-size:.65rem}.map-legend{gap:10px}}
 @media(prefers-reduced-motion:reduce){.stop{transition:none}}
+
+/* First fully art-directed Andragogy card: simplified editorial vectors, independent animated jigsaw pieces */
+.hero-scene{margin:0;width:100%;max-width:590px}
+.hero-art{display:block;width:100%;height:auto;max-height:none;overflow:visible}
+.art-caption{font-size:.76rem;font-weight:750;color:#665d55;letter-spacing:.055em;text-align:center;margin-top:0}
+#visual{min-width:0}
+.hero-scene .part{transform-box:fill-box;transform-origin:center;transition:transform .72s cubic-bezier(.2,.78,.2,1)}
+.hero-scene .part-experience{transition-delay:.04s}
+.hero-scene .part-purpose{transition-delay:.19s}
+.hero-scene .part-autonomy{transition-delay:.33s}
+.hero-scene.replaying .part-experience{transform:translate(-36px,-18px) rotate(-5deg)}
+.hero-scene.replaying .part-purpose{transform:translate(34px,-25px) rotate(5deg)}
+.hero-scene.replaying .part-autonomy{transform:translate(-15px,29px) rotate(-4deg)}
+.hero-scene .person{transition:transform .7s ease}
+.hero-scene.replaying .person-left{transform:translate(-4px,1px)}
+.hero-scene.replaying .person-right{transform:translate(3px,1px)}
+.illustration-play{margin-top:20px;padding:10px 16px;border-radius:100px;background:#fff4e7;color:#75422e;border:1px solid #e9bea1;font-weight:750;font-size:.93rem}
+.illustration-play:hover{background:#ffe9d6}
+.concept-art{min-height:280px;background:#f5f8f5;border:1px dashed #c3d9d3;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:16px;flex-direction:column;color:#61857a;text-align:center;padding:20px}
+.concept-art span{font-size:5rem;line-height:1}.concept-art small{font-size:.82rem}
+.bottom{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:16px;row-gap:7px}
+.bottom .milestones{grid-column:1/-1;grid-row:1;margin:0;justify-content:stretch}
+.bottom #prev{grid-column:1;grid-row:2}
+.bottom .progress{grid-column:2;grid-row:2;min-width:0}
+.bottom #next{grid-column:3;grid-row:2}
+.main{padding-bottom:152px}
+.card{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);min-height:450px}
+@media(max-width:740px){
+ .card{grid-template-columns:1fr;padding:22px 18px}
+ #visual{order:-1}
+ .hero-scene{max-width:450px;margin:auto}
+ .illustration-play{margin:10px 0 16px}
+ .main{padding-bottom:172px}
+ .bottom{column-gap:9px;padding:10px 12px}
+ .bottom .milestone{height:27px}
+ .bottom .nav{padding:9px 11px}
+ .art-caption{margin:0 0 10px}
+}
+@media(prefers-reduced-motion:reduce){.hero-scene .part,.hero-scene .person{transition:none!important}}
 </style>
 </head>
 <body>
@@ -43,11 +82,11 @@
 <div class="map-legend"><span><b>▤</b> Learning</span><span><b>?</b> Question</span><span><b>✓</b> Completed</span></div>
 <div class="map-actions"><button class="nav primary" id="start-map" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small></div>
 </section>
-<section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
+<section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script>
-const artwork='<svg class="art" viewBox="0 0 460 360" role="img" aria-label="An adult learner explores a new idea with a facilitator"><rect x="34" y="52" width="390" height="268" rx="35" fill="#EAF6F2"/><circle cx="346" cy="102" r="47" fill="#FAD6A0"/><path d="M65 282h330" stroke="#8FBEB4" stroke-width="8" stroke-linecap="round"/><rect x="105" y="214" width="247" height="16" rx="8" fill="#204E4B"/><rect x="134" y="230" width="13" height="52" rx="6" fill="#204E4B"/><rect x="315" y="230" width="13" height="52" rx="6" fill="#204E4B"/><path d="M151 163c0-36 20-54 52-54s52 18 52 54v49H151z" fill="#0D9488"/><circle cx="202" cy="89" r="36" fill="#E5AB84"/><path d="M166 87c-3-42 65-58 73-5-20-2-30-15-38-20-8 16-21 22-35 25" fill="#253D40"/><path d="M258 211l25-87 68 20-25 67z" fill="#F5B95D"/><path d="M283 124l68 20-5 16-68-20z" fill="#FFF4DC"/><path d="M254 178l39-29" stroke="#E5AB84" stroke-width="17" stroke-linecap="round"/><circle cx="320" cy="75" r="13" fill="#0D9488"/><path d="M320 66v18m-9-9h18" stroke="white" stroke-width="4" stroke-linecap="round"/><path d="M89 131l12-19 12 19-12 19z" fill="#F08A75"/><path d="M367 241l11-17 11 17-11 17z" fill="#F08A75"/></svg>';
+const artwork="<svg class=\"art hero-art\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 610 440\" role=\"img\" aria-label=\"Three faceless adult learners collaboratively assembling a large colourful learning puzzle\">\n<defs>\n<filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"180%\"><feGaussianBlur stdDeviation=\"6\"/></filter>\n<pattern id=\"grain\" width=\"13\" height=\"13\" patternUnits=\"userSpaceOnUse\"><circle cx=\"2\" cy=\"4\" r=\".75\" fill=\"#8E7063\" opacity=\".3\"/><circle cx=\"9\" cy=\"10\" r=\".65\" fill=\"#8E7063\" opacity=\".22\"/></pattern>\n</defs>\n<path d=\"M112 100Q239 21 410 78Q531 114 524 273Q500 387 294 387Q112 370 83 244Q61 159 112 100Z\" fill=\"#EDF5F2\"/>\n<ellipse cx=\"305\" cy=\"385\" rx=\"246\" ry=\"21\" fill=\"#B48E7B\" opacity=\".12\"/>\n<path d=\"M112 213L368 140L534 289L279 380Z\" fill=\"#6A463F\" opacity=\".17\" filter=\"url(#shadow)\" transform=\"translate(3 11)\"/>\n<path d=\"M112 213L368 140L534 289L279 380Z\" fill=\"#FFF7ED\" stroke=\"#E5D3C6\" stroke-width=\"2\"/>\n<path d=\"M144 236L371 168M171 272L401 203M207 315L443 245M250 350L485 282\" stroke=\"#DABBA7\" opacity=\".5\" stroke-width=\"2\"/>\n<g class=\"part part-experience\"><path d=\"M213 223L289 201Q304 225 322 217Q338 209 333 186L370 176L414 217L348 242Q341 264 322 269Q307 272 294 255L248 276Z\" fill=\"#F1794A\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"part part-autonomy\"><path d=\"M145 254L211 231L248 276L294 255Q307 272 322 269L351 306L260 337Z\" fill=\"#F0AF4B\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"part part-purpose\"><path d=\"M370 176L425 211L490 274L351 306L322 269Q341 264 348 242L414 217Z\" fill=\"#9FCFDE\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"person person-left\"><path d=\"M79 333Q46 314 45 279L61 215Q70 186 94 189L128 201Q145 219 147 255L148 322Z\" fill=\"#F27746\"/><path d=\"M78 185Q64 169 73 151Q84 129 113 134Q140 139 134 164Q130 182 114 191L110 205L82 198Z\" fill=\"#E3AA87\"/><path d=\"M72 162Q67 132 92 125Q127 115 138 146Q131 141 118 140Q107 157 91 153Q89 171 78 179Z\" fill=\"#75483C\"/><path d=\"M108 237L168 270L213 242\" fill=\"none\" stroke=\"#F27746\" stroke-width=\"30\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M208 238L220 235\" stroke=\"#E3AA87\" stroke-width=\"13\" stroke-linecap=\"round\"/><path d=\"M77 327L64 362L96 366L117 333M126 325L127 370L156 370L158 321\" fill=\"#6E514C\"/><path d=\"M90 197L107 199\" stroke=\"#FFF7ED\" stroke-width=\"8\" stroke-linecap=\"round\"/></g>\n<g class=\"person person-top\"><path d=\"M352 146Q337 114 345 83Q359 58 397 64Q431 78 433 118L437 158L414 192L362 179Z\" fill=\"#99CADD\"/><path d=\"M365 91Q364 70 384 67Q407 67 408 89Q408 111 386 119L376 123L366 107Z\" fill=\"#E6B18D\"/><path d=\"M363 84Q360 60 377 55Q402 48 416 71Q400 67 389 75Q381 82 363 84Z\" fill=\"#80513E\"/><path d=\"M408 121L445 144L415 181L387 166\" fill=\"#E5C4A2\"/><path d=\"M412 127L439 136L418 159L395 149Z\" fill=\"#FFF8ED\"/><path d=\"M346 158L328 191\" stroke=\"#99CADD\" stroke-width=\"25\" stroke-linecap=\"round\"/><path d=\"M325 190L315 195\" stroke=\"#E6B18D\" stroke-width=\"14\" stroke-linecap=\"round\"/></g>\n<g class=\"person person-right\"><path d=\"M429 347Q408 314 418 278Q427 256 449 246Q477 244 490 269L519 345Z\" fill=\"#D68464\"/><path d=\"M444 241Q432 219 446 204Q460 187 481 196Q496 209 486 228L475 243L473 260L447 259Z\" fill=\"#DFA789\"/><path d=\"M440 221Q435 193 454 187Q486 180 499 212Q489 208 483 202Q471 208 454 204Q453 224 440 234Z\" fill=\"#6D4039\"/><path d=\"M435 280L397 313L363 302\" fill=\"none\" stroke=\"#D68464\" stroke-width=\"23\" stroke-linecap=\"round\"/><path d=\"M360 301L348 302\" stroke=\"#DFA789\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M461 345L458 385L478 388L496 346\" fill=\"#674642\"/></g>\n<path d=\"M0 0h610v440H0Z\" fill=\"url(#grain)\" opacity=\".24\" pointer-events=\"none\"/>\n</svg>";
 const cards=[
-{k:"Welcome",word:"Welcome",h:"Adults learn differently.",b:"Welcome to Foundations of Andragogy. Explore how experience, autonomy and relevance shape adult learning."},
+{k:"Welcome",word:"Welcome",h:"Learning fits together.",b:"Adult learning starts with people—not just content. Experience, autonomy and purpose combine to make learning meaningful."},
 {k:"Core principle",word:"Experience",h:"Experience is an asset.",b:"Adult learners bring prior clinical and personal experience. Effective teaching uses that experience rather than ignoring it."},
 {k:"Think and decide",word:"Choose",h:"Which activity is more learner-centred?",b:"Choose the approach that best uses the learner’s experience.",q:["A 40-minute lecture with no discussion","A clinical case where learners compare decisions with their own practice"],answer:1,why:"Correct. The clinical case activates prior experience and encourages reflection."},
 {k:"Apply it",word:"Relevance",h:"Make learning relevant.",b:"Connect each teaching activity to a real clinical problem the learner recognises. Explain why the skill matters now."},
