@@ -146,8 +146,21 @@ function showCard(index){
 }
 function render(){
  const c=cards[current];
- $('kicker').textContent=c.k;$('heading').textContent=c.h;$('body').textContent=c.b;$('visual').innerHTML=artwork;
- $('interaction').replaceChildren();
+ $('kicker').textContent=c.k;$('heading').textContent=c.h;$('body').textContent=c.b;if(current===0){
+  $('visual').innerHTML='<figure class="hero-scene" aria-label="Illustration of adults joining a learning puzzle">'+artwork+'<figcaption class="art-caption">Experience · Autonomy · Purpose</figcaption></figure>';
+  $('interaction').replaceChildren();
+  const btn=document.createElement('button');btn.type='button';btn.className='illustration-play';
+  btn.textContent='↻ Watch the pieces connect';
+  btn.addEventListener('click',()=>{
+    const scene=$('visual').querySelector('.hero-scene');
+    scene.classList.add('replaying');
+    setTimeout(()=>{if(scene.isConnected)scene.classList.remove('replaying');},220);
+  });
+  $('interaction').appendChild(btn);
+ }else{
+  $('visual').innerHTML='<div class="concept-art" role="img" aria-label="A future concept-specific illustration"><span aria-hidden="true">✳</span><small>Illustration in development</small></div>';
+  $('interaction').replaceChildren();
+ }
  if(c.q){
   const wrap=document.createElement('div');wrap.className='choices';
   c.q.forEach((option,i)=>{
