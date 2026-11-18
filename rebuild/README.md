@@ -28,3 +28,11 @@ This branch preserves the existing main-branch application untouched. The new pr
 4. Build course map for Andragogy, Kolb and RCDP; define question completion rules.
 5. Add automated checks and mobile browser testing.
 6. Replace production entry point only after explicit review and approval.
+
+## Card 1 visual prototype (18 November 2026)
+- Implemented a unique, faceless editorial SVG illustration for **Welcome / Learning fits together**: three adult learners and three independent jigsaw shapes.
+- Palette: warm orange, mustard, sky blue, cream, soft neutral shadows, and restrained stippled grain; no facial features.
+- Click **Watch the pieces connect** to replay the actual SVG piece translations.
+- Moved type-specific card indicators into the persistent bottom navigation; retained one-word course map and forward question gating/backward freedom.
+- The remaining cards intentionally display an *illustration in development* placeholder rather than recycling the rejected artwork.
+- JavaScript was syntax-checked; a standalone rendering/layout approximation was inspected on desktop and mobile. **Full repository browser-flow testing and live deployment are still pending.**
