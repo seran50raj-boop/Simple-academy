@@ -40,3 +40,14 @@ This file records the user's explicit choice: **"I want this style."** Treat it 
 
 ## Explicit confirmation
 The user reaffirmed: **keep the SAME vibrant colours AND the visible textures as the uploaded puzzle-collaboration reference**. Do not interpret “faceless vector” as desaturated monochrome icons or simplistic flat untextured clip art.
+
+## Iteration chosen after the original reference
+The newest approved *directional improvement* is the **flatter, more minimal, entirely faceless** six-frame study illustration. The user responded **"even better"** (not yet final sign-off).
+- Reduce object count and busy background elements; one readable central teaching metaphor per card.
+- Use larger, clean, almost solid colour blocks and fewer internal fold/detail lines.
+- **No drawn eyes, brows, noses, mouths, or facial expressions** in standard people illustrations.
+- Keep the original reference's vivid coral/orange, sky blue/teal, warm cream and complementary accent colours. Avoid faded pastel and glossy gradient rendering.
+- Preserve fine matte paper/fabric texture **subtly**; it should be visible but not gritty or painterly.
+- Use only soft, localized contact shadows, not complex lighting or 3D shading.
+- Animate individual vector elements with restrained gestures, never a highly expressive character performance.
+- The six-frame demonstration is a useful style study, but **is not a final card design or reusable animation file**. Build and review a real course card with purpose-specific art next.
