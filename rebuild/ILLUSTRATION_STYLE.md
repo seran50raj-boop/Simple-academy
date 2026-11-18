@@ -9,10 +9,10 @@ This file records the user's explicit choice: **"I want this style."** Treat it 
 - **Flat editorial vector illustration**, modern educational/corporate rather than storybook, anime, glossy 3D, photorealistic, or childish clip art.
 - **Human figures are simplified, mature, and minimally expressive**. A few understated eye/nose marks are acceptable when matching the source reference, but avoid prominent eyes, large smiles, detailed expressions, eyelashes, blush, exaggerated anatomy or character acting. Prefer near-faceless faces wherever the learning idea does not require expression.
 - **Minimal/no black outline**: build forms with contiguous vector fills, hair and garment silhouettes; sparse fine lines only for folds, objects and boundaries.
-- **Warm vivid yet controlled palette**: burnt orange / terracotta, mustard / apricot, muted sky blue, warm creams and beige, rich chestnut / aubergine browns, restrained neutrals. Keep clear distinct color blocks; no neon.
+- **Match the reference's actual vibrant saturation and colour contrasts**: vivid burnt orange and terracotta, bright mustard/apricot, clear light sky blue, warm cream, and deep chestnut/aubergine brown. Colours should feel fresh and expressive rather than washed-out, dusty, or uniformly pastel. Preserve the reference's crisp contrasts, while avoiding neon.
 - **Composition**: white or warm-white open background, generous negative space, 2–4 figures participating in a collaborative task, oversized central metaphor/prop. Angled/isometric-like planes are welcome but not technical isometric projection.
-- **Texture**: restrained matte, light paper-like imperfection or tonal variation only; do not overlay noisy grain or heavy photographic effects.
-- **Depth**: subtle, soft contact shadows and gentle overlapping layers. No hard glossy highlights, dramatic lighting, deep drop shadows, glassmorphism or UI-like floating holograms unless a specific teaching concept needs them.
+- **Textures are essential, not optional**: reproduce the reference's tactile matte/paper-like finish, subtle grain in colour areas, delicate tonal variation and slightly hand-crafted fabric/paper treatment. Texture must remain visible at card size, without becoming photographic, fuzzy or noisy.
+- **Depth**: visible but soft contact shadows under bodies, hands, and the large paper/puzzle surface; gentle overlapping layers and slight shaded shape edges. Never flatten the entire scene into unshaded clip art. No hard glossy highlights, dramatic lighting, heavy 3D, glassmorphism or UI-like floating holograms unless a specific concept needs them.
 - **Shapes**: rounded organic silhouettes with clean geometric objects, simple hands and facial profiles, limited garment creases.
 - **Typography**: illustration is generally text-free. Render slide text as accessible HTML, not as text baked into artwork.
 
@@ -37,3 +37,6 @@ This file records the user's explicit choice: **"I want this style."** Treat it 
 4. The one-word-label course journey map appears before the cards.
 5. Style approval is **not** visual QA: verify output against the uploaded source and show a true rendered preview before merging.
 6. The current rebuild placeholder vector **does not satisfy this specification** and must be replaced.
+
+## Explicit confirmation
+The user reaffirmed: **keep the SAME vibrant colours AND the visible textures as the uploaded puzzle-collaboration reference**. Do not interpret “faceless vector” as desaturated monochrome icons or simplistic flat untextured clip art.
