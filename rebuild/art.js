@@ -47,7 +47,7 @@ const scenes = {
   <circle cx="328" cy="198" r="44" fill="#9BCAD9"/>
   <circle cx="520" cy="324" r="43" fill="#F0AD4A"/>
   <path d="M96 335l14 14 24-31M308 199l13 14 24-31M500 324l13 14 24-31" stroke="#FFF7ED" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="328" cy="75" r="25" fill="#EAB58E"/><path d="M302 119Q325 100 352 119L363 150H295Z" fill="#85B5BB"/>
+  <circle cx="328" cy="86" r="25" fill="#EAB58E"/><path d="M302 111Q325 100 352 111L363 150H295Z" fill="#85B5BB"/>
   <path d="M312 148L302 174M344 148l12 28" stroke="#85B5BB" stroke-width="13" stroke-linecap="round"/> `,
  experience: () => `
   <path d="M107 137Q247 30 469 139Q536 197 506 349H103Z" fill="#E8F5F0"/>
