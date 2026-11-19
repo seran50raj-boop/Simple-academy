@@ -1,7 +1,7 @@
 /* Foundations of Andragogy — reconstructed from the previous 14-card deck on main (v5.90). 
    Separate question cards remain in the original sequence. */
 const cards = [
-  {k:"The big idea",word:"Andragogy",h:"What is Andragogy?",b:"Adult learning design starts with the adult learner. Respect what they bring, the choices they can make, and a clear reason to learn now.",art:"puzzle"},
+  {k:"The big idea",word:"Andragogy",h:"What is Andragogy?",b:"Adult learning design starts with the adult learner. Respect what they bring, the choices they can make, and a clear reason to learn now.",art:"approved-hero"},
   {k:"Yes or no?",word:"Experience",h:"Adults arrive as a blank slate.",b:"Consider what a learner brings into a new clinical course.",q:["Yes","No"],answer:1,why:"Exactly. Adults arrive with experiences, habits and mental models that shape how they interpret new learning.",wrong:"Adults usually bring substantial prior experience into learning.",art:"experience"},
   {k:"The core idea",word:"Learner",h:"Start with the adult learner.",b:"The educator still brings expertise, but the learner can help shape the route: what matters, what they already know, and where practice should go next.",art:"journey"},
   {k:"Yes or no?",word:"Guidance",h:"Andragogy means adults should always teach themselves.",b:"Does adult learning remove the educator’s role?",q:["Yes","No"],answer:1,why:"Correct. The learner can influence the direction while the educator still guides, teaches and gives feedback.",wrong:"Andragogy does not mean abandoning teaching or structure.",art:"guidance"},
