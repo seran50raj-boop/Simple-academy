@@ -67,6 +67,41 @@
  .art-caption{margin:0 0 10px}
 }
 @media(prefers-reduced-motion:reduce){.hero-scene .part,.hero-scene .person{transition:none!important}}
+
+/* Fourteen-stop serpentine journey, preserving one-word markers and visual gating. */
+.route-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,170px);grid-template-areas:none;height:680px;max-width:1000px}
+.stop{position:relative;z-index:1;grid-column:var(--d-col);grid-row:var(--d-row)}
+.route-path{z-index:0}
+.map-screen{width:100%;max-width:1060px}
+.map-screen .map-intro{max-width:675px}
+.milestones{display:flex;overflow-x:auto;scrollbar-width:thin;justify-content:flex-start;gap:7px;max-width:100%;scroll-snap-type:x proximity}
+.milestone{flex:1 0 32px;max-width:72px;min-width:32px;scroll-snap-align:center}
+.card.is-question{border-top:5px solid #E59F65}
+.card.is-question .kicker{color:#AD5D3B}
+.card.is-question .choice{border-radius:14px}
+.card.is-question .choice:disabled{opacity:1;cursor:default}
+.art-panel{width:100%;max-width:560px;margin:auto}
+.editorial-art{display:block;width:100%;height:auto;max-height:350px}
+.hero-scene{margin:auto;max-width:590px}
+.hero-scene.replaying .part-experience{animation:connectA 1.05s cubic-bezier(.18,.8,.26,1) both}
+.hero-scene.replaying .part-autonomy{animation:connectB 1.13s .08s cubic-bezier(.18,.8,.26,1) both}
+.hero-scene.replaying .part-purpose{animation:connectC 1.15s .17s cubic-bezier(.18,.8,.26,1) both}
+@keyframes connectA{from{transform:translate(-32px,-18px) rotate(-7deg);opacity:.65}to{transform:none;opacity:1}}
+@keyframes connectB{from{transform:translate(-21px,25px) rotate(7deg);opacity:.65}to{transform:none;opacity:1}}
+@keyframes connectC{from{transform:translate(31px,-18px) rotate(7deg);opacity:.65}to{transform:none;opacity:1}}
+@media(max-width:740px){
+ .route-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(7,140px);grid-template-areas:none;height:980px}
+ .stop{grid-column:var(--m-col);grid-row:var(--m-row)}
+ .map-screen{padding:22px 10px}
+ .map-screen h1{font-size:clamp(2rem,7vw,2.4rem)}
+ .stop-marker{height:62px;width:62px}
+ .editorial-art{max-height:270px}
+ .milestone{flex:0 0 35px;max-width:35px}
+ .card.is-question .art-panel{max-height:230px;overflow:hidden}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-scene.replaying .part-experience,.hero-scene.replaying .part-autonomy,.hero-scene.replaying .part-purpose{animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -76,28 +111,20 @@
 <h1 id="map-title">Explore Andragogy</h1>
 <p class="map-intro">Follow the route from concept to practice. Each stop is one card. Questions unlock the path forward.</p>
 <nav class="route-grid" id="route-grid" aria-label="Andragogy card map">
-<svg class="route-path route-path-desktop" viewBox="0 0 900 420" preserveAspectRatio="none" aria-hidden="true"><path d="M150 105 H750 Q825 105 825 210 Q825 315 750 315 H150" fill="none" stroke="#dce9e6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 16"/></svg>
-<svg class="route-path route-path-mobile" viewBox="0 0 600 480" preserveAspectRatio="none" aria-hidden="true"><path d="M150 80 H450 Q520 80 520 160 Q520 240 450 240 H150 Q80 240 80 320 Q80 400 150 400 H450" fill="none" stroke="#dce9e6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 16"/></svg>
+<svg class="route-path route-path-desktop" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true"><path d="M125 85H875Q940 85 940 170Q940 255 875 255H125Q60 255 60 340Q60 425 125 425H875Q940 425 940 510Q940 595 875 595H625" fill="none" stroke="#D8E7DE" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 17"/></svg>
+<svg class="route-path route-path-mobile" viewBox="0 0 600 980" preserveAspectRatio="none" aria-hidden="true"><path d="M150 70H450Q520 70 520 140Q520 210 450 210H150Q80 210 80 280Q80 350 150 350H450Q520 350 520 420Q520 490 450 490H150Q80 490 80 560Q80 630 150 630H450Q520 630 520 700Q520 770 450 770H150Q80 770 80 840Q80 910 150 910H450" fill="none" stroke="#D8E7DE" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 17"/></svg>
 </nav>
 <div class="map-legend"><span><b>▤</b> Learning</span><span><b>?</b> Question</span><span><b>✓</b> Completed</span></div>
 <div class="map-actions"><button class="nav primary" id="start-map" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small></div>
 </section>
 <section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
+<script src="./course.js"></script>
+<script src="./art.js"></script>
 <script>
-const artwork="<svg class=\"art hero-art\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 610 440\" role=\"img\" aria-label=\"Three faceless adult learners collaboratively assembling a large colourful learning puzzle\">\n<defs>\n<filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"180%\"><feGaussianBlur stdDeviation=\"6\"/></filter>\n<pattern id=\"grain\" width=\"13\" height=\"13\" patternUnits=\"userSpaceOnUse\"><circle cx=\"2\" cy=\"4\" r=\".75\" fill=\"#8E7063\" opacity=\".3\"/><circle cx=\"9\" cy=\"10\" r=\".65\" fill=\"#8E7063\" opacity=\".22\"/></pattern>\n</defs>\n<path d=\"M112 100Q239 21 410 78Q531 114 524 273Q500 387 294 387Q112 370 83 244Q61 159 112 100Z\" fill=\"#EDF5F2\"/>\n<ellipse cx=\"305\" cy=\"385\" rx=\"246\" ry=\"21\" fill=\"#B48E7B\" opacity=\".12\"/>\n<path d=\"M112 213L368 140L534 289L279 380Z\" fill=\"#6A463F\" opacity=\".17\" filter=\"url(#shadow)\" transform=\"translate(3 11)\"/>\n<path d=\"M112 213L368 140L534 289L279 380Z\" fill=\"#FFF7ED\" stroke=\"#E5D3C6\" stroke-width=\"2\"/>\n<path d=\"M144 236L371 168M171 272L401 203M207 315L443 245M250 350L485 282\" stroke=\"#DABBA7\" opacity=\".5\" stroke-width=\"2\"/>\n<g class=\"part part-experience\"><path d=\"M213 223L289 201Q304 225 322 217Q338 209 333 186L370 176L414 217L348 242Q341 264 322 269Q307 272 294 255L248 276Z\" fill=\"#F1794A\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"part part-autonomy\"><path d=\"M145 254L211 231L248 276L294 255Q307 272 322 269L351 306L260 337Z\" fill=\"#F0AF4B\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"part part-purpose\"><path d=\"M370 176L425 211L490 274L351 306L322 269Q341 264 348 242L414 217Z\" fill=\"#9FCFDE\" stroke=\"#FFF7ED\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g>\n<g class=\"person person-left\"><path d=\"M79 333Q46 314 45 279L61 215Q70 186 94 189L128 201Q145 219 147 255L148 322Z\" fill=\"#F27746\"/><path d=\"M78 185Q64 169 73 151Q84 129 113 134Q140 139 134 164Q130 182 114 191L110 205L82 198Z\" fill=\"#E3AA87\"/><path d=\"M72 162Q67 132 92 125Q127 115 138 146Q131 141 118 140Q107 157 91 153Q89 171 78 179Z\" fill=\"#75483C\"/><path d=\"M108 237L168 270L213 242\" fill=\"none\" stroke=\"#F27746\" stroke-width=\"30\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M208 238L220 235\" stroke=\"#E3AA87\" stroke-width=\"13\" stroke-linecap=\"round\"/><path d=\"M77 327L64 362L96 366L117 333M126 325L127 370L156 370L158 321\" fill=\"#6E514C\"/><path d=\"M90 197L107 199\" stroke=\"#FFF7ED\" stroke-width=\"8\" stroke-linecap=\"round\"/></g>\n<g class=\"person person-top\"><path d=\"M352 146Q337 114 345 83Q359 58 397 64Q431 78 433 118L437 158L414 192L362 179Z\" fill=\"#99CADD\"/><path d=\"M365 91Q364 70 384 67Q407 67 408 89Q408 111 386 119L376 123L366 107Z\" fill=\"#E6B18D\"/><path d=\"M363 84Q360 60 377 55Q402 48 416 71Q400 67 389 75Q381 82 363 84Z\" fill=\"#80513E\"/><path d=\"M408 121L445 144L415 181L387 166\" fill=\"#E5C4A2\"/><path d=\"M412 127L439 136L418 159L395 149Z\" fill=\"#FFF8ED\"/><path d=\"M346 158L328 191\" stroke=\"#99CADD\" stroke-width=\"25\" stroke-linecap=\"round\"/><path d=\"M325 190L315 195\" stroke=\"#E6B18D\" stroke-width=\"14\" stroke-linecap=\"round\"/></g>\n<g class=\"person person-right\"><path d=\"M429 347Q408 314 418 278Q427 256 449 246Q477 244 490 269L519 345Z\" fill=\"#D68464\"/><path d=\"M444 241Q432 219 446 204Q460 187 481 196Q496 209 486 228L475 243L473 260L447 259Z\" fill=\"#DFA789\"/><path d=\"M440 221Q435 193 454 187Q486 180 499 212Q489 208 483 202Q471 208 454 204Q453 224 440 234Z\" fill=\"#6D4039\"/><path d=\"M435 280L397 313L363 302\" fill=\"none\" stroke=\"#D68464\" stroke-width=\"23\" stroke-linecap=\"round\"/><path d=\"M360 301L348 302\" stroke=\"#DFA789\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M461 345L458 385L478 388L496 346\" fill=\"#674642\"/></g>\n<path d=\"M0 0h610v440H0Z\" fill=\"url(#grain)\" opacity=\".24\" pointer-events=\"none\"/>\n</svg>";
-const cards=[
-{k:"Welcome",word:"Welcome",h:"Learning fits together.",b:"Adult learning starts with people—not just content. Experience, autonomy and purpose combine to make learning meaningful."},
-{k:"Core principle",word:"Experience",h:"Experience is an asset.",b:"Adult learners bring prior clinical and personal experience. Effective teaching uses that experience rather than ignoring it."},
-{k:"Think and decide",word:"Choose",h:"Which activity is more learner-centred?",b:"Choose the approach that best uses the learner’s experience.",q:["A 40-minute lecture with no discussion","A clinical case where learners compare decisions with their own practice"],answer:1,why:"Correct. The clinical case activates prior experience and encourages reflection."},
-{k:"Apply it",word:"Relevance",h:"Make learning relevant.",b:"Connect each teaching activity to a real clinical problem the learner recognises. Explain why the skill matters now."},
-{k:"Knowledge check",word:"Diagnose",h:"What should come first?",b:"You are designing a session for experienced emergency residents.",q:["Find out what learners already know and need","Assume every learner is starting from zero"],answer:0,why:"Correct. Diagnosing prior knowledge and learning needs is a useful starting point."},
-{k:"Next steps",word:"Future",h:"Build on the foundations.",b:"This is a working preview, not the complete course. Next we can restore the approved artwork, develop the full curriculum, and add further interactions."}
-];
-
 let current=0,furthest=0;
 const completed=new Set(),answers=new Map();
 const $=id=>document.getElementById(id);
-const saveKey='simple-academy-andragogy-rebuild-v1';
+const saveKey='simple-academy-andragogy-foundations-v2';
 try{
  const stored=JSON.parse(localStorage.getItem(saveKey)||'null');
  if(stored&&typeof stored==='object'){
@@ -122,7 +149,11 @@ function renderMap(){
   const kind=c.q?'Question':'Learning';
   const status=!unlocked?'locked':i<furthest||completed.has(i)?'visited':'available';
   const btn=document.createElement('button');
-  btn.type='button';btn.className='stop '+status;btn.style.gridArea=String.fromCharCode(97+i);
+  btn.type='button';btn.className='stop '+status;
+  const dRow=Math.floor(i/4)+1, dCol=dRow%2 ? i%4+1 : 4-i%4;
+  const mRow=Math.floor(i/2)+1, mCol=mRow%2 ? i%2+1 : 2-i%2;
+  btn.style.setProperty('--d-row',dRow);btn.style.setProperty('--d-col',dCol);
+  btn.style.setProperty('--m-row',mRow);btn.style.setProperty('--m-col',mCol);
   btn.disabled=!unlocked;
   btn.setAttribute('aria-label',c.word+', '+kind.toLowerCase()+' card, '+(unlocked?'unlocked':'locked'));
   if(i===furthest)btn.setAttribute('aria-current','step');
@@ -146,21 +177,22 @@ function showCard(index){
 }
 function render(){
  const c=cards[current];
- $('kicker').textContent=c.k;$('heading').textContent=c.h;$('body').textContent=c.b;if(current===0){
-  $('visual').innerHTML='<figure class="hero-scene" aria-label="Illustration of adults joining a learning puzzle">'+artwork+'<figcaption class="art-caption">Experience · Autonomy · Purpose</figcaption></figure>';
-  $('interaction').replaceChildren();
+ $('kicker').textContent=c.k;$('heading').textContent=c.h;$('body').textContent=c.b;
+ document.querySelector('.card').classList.toggle('is-question',!!c.q);
+ $('visual').replaceChildren();$('interaction').replaceChildren();
+ if(current===0){
+  const figure=document.createElement('figure');figure.className='hero-scene';
+  figure.innerHTML=artFor(c.art)+'<figcaption class="art-caption">Experience · Autonomy · Purpose</figcaption>';
+  $('visual').appendChild(figure);
   const btn=document.createElement('button');btn.type='button';btn.className='illustration-play';
   btn.textContent='↻ Watch the pieces connect';
   btn.addEventListener('click',()=>{
-    const scene=$('visual').querySelector('.hero-scene');
-    scene.classList.add('replaying');
-    setTimeout(()=>{if(scene.isConnected)scene.classList.remove('replaying');},220);
+   if(figure.classList.contains('replaying'))figure.classList.remove('replaying');
+   void figure.offsetWidth;
+   figure.classList.add('replaying');
   });
   $('interaction').appendChild(btn);
- }else{
-  $('visual').innerHTML='<div class="concept-art" role="img" aria-label="A future concept-specific illustration"><span aria-hidden="true">✳</span><small>Illustration in development</small></div>';
-  $('interaction').replaceChildren();
- }
+ }else{$('visual').innerHTML='<div class="art-panel">'+artFor(c.art)+'</div>';}
  if(c.q){
   const wrap=document.createElement('div');wrap.className='choices';
   c.q.forEach((option,i)=>{
@@ -177,15 +209,14 @@ function render(){
      answers.set(current,i);completed.add(current);saveProgress();
      feedback.className='feedback good';feedback.textContent=c.why;
      wrap.querySelectorAll('button').forEach(b=>b.disabled=true);
-    }else{
-     feedback.className='feedback bad';feedback.textContent='Not quite. Try another option.';
-    }
+    }else{feedback.className='feedback bad';feedback.textContent=c.wrong||'Try another option.';}
     updateNav();
    });
    wrap.appendChild(btn);
   });
   $('interaction').appendChild(wrap);
-  const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';fb.setAttribute('role','status');
+  const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';
+  fb.setAttribute('role','status');fb.setAttribute('aria-live','polite');
   if(completed.has(current)){fb.className='feedback good';fb.textContent=c.why;}
   $('interaction').appendChild(fb);
  }
@@ -196,7 +227,7 @@ function updateNav(){
  cards.forEach((c,i)=>{
   const btn=document.createElement('button');btn.type='button';
   btn.className='milestone'+(i===current?' current':'')+(completed.has(i)?' complete':'');
-  btn.textContent=(c.q?'?':'▤')+(completed.has(i)?' ✓':'');
+  btn.textContent=c.q?'?':'▤'; if(completed.has(i))btn.textContent='✓';
   btn.title=(c.q?'Question: ':'Learning: ')+c.word;
   btn.setAttribute('aria-label',btn.title);
   if(i===current)btn.setAttribute('aria-current','step');
@@ -206,8 +237,8 @@ function updateNav(){
  });
  $('prev').disabled=false;
  $('prev').textContent=current===0?'← Map':'← Back';
- $('next').disabled=current===cards.length-1||(!!cards[current].q&&!completed.has(current));
- $('next').textContent=current===cards.length-1?'Finished ✓':'Next →';
+ $('next').disabled=!!cards[current].q&&!completed.has(current);
+ $('next').textContent=current===cards.length-1?'Finish ✓':'Next →';
  $('count').textContent='Card '+(current+1)+' of '+cards.length;
  $('fill').style.width=((current+1)/cards.length*100)+'%';
 }
@@ -217,7 +248,8 @@ function go(direction){
   showCard(current-1);return;
  }
  if(direction>0){
-  if(current===cards.length-1||(cards[current].q&&!completed.has(current)))return;
+  if(current===cards.length-1){showMap();return;}
+  if(cards[current].q&&!completed.has(current))return;
   const next=current+1;
   if(next>furthest){furthest=next;saveProgress();}
   showCard(next);
