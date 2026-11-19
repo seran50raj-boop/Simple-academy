@@ -107,6 +107,9 @@
 .approved-scene{display:flex;align-items:center;justify-content:center;flex-direction:column;max-width:480px;margin:auto}
 .approved-hero-img{width:min(100%,320px);height:auto;aspect-ratio:1;object-fit:contain;border-radius:18px}
 .approved-scene .art-caption{margin-top:14px}
+.approved-hero-img{animation:calmArtReveal .55s cubic-bezier(.2,.8,.2,1) both}
+@keyframes calmArtReveal{from{opacity:.45;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.approved-hero-img{animation:none!important}}
 @media(max-width:740px){.approved-hero-img{width:min(100%,300px)}}
 </style>
 <link rel="stylesheet" href="./map.css">
