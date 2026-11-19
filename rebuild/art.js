@@ -7,37 +7,6 @@ const svgDefs = `
   <pattern id="matteGrain" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r=".75" fill="#8F624C" opacity=".2"/><circle cx="12" cy="14" r=".6" fill="#8F624C" opacity=".18"/></pattern>
 </defs>`;
 const svgWrap = (body,label) => '<svg class="art editorial-art" viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+label+'">'+svgDefs+'<rect width="640" height="440" fill="#FFFFFF" />'+body+'<rect width="640" height="440" fill="url(#matteGrain)" opacity=".22" pointer-events="none"/></svg>';
-const face = (x,y,s,shirt,flip=false) => `
-<g transform="translate(${x} ${y}) scale(${flip?-s:s} ${s})">
- <path d="M35 160Q30 120 46 108Q60 97 76 97Q98 99 112 125L117 161L102 185H42Z" fill="${shirt}"/>
- <path d="M56 90L56 111Q70 126 86 111L85 90" fill="#E2AA88"/>
- <ellipse cx="72" cy="66" rx="34" ry="42" fill="#E8B492"/>
- <path d="M38 73Q26 43 43 24Q57 7 83 14Q109 23 107 54Q97 47 91 35Q73 44 53 40Q52 60 38 73Z" fill="#70463C"/>
- <path d="M43 162H106" stroke="#6D463D" stroke-width="3" opacity=".16"/>
-</g>`;
-const strokeArm = (path,color,skin) => '<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="23" stroke-linejoin="round" stroke-linecap="round"/>';
-const pieces = `
-<g class="part part-experience"><path d="M217 296L298 274Q313 255 331 272L347 267L374 306L298 329Q282 346 266 334L238 343Z" fill="#EF7445" stroke="#FFF5EB" stroke-width="4" stroke-linejoin="round"/></g>
-<g class="part part-autonomy"><path d="M238 343L266 334Q281 349 298 329L374 306L407 347L292 377Z" fill="#F4AF45" stroke="#FFF5EB" stroke-width="4" stroke-linejoin="round"/></g>
-<g class="part part-purpose"><path d="M298 274L389 252L462 323L407 347L374 306L347 267L331 272Q313 255 298 274Z" fill="#9CCDDD" stroke="#FFF5EB" stroke-width="4" stroke-linejoin="round"/></g>`;
-const puzzleScene = `
- <ellipse cx="332" cy="386" rx="238" ry="24" fill="#744F43" opacity=".1"/>
- <path d="M104 181Q174 66 324 87Q510 73 536 230L550 356H105Z" fill="#EAF5EF"/>
- ${face(60,138,.9,'#EE7546',false)}
- ${face(625,139,.9,'#CE8564',true)}
- ${face(264,38,.82,'#9BCDDC',false)}
- <!-- Hands and sleeves are continuous from visible shoulders to the board. The board masks all hips/legs. -->
- ${strokeArm('M147 259Q180 271 215 294','#EE7546')}
- <path d="M210 291Q223 288 233 298Q230 307 216 310Z" fill="#E8B492"/>
- ${strokeArm('M541 259Q528 284 497 303','#CE8564')}
- <path d="M491 301Q502 293 509 302Q502 313 493 314Z" fill="#E8B492"/>
- ${strokeArm('M351 177Q370 195 379 235','#9BCDDC')}
- <path d="M370 232Q380 226 389 238Q384 248 373 245Z" fill="#E8B492"/>
- <!-- Foreground board establishes occlusion and makes the standing poses coherent. -->
- <path d="M172 292L395 234L533 338L304 405Z" fill="#FFF5EB" stroke="#E6D4C4" stroke-width="3" filter="url(#paperShadow)"/>
- <path d="M210 303L395 256L486 332L299 381Z" fill="#FAE7D4"/>
- ${pieces}
- <path d="M130 350l18-6M495 373l17 1" stroke="#744F43" stroke-width="3" stroke-linecap="round" opacity=".22"/>`;
 const iconCard = (x,y,w,h,fill,inside) => `<g filter="url(#paperShadow)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="19" fill="${fill}"/>${inside}</g>`;
 const scenes = {
  journey: () => `
@@ -140,9 +109,8 @@ const scenes = {
   <path d="M215 340H424" stroke="#CA8370" stroke-width="8" stroke-linecap="round"/> `
 };
 function artFor(key){
- const scene=key==='puzzle'?puzzleScene:(scenes[key]||scenes.summary)();
+ const scene=(scenes[key]||scenes.summary)();
  const labels={
-  puzzle:'Faceless adult learners standing together and assembling three pieces of a learning puzzle',
   experience:'Different experiences represented by three brightly coloured learning cards',
   journey:'Different learning paths with clear learning waypoints',
   guidance:'An educator-guided pathway with several choices',
