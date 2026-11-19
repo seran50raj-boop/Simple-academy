@@ -44,7 +44,7 @@
  bottom:-5px;right:-8px;width:21px;height:21px;font-size:.72rem;
  background:#14877C;color:#fff;
 }
-.route-grid .stop:disabled .map-symbol{filter:saturate(.52);opacity:.75}
+.route-grid .stop:disabled .map-symbol{filter:saturate(.78);opacity:.85}
 .route-grid .stop:disabled .question-corner{background:#A6B6B0;opacity:.84}
 .route-grid .stop.available .stop-marker{box-shadow:0 0 0 5px rgba(17,139,122,.1),0 5px 12px rgba(72,78,70,.09)}
 @media(max-width:740px){
