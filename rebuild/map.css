@@ -19,3 +19,38 @@
  .route-grid .stop-marker{width:62px;height:62px;flex-basis:62px}
  .route-grid .stop-word{font-size:.91rem}
 }
+
+/* Concept-specific editorial symbols, with question/completion states kept outside
+   their artwork. Icons remain centered on the exact route coordinates. */
+.route-grid .stop-marker{
+ position:relative;display:grid;place-items:center;overflow:visible;
+ box-shadow:0 5px 12px rgba(72,78,70,.09);
+}
+.route-grid .map-symbol{
+ display:block;width:43px;height:43px;max-width:75%;max-height:75%;
+ flex:none;filter:drop-shadow(0 1px 0 rgba(80,52,44,.08));
+}
+.route-grid .question-corner,
+.route-grid .completion-corner{
+ position:absolute;display:grid;place-items:center;border:2px solid white;
+ border-radius:50%;font-family:"Segoe UI",system-ui,sans-serif;font-weight:800;
+ line-height:1;box-shadow:0 1px 3px rgba(51,61,57,.16);
+}
+.route-grid .question-corner{
+ top:-6px;right:-8px;width:21px;height:21px;font-size:.78rem;
+ background:#D66D54;color:#fff;
+}
+.route-grid .completion-corner{
+ bottom:-5px;right:-8px;width:21px;height:21px;font-size:.72rem;
+ background:#14877C;color:#fff;
+}
+.route-grid .stop:disabled .map-symbol{filter:grayscale(1);opacity:.47}
+.route-grid .stop:disabled .question-corner{background:#A6B6B0;opacity:.84}
+.route-grid .stop.available .stop-marker{box-shadow:0 0 0 5px rgba(17,139,122,.1),0 5px 12px rgba(72,78,70,.09)}
+@media(max-width:740px){
+ .route-grid .map-symbol{width:39px;height:39px}
+ .route-grid .question-corner{top:-6px;right:-8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .route-grid .map-symbol{transition:none}
+}
