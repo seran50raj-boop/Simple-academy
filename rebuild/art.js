@@ -40,6 +40,15 @@ const puzzleScene = `
  <path d="M130 350l18-6M495 373l17 1" stroke="#744F43" stroke-width="3" stroke-linecap="round" opacity=".22"/>`;
 const iconCard = (x,y,w,h,fill,inside) => `<g filter="url(#paperShadow)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="19" fill="${fill}"/>${inside}</g>`;
 const scenes = {
+ journey: () => `
+  <path d="M89 352Q165 62 329 107Q468 115 538 328" fill="none" stroke="#E8F4EF" stroke-width="84" stroke-linecap="round"/>
+  <path d="M111 343Q183 161 329 202Q456 219 515 323" fill="none" stroke="#D8906A" stroke-width="8" stroke-dasharray="14 19" stroke-linecap="round"/>
+  <circle cx="117" cy="332" r="40" fill="#EA7950"/>
+  <circle cx="328" cy="198" r="44" fill="#9BCAD9"/>
+  <circle cx="520" cy="324" r="43" fill="#F0AD4A"/>
+  <path d="M96 335l14 14 24-31M308 199l13 14 24-31M500 324l13 14 24-31" stroke="#FFF7ED" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="328" cy="75" r="25" fill="#EAB58E"/><path d="M302 119Q325 100 352 119L363 150H295Z" fill="#85B5BB"/>
+  <path d="M312 148L302 174M344 148l12 28" stroke="#85B5BB" stroke-width="13" stroke-linecap="round"/> `,
  experience: () => `
   <path d="M107 137Q247 30 469 139Q536 197 506 349H103Z" fill="#E8F5F0"/>
   ${iconCard(94,115,135,188,'#F2AB44','<path d="M123 170h78m-78 24h52m-52 24h65" stroke="#FFF8EE" stroke-width="8" stroke-linecap="round"/>')}
