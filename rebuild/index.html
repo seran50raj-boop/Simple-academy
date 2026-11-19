@@ -102,6 +102,12 @@
 @media(prefers-reduced-motion:reduce){
  .hero-scene.replaying .part-experience,.hero-scene.replaying .part-autonomy,.hero-scene.replaying .part-purpose{animation:none!important}
 }
+
+/* Faceless editorial concept asset replaces the unapproved anatomically distorted SVG figures. */
+.approved-scene{display:flex;align-items:center;justify-content:center;flex-direction:column;max-width:480px;margin:auto}
+.approved-hero-img{width:min(100%,390px);height:auto;aspect-ratio:1;object-fit:contain;border-radius:18px}
+.approved-scene .art-caption{margin-top:14px}
+@media(max-width:740px){.approved-hero-img{width:min(100%,340px)}}
 </style>
 <link rel="stylesheet" href="./map.css">
 </head>
@@ -121,6 +127,7 @@
 <section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script src="./course.js"></script>
 <script src="./art.js"></script>
+<script src="./approved-hero.js"></script>
 <script src="./map.js"></script>
 <script>
 let current=0,furthest=0;
@@ -163,17 +170,19 @@ function render(){
  document.querySelector('.card').classList.toggle('is-question',!!c.q);
  $('visual').replaceChildren();$('interaction').replaceChildren();
  if(current===0){
-  const figure=document.createElement('figure');figure.className='hero-scene';
-  figure.innerHTML=artFor(c.art)+'<figcaption class="art-caption">Experience · Autonomy · Purpose</figcaption>';
+  const figure=document.createElement('figure');
+  figure.className='hero-scene approved-scene';
+  const picture=document.createElement('img');
+  picture.className='approved-hero-img';
+  picture.src=approvedHeroImage;
+  picture.alt='Minimal faceless editorial illustration of a healthcare educator presenting adult learning concepts';
+  picture.width=288;picture.height=288;
+  figure.appendChild(picture);
+  const caption=document.createElement('figcaption');
+  caption.className='art-caption';
+  caption.textContent='Experience · Autonomy · Purpose';
+  figure.appendChild(caption);
   $('visual').appendChild(figure);
-  const btn=document.createElement('button');btn.type='button';btn.className='illustration-play';
-  btn.textContent='↻ Watch the pieces connect';
-  btn.addEventListener('click',()=>{
-   if(figure.classList.contains('replaying'))figure.classList.remove('replaying');
-   void figure.offsetWidth;
-   figure.classList.add('replaying');
-  });
-  $('interaction').appendChild(btn);
  }else{$('visual').innerHTML='<div class="art-panel">'+artFor(c.art)+'</div>';}
  if(c.q){
   const wrap=document.createElement('div');wrap.className='choices';
