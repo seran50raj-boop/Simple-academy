@@ -47,16 +47,16 @@ test('mobile layout, reachable map and card-one replay',async({page})=>{
   fs.mkdirSync(capture,{recursive:true});
   await page.screenshot({path:path.join(capture,'card1-mobile.png'),fullPage:true});
 });
-test('all 14 vector artworks are distinct and parse as SVG',async({page})=>{
+test('13 SVG concepts are distinct and valid; card 1 uses the reviewed editorial illustration',async({page})=>{
  const result=await page.evaluate(()=>{
-  return cards.map((c,i)=>{
+  return cards.slice(1).map((c,i)=>{
    const svg=artFor(c.art);const doc=new DOMParser().parseFromString(svg,'image/svg+xml');
    return {i,ok:doc.documentElement.nodeName==='svg'&&!doc.querySelector('parsererror'),label:doc.documentElement.getAttribute('aria-label'),svg};
   });
  });
- expect(result).toHaveLength(14);
+ expect(result).toHaveLength(13);
  expect(result.every(r=>r.ok&&r.label)).toBe(true);
- expect(new Set(result.map(r=>r.svg)).size).toBe(14);
+ expect(new Set(result.map(r=>r.svg)).size).toBe(13);
 });
 
 test('route passes exactly through every marker centre on desktop and mobile',async({page})=>{
