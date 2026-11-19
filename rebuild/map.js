@@ -9,10 +9,14 @@ function renderCourseMap(nav,cards,furthest,go){
   for(let i=1;i<pts.length;i++){
     const a=pts[i-1],b=pts[i];
     if(Math.abs(a.x-b.x)<.001&&b.y>a.y){
-      const outside=a.x>50?10:-10;
-      const bend=a.x+outside,dy=b.y-a.y;
-      d+=' C'+(bend*10).toFixed(3)+' '+((a.y+.23*dy)*10).toFixed(3);
-      d+=' '+(bend*10).toFixed(3)+' '+((b.y-.23*dy)*10).toFixed(3)+' '+coord(b);
+      const sign=a.x>50?1:-1,offset=pts[0].x>15?16:10,turn=a.x+sign*offset;
+      const approach=turn-sign*2.6,round=2.6;
+      const p=(x,y)=>(x*10).toFixed(3)+' '+(y*10).toFixed(3);
+      d+=' L'+p(approach,a.y);
+      d+=' Q'+p(turn,a.y)+' '+p(turn,a.y+round);
+      d+=' L'+p(turn,b.y-round);
+      d+=' Q'+p(turn,b.y)+' '+p(approach,b.y);
+      d+=' L'+coord(b);
     }else d+=' L'+coord(b);
   }
   return d;
