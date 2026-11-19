@@ -1,0 +1,21 @@
+/* Route and marker centre use the same percent coordinates; no independently drawn lines. */
+.route-grid{position:relative;display:block!important;height:620px;max-width:940px;margin:26px auto 24px;overflow:visible;isolation:isolate}
+.aligned-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.aligned-route-mobile{display:none}
+.route-grid .stop{position:absolute;grid-area:auto!important;grid-row:auto!important;grid-column:auto!important;
+ left:var(--desktop-x);top:var(--desktop-y);transform:translate(-50%,-34px);
+ width:142px;height:118px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+ padding:0;gap:5px;z-index:1;background:transparent;border:0;overflow:visible}
+.route-grid .stop:not(:disabled):hover{transform:translate(-50%,-37px)}
+.route-grid .stop-marker{height:68px;width:68px;flex:0 0 68px;background:#fff;border-radius:50%}
+.route-grid .stop-word{font-size:clamp(.83rem,1.2vw,1rem);line-height:1.2;max-width:140px;text-align:center}
+.route-grid .stop-kind{font-size:.67rem;line-height:1.1}
+.route-grid .stop.locked .stop-marker{background:#F8FAF8}
+@media(max-width:740px){
+ .route-grid{height:900px;max-width:100%;margin:14px auto 22px}
+ .aligned-route-desktop{display:none}.aligned-route-mobile{display:block}
+ .route-grid .stop{left:var(--mobile-x);top:var(--mobile-y);transform:translate(-50%,-31px);width:145px;height:106px}
+ .route-grid .stop:not(:disabled):hover{transform:translate(-50%,-31px)}
+ .route-grid .stop-marker{width:62px;height:62px;flex-basis:62px}
+ .route-grid .stop-word{font-size:.91rem}
+}
