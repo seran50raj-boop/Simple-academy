@@ -3,7 +3,20 @@ function renderCourseMap(nav,cards,furthest,go){
  const ns='http://www.w3.org/2000/svg';
  const desktop=cards.map((_,i)=>{const row=Math.floor(i/4),col=row%2?3-i%4:i%4;return{x:12+col*(76/3),y:10+row*25}});
  const mobile=cards.map((_,i)=>{const row=Math.floor(i/2),col=row%2?1-i%2:i%2;return{x:col?76:24,y:6.8+row*14.4}});
- const pathData=pts=>pts.map((p,i)=>(i?'L':'M')+(p.x*10).toFixed(3)+' '+(p.y*10).toFixed(3)).join(' ');
+ const pathData=pts=>{
+  const coord=p=>[(p.x*10).toFixed(3),(p.y*10).toFixed(3)].join(' ');
+  let d='M'+coord(pts[0]);
+  for(let i=1;i<pts.length;i++){
+    const a=pts[i-1],b=pts[i];
+    if(Math.abs(a.x-b.x)<.001&&b.y>a.y){
+      const outside=a.x>50?10:-10;
+      const bend=a.x+outside,dy=b.y-a.y;
+      d+=' C'+(bend*10).toFixed(3)+' '+((a.y+.23*dy)*10).toFixed(3);
+      d+=' '+(bend*10).toFixed(3)+' '+((b.y-.23*dy)*10).toFixed(3)+' '+coord(b);
+    }else d+=' L'+coord(b);
+  }
+  return d;
+ };
  const svg=document.createElementNS(ns,'svg');
  svg.setAttribute('class','aligned-route');
  svg.setAttribute('viewBox','0 0 1000 1000');
