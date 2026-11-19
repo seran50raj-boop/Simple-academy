@@ -15,24 +15,24 @@ This branch preserves the existing main-branch application untouched. The new pr
 5. Separate course content, rendering components, styles, and assets as the project grows.
 6. Preserve original main and deploy only after browser/device verification.
 
-## First prototype
-- `rebuild/index.html`: six-card Andragogy interaction proof of concept.
-- Uses a *temporary* vector illustration; not claimed to be the approved signature asset.
-- Two interactive knowledge checks; no progress past an unanswered check.
-- No production deployment or replacement of `index.html`.
+## Foundations milestone — 19 November 2026
 
-## Next milestones
-1. Audit and visually compare original approved illustrations in Git history.
-2. Extract/verify full existing Andragogy content and learning objectives.
-3. Implement reusable card types: explanation, illustration, yes/no, multiple choice, matching, ordering, reflection.
-4. Build course map for Andragogy, Kolb and RCDP; define question completion rules.
-5. Add automated checks and mobile browser testing.
-6. Replace production entry point only after explicit review and approval.
+- **Recovered the original 14-card Foundations sequence** from the previous main-branch course, including six mandatory Yes/No question cards and their original correct-answer rationale.
+- Separated curriculum content (`course.js`) and visual scenes (`art.js`) from the app shell (`index.html`).
+- Added **14 distinct concept-specific SVG illustrations**, with question-card artwork visually separate from explanation cards.
+- Improved Card 1's faceless collaboration illustration after manually rendering the exact SVG and identifying a detached right arm. The updated artwork places characters more consistently and keeps hidden lower bodies behind the shared board; this is not certification of the full illustration set.
+- Expanded the pre-course route map to 14 one-word markers in a winding 4-column desktop / 2-column mobile layout.
+- Preserved bottom card-type markers, backward navigation, saved correct answers, and forward gating at mandatory questions.
+- Added a local test server, Playwright browser checks, and GitHub Actions workflow. Automated test status must be verified from the workflow run; source syntax checks alone do not establish browser correctness.
 
-## Card 1 visual prototype (18 November 2026)
-- Implemented a unique, faceless editorial SVG illustration for **Welcome / Learning fits together**: three adult learners and three independent jigsaw shapes.
-- Palette: warm orange, mustard, sky blue, cream, soft neutral shadows, and restrained stippled grain; no facial features.
-- Click **Watch the pieces connect** to replay the actual SVG piece translations.
-- Moved type-specific card indicators into the persistent bottom navigation; retained one-word course map and forward question gating/backward freedom.
-- The remaining cards intentionally display an *illustration in development* placeholder rather than recycling the rejected artwork.
-- JavaScript was syntax-checked; a standalone rendering/layout approximation was inspected on desktop and mobile. **Full repository browser-flow testing and live deployment are still pending.**
+### Visual quality gate
+
+Before declaring any course art ready, **render and review the image** at desktop and phone card sizes. Check head/neck, shoulder/arm connection, elbow/wrist direction, hands/object contact, pelvis/legs if exposed, occlusion, physical balance, and consistent stroke/colour/shadow style. Avoid hidden or ambiguous joints that imply extra or detached limbs. Do not ship distorted anatomy.
+
+### Still outstanding
+
+- Confirm GitHub Actions Chromium tests have passed and inspect browser screenshots.
+- Manually inspect the remaining 13 artworks at actual card size (source-level SVG validation is not visual inspection).
+- Review all restored educational wording and implications before release; no live deployment has been made.
+- Add broader learning modules (Assumptions, Kolb, RCDP) and further exercise types after Foundations is validated.
+- Keep production `main` intact until user approval and successful quality checks.
