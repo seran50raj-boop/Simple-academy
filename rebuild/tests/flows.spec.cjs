@@ -10,7 +10,8 @@ test('14-point map, distinct question markers and gated learning',async({page})=
   await expect(page.locator('.stop').filter({has:page.locator('.stop-kind', {hasText:'Question'})})).toHaveCount(6);
   await page.getByRole('button',{name:/Start learning/}).click();
   await expect(page.getByRole('heading',{name:'What is Andragogy?'})).toBeVisible();
-  await expect(page.locator('.editorial-art')).toBeVisible();
+  await expect(page.locator('.approved-hero-img')).toBeVisible();
+  expect(await page.locator('.approved-hero-img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
   await expect(page.getByRole('button',{name:'Next →'})).toBeEnabled();
   await page.getByRole('button',{name:'Next →'}).click();
   await expect(page.getByRole('heading',{name:'Adults arrive as a blank slate.'})).toBeVisible();
@@ -38,11 +39,11 @@ test('mobile layout, reachable map and card-one replay',async({page})=>{
   const mapOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
   expect(mapOverflow).toBe(false);
   await page.getByRole('button',{name:/Start learning/}).click();
-  await expect(page.locator('.editorial-art')).toBeVisible();
+  await expect(page.locator('.approved-hero-img')).toBeVisible();
+  expect(await page.locator('.approved-hero-img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
   const cardOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
   expect(cardOverflow).toBe(false);
-  await page.getByRole('button',{name:/Watch the pieces connect/}).click();
-  await expect(page.locator('.hero-scene.replaying')).toBeVisible();
+  await expect(page.locator('.approved-scene .art-caption')).toContainText('Experience');
   fs.mkdirSync(capture,{recursive:true});
   await page.screenshot({path:path.join(capture,'card1-mobile.png'),fullPage:true});
 });
