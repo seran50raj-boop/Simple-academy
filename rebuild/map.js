@@ -1,5 +1,5 @@
 /* Single coordinate source for route and markers: exact alignment on all screen widths. */
-function renderCourseMap(nav,cards,furthest,go){
+function renderCourseMap(nav,cards,furthest,completed,go){
  const ns='http://www.w3.org/2000/svg';
  const desktop=cards.map((_,i)=>{const row=Math.floor(i/4),col=row%2?3-i%4:i%4;return{x:12+col*(76/3),y:10+row*25}});
  const mobile=cards.map((_,i)=>{const row=Math.floor(i/2),col=row%2?1-i%2:i%2;return{x:col?76:24,y:6.8+row*14.4}});
@@ -39,7 +39,7 @@ function renderCourseMap(nav,cards,furthest,go){
  }
  nav.replaceChildren(svg);
  cards.forEach((c,i)=>{
-  const unlocked=i<=furthest,status=!unlocked?'locked':i<furthest?'visited':'available';
+  const unlocked=i<=furthest,isComplete=i<furthest||completed.has(i),status=!unlocked?'locked':isComplete?'visited':'available';
   const btn=document.createElement('button');
   btn.type='button';btn.className='stop '+status;btn.disabled=!unlocked;
   btn.style.setProperty('--desktop-x',desktop[i].x+'%');
@@ -49,7 +49,10 @@ function renderCourseMap(nav,cards,furthest,go){
   btn.setAttribute('aria-label',c.word+', '+(c.q?'question':'learning')+' card, '+(unlocked?'unlocked':'locked'));
   if(i===furthest)btn.setAttribute('aria-current','step');
   const marker=document.createElement('span');marker.className='stop-marker';
-  marker.textContent=c.q?'?':'▤';marker.setAttribute('aria-hidden','true');
+  marker.setAttribute('aria-hidden','true');
+  marker.innerHTML=mapIcon(c.word);
+  if(c.q){const q=document.createElement('span');q.className='question-corner';q.textContent='?';marker.appendChild(q);}
+  if(isComplete){const done=document.createElement('span');done.className='completion-corner';done.textContent='✓';marker.appendChild(done);}
   const label=document.createElement('span');label.className='stop-word';label.textContent=c.word;
   const kind=document.createElement('span');kind.className='stop-kind';kind.textContent=c.q?'Question':'Learning';
   btn.append(marker,label,kind);btn.addEventListener('click',()=>go(i));nav.append(btn);
