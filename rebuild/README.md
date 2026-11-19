@@ -36,3 +36,13 @@ Before declaring any course art ready, **render and review the image** at deskto
 - Review all restored educational wording and implications before release; no live deployment has been made.
 - Add broader learning modules (Assumptions, Kolb, RCDP) and further exercise types after Foundations is validated.
 - Keep production `main` intact until user approval and successful quality checks.
+
+## Map-alignment and artwork reset — 19 November 2026
+
+- **Replaced static mismatched route SVGs and CSS grid positioning.** `map.js` now computes one ordered set of coordinates per breakpoint and uses those exact numbers for SVG route vertices and button centres. The route detours around labels between rows rather than crossing the label text.
+- Added a Playwright assertion that every marker centre is within 1.5 CSS pixels of the corresponding route anchor at 1320px desktop and 390px mobile widths. This checks DOM geometry rather than only a screenshot.
+- **Discarded the anatomically distorted, hand-coded Card 1 puzzle figures** from `art.js`; they are no longer part of the course.
+- Card 1 now uses an embedded **small, static image derived from the earlier flat faceless educational illustration the user preferred**, with vibrant warm/cool colours and soft matte texture. The original user-supplied group/puzzle reference remains the broader style benchmark. This is **a visual-direction sample, not a final production-quality custom illustration**.
+- A restrained entry fade preserves static character anatomy. No simulated body-part movement or false "interactive puzzle" control.
+- The 13 remaining cards use individual SVG illustrations; each still requires case-by-case human visual QA, especially any human anatomy.
+- Production remains untouched. Do not merge until the user has reviewed Card 1's actual appearance and the complete illustration set is checked.
