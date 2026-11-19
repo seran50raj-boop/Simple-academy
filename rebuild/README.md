@@ -46,3 +46,13 @@ Before declaring any course art ready, **render and review the image** at deskto
 - A restrained entry fade preserves static character anatomy. No simulated body-part movement or false "interactive puzzle" control.
 - The 13 remaining cards use individual SVG illustrations; each still requires case-by-case human visual QA, especially any human anatomy.
 - Production remains untouched. Do not merge until the user has reviewed Card 1's actual appearance and the complete illustration set is checked.
+
+## Illustrated course map — 19 November 2026
+
+- Added `map-icons.js` with **14 hand-built, concept-specific SVG symbols**, one per one-word card marker (Andragogy, Experience, Learner, Guidance, Assumptions, Safety, Meaning, History, Knowles, Spectrum, Structure, Simulation, Pathways, Remember).
+- Icons use the warm flat-vector colour system and deliberately simple, anatomy-free metaphors (no complex faces, hands or limbs in tiny markers).
+- Small question accent badges differentiate the six question stops without sacrificing their subject icons. A separate check badge marks completed stops.
+- Locked destinations remain visibly muted and non-interactive, while their imagery remains recognisable.
+- **Marker centres and dotted-path anchors continue to share exact coordinates** on desktop and mobile, and the forward answer gate and unrestricted backward navigation remain unchanged.
+- Added Playwright checks for icon count, 14 distinct SVGs, six question accents, saved completion states, responsive no-overflow and 1.5px path alignment.
+- Before approval: inspect the final browser-rendered illustrated map and verify contrast, icon recognition, visual consistency and mobile labels. The design should not be considered approved solely because tests pass.
