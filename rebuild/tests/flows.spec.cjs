@@ -87,3 +87,35 @@ test('route passes exactly through every marker centre on desktop and mobile',as
   await page.screenshot({path:path.join(capture,'map-'+width+'.png'),fullPage:true});
  }
 });
+
+test('map icons are concept-specific, accessible and separate from progress badges',async({page})=>{
+ await expect(page.locator('.route-grid .map-symbol')).toHaveCount(14);
+ await expect(page.locator('.route-grid .question-corner')).toHaveCount(6);
+ await expect(page.locator('.route-grid .completion-corner')).toHaveCount(0);
+ const symbols=await page.locator('.route-grid .map-symbol').evaluateAll(elements=>elements.map(el=>el.outerHTML));
+ expect(new Set(symbols).size).toBe(14);
+ const titles=await page.locator('.route-grid .stop').evaluateAll(elements=>elements.map(btn=>btn.getAttribute('aria-label')));
+ expect(titles[0]).toContain('Andragogy, learning card');
+ expect(titles[1]).toContain('Experience, question card');
+ expect(titles[11]).toContain('Simulation, learning card');
+ const iconSize=await page.locator('.route-grid .map-symbol').first().boundingBox();
+ expect(iconSize.width).toBeGreaterThanOrEqual(38);
+ await page.getByRole('button',{name:/Start learning/}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await page.getByRole('button',{name:'No',exact:true}).click();
+ await page.getByRole('button',{name:'Course map'}).click();
+ await expect(page.locator('.route-grid .completion-corner')).toHaveCount(2);
+ for(const [width,height] of [[1320,900],[390,844]]){
+  await page.setViewportSize({width,height});
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
+  expect(overflow).toBe(false);
+  const mapping=await page.locator('.route-grid .stop').evaluateAll(btns=>btns.map(btn=>({
+   hasIcon:!!btn.querySelector('svg.map-symbol'),
+   label:btn.querySelector('.stop-word')?.textContent,
+   iconWidth:btn.querySelector('svg.map-symbol')?.getBoundingClientRect().width
+  })));
+  expect(mapping.every(row=>row.hasIcon&&row.label&&row.iconWidth>=37)).toBe(true);
+  fs.mkdirSync(capture,{recursive:true});
+  await page.screenshot({path:path.join(capture,'illustrated-map-'+width+'.png'),fullPage:true});
+ }
+});
