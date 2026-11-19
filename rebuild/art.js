@@ -24,15 +24,15 @@ const puzzleScene = `
  <ellipse cx="332" cy="386" rx="238" ry="24" fill="#744F43" opacity=".1"/>
  <path d="M104 181Q174 66 324 87Q510 73 536 230L550 356H105Z" fill="#EAF5EF"/>
  ${face(60,138,.9,'#EE7546',false)}
- ${face(452,139,.9,'#CE8564',true)}
+ ${face(625,139,.9,'#CE8564',true)}
  ${face(264,38,.82,'#9BCDDC',false)}
  <!-- Hands and sleeves are continuous from visible shoulders to the board. The board masks all hips/legs. -->
  ${strokeArm('M147 259Q180 271 215 294','#EE7546')}
  <path d="M210 291Q223 288 233 298Q230 307 216 310Z" fill="#E8B492"/>
- ${strokeArm('M489 258Q466 278 451 302','#CE8564')}
- <path d="M440 299Q448 292 458 300Q457 314 447 316Z" fill="#E8B492"/>
- ${strokeArm('M344 177Q345 213 352 244','#9BCDDC')}
- <path d="M342 243Q353 238 361 248Q355 260 345 256Z" fill="#E8B492"/>
+ ${strokeArm('M541 259Q528 284 497 303','#CE8564')}
+ <path d="M491 301Q502 293 509 302Q502 313 493 314Z" fill="#E8B492"/>
+ ${strokeArm('M351 177Q370 195 379 235','#9BCDDC')}
+ <path d="M370 232Q380 226 389 238Q384 248 373 245Z" fill="#E8B492"/>
  <!-- Foreground board establishes occlusion and makes the standing poses coherent. -->
  <path d="M172 292L395 234L533 338L304 405Z" fill="#FFF5EB" stroke="#E6D4C4" stroke-width="3" filter="url(#paperShadow)"/>
  <path d="M210 303L395 256L486 332L299 381Z" fill="#FAE7D4"/>
