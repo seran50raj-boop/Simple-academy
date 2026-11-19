@@ -103,6 +103,7 @@
  .hero-scene.replaying .part-experience,.hero-scene.replaying .part-autonomy,.hero-scene.replaying .part-purpose{animation:none!important}
 }
 </style>
+<link rel="stylesheet" href="./map.css">
 </head>
 <body>
 <div class="shell"><header class="top"><div class="brand">SIM<span>ple</span> Academy</div><div class="header-actions"><div class="unit">Module 1 · Foundations of Andragogy</div><button class="map-link" id="map-link" type="button" hidden>Course map</button></div></header><main class="main">
@@ -120,6 +121,7 @@
 <section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script src="./course.js"></script>
 <script src="./art.js"></script>
+<script src="./map.js"></script>
 <script>
 let current=0,furthest=0;
 const completed=new Set(),answers=new Map();
@@ -142,27 +144,7 @@ function saveProgress(){
  try{localStorage.setItem(saveKey,JSON.stringify({furthest,answers:[...answers]}));}catch(error){}
 }
 function renderMap(){
- const nav=$('route-grid');
- nav.querySelectorAll('.stop').forEach(node=>node.remove());
- cards.forEach((c,i)=>{
-  const unlocked=i<=furthest;
-  const kind=c.q?'Question':'Learning';
-  const status=!unlocked?'locked':i<furthest||completed.has(i)?'visited':'available';
-  const btn=document.createElement('button');
-  btn.type='button';btn.className='stop '+status;
-  const dRow=Math.floor(i/4)+1, dCol=dRow%2 ? i%4+1 : 4-i%4;
-  const mRow=Math.floor(i/2)+1, mCol=mRow%2 ? i%2+1 : 2-i%2;
-  btn.style.setProperty('--d-row',dRow);btn.style.setProperty('--d-col',dCol);
-  btn.style.setProperty('--m-row',mRow);btn.style.setProperty('--m-col',mCol);
-  btn.disabled=!unlocked;
-  btn.setAttribute('aria-label',c.word+', '+kind.toLowerCase()+' card, '+(unlocked?'unlocked':'locked'));
-  if(i===furthest)btn.setAttribute('aria-current','step');
-  const marker=document.createElement('span');marker.className='stop-marker';marker.textContent=completed.has(i)?'✓':(c.q?'?':'▤');
-  const name=document.createElement('span');name.className='stop-word';name.textContent=c.word;
-  const category=document.createElement('span');category.className='stop-kind';category.textContent=kind;
-  btn.append(marker,name,category);
-  btn.addEventListener('click',()=>showCard(i));nav.appendChild(btn);
- });
+ renderCourseMap($('route-grid'),cards,furthest,showCard);
  $('start-map').textContent=furthest?'Continue learning →':'Start learning →';
  $('map-summary').textContent=(furthest+1)+' of '+cards.length+' cards unlocked';
 }
