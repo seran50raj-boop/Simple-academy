@@ -57,3 +57,32 @@ test('all 14 vector artworks are distinct and parse as SVG',async({page})=>{
  expect(result.every(r=>r.ok&&r.label)).toBe(true);
  expect(new Set(result.map(r=>r.svg)).size).toBe(14);
 });
+
+test('route passes exactly through every marker centre on desktop and mobile',async({page})=>{
+ for(const [width,height] of [[1320,900],[390,844]]){
+  await page.setViewportSize({width,height});
+  await page.reload();
+  const distances=await page.evaluate(()=>{
+   const mobile=matchMedia('(max-width:740px)').matches;
+   const cls=mobile?'.aligned-route-mobile':'.aligned-route-desktop';
+   const path=document.querySelector(cls);
+   const svg=path.ownerSVGElement;
+   const svgBox=svg.getBoundingClientRect();
+   const coords=cards.map((_,i)=>{
+    const row=Math.floor(i/(mobile?2:4));
+    const col=mobile?(row%2?1-i%2:i%2):(row%2?3-i%4:i%4);
+    return mobile?{x:col?76:24,y:6.8+row*14.4}:{x:12+col*(76/3),y:10+row*25};
+   });
+   return [...document.querySelectorAll('.stop-marker')].map((marker,i)=>{
+    const rect=marker.getBoundingClientRect(),point=coords[i];
+    const expectedX=svgBox.left+point.x/100*svgBox.width;
+    const expectedY=svgBox.top+point.y/100*svgBox.height;
+    const actualX=rect.left+rect.width/2,actualY=rect.top+rect.height/2;
+    return Math.hypot(actualX-expectedX,actualY-expectedY);
+   });
+  });
+  expect(Math.max(...distances),'Route/marker mismatch at '+width+'px').toBeLessThan(1.5);
+  fs.mkdirSync(capture,{recursive:true});
+  await page.screenshot({path:path.join(capture,'map-'+width+'.png'),fullPage:true});
+ }
+});
