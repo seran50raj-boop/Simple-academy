@@ -68,7 +68,8 @@ function renderAndragogyMotion(container,interaction){
  }
  replay.addEventListener('click',playFromStart);
  toggle.addEventListener('click',()=>{
-  if(video.paused){playFromStart();}else{video.pause();setPlaying(false);}
+  if(video.paused){const attempt=video.play();if(attempt&&attempt.catch)attempt.catch(()=>{status.textContent='Press Play to animate';});}
+  else{video.pause();setPlaying(false);}
  });
  video.addEventListener('error',()=>{fallback.hidden=false;status.textContent='Animation unavailable';replay.disabled=true;toggle.hidden=true;});
  video.addEventListener('playing',()=>setPlaying(true));
