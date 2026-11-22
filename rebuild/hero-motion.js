@@ -37,19 +37,23 @@ function renderAndragogyMotion(container,interaction){
  const replay=document.createElement('button');
  replay.className='hero-motion-replay';
  replay.type='button';
- replay.textContent=reduce?'Play puzzle animation':'Replay puzzle animation';
+ replay.textContent=reduce?'Play':'Replay ↻';
+ replay.setAttribute('aria-label',reduce?'Play puzzle animation':'Replay puzzle animation');
  const toggle=document.createElement('button');
  toggle.className='hero-motion-toggle';
  toggle.type='button';
- toggle.textContent='Pause animation';
+ toggle.textContent='Pause';
+ toggle.setAttribute('aria-label','Pause animation');
  toggle.hidden=reduce;
  const status=document.createElement('span');
  status.className='hero-motion-caption';
  status.textContent=reduce?'Static by default · play when ready':'4-second moving-puzzle loop';
  status.setAttribute('role','status');
  function setPlaying(playing){
-  toggle.textContent=playing?'Pause animation':'Resume animation';
-  replay.textContent=reduce?'Replay puzzle animation':'Replay puzzle animation';
+  toggle.textContent=playing?'Pause':'Play';
+  toggle.setAttribute('aria-label',playing?'Pause animation':'Resume animation');
+  replay.textContent='Replay ↻';
+  replay.setAttribute('aria-label','Replay puzzle animation');
   status.textContent=playing?'Puzzle piece moving':(reduce?'Motion paused for accessibility':'Motion paused');
  }
  function playFromStart(){
@@ -57,7 +61,8 @@ function renderAndragogyMotion(container,interaction){
   const result=video.play();
   if(result && result.catch)result.then(()=>setPlaying(true)).catch(()=>{
    toggle.hidden=false;
-   toggle.textContent='Play animation';
+   toggle.textContent='Play';
+   toggle.setAttribute('aria-label','Play animation');
    status.textContent='Autoplay blocked · press Play';
   });
  }
@@ -73,7 +78,7 @@ function renderAndragogyMotion(container,interaction){
  if(!reduce){
   video.addEventListener('loadeddata',()=>{
    if(video.isConnected&&video.paused)video.play().catch(()=>{
-    toggle.hidden=false;toggle.textContent='Play animation';
+    toggle.hidden=false;toggle.textContent='Play';toggle.setAttribute('aria-label','Play animation');
     status.textContent='Press Play to animate';
    });
   },{once:true});
