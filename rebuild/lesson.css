@@ -100,3 +100,32 @@
  .card .art-panel.is-playing svg *{animation:none!important}
  .scene-controls{display:none}
 }
+
+/* Card 1: actual approved 4-second MP4 motion, not SVG simulated movement. */
+.animated-hero{width:100%;max-width:600px;margin:0 auto;display:block}
+.animated-hero .puzzle-motion-video{
+ display:block;width:100%;height:auto;aspect-ratio:25/14;object-fit:contain;
+ background:#D8F1F1;border:1px solid #D5E9E6;border-radius:17px;
+ box-shadow:0 8px 24px rgba(57,96,93,.11)
+}
+.animated-hero .art-caption{text-align:center;line-height:1.5;margin:12px 0 0;
+ font-size:.78rem;color:#556E68}
+.hero-motion-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.hero-motion-replay,.hero-motion-toggle{
+ min-height:43px;padding:10px 15px;border-radius:14px;
+ font-size:.91rem;font-weight:760;line-height:1.2;cursor:pointer;
+ border:1.5px solid #B9D9D1;background:#fff;color:#206F64
+}
+.hero-motion-replay{background:#E6F5EF;border-color:#A5D0C4}
+.hero-motion-replay:hover,.hero-motion-toggle:hover{background:#D6EFE7}
+.hero-motion-replay:disabled{cursor:default;opacity:.6}
+.hero-motion-caption{font-size:.78rem;color:#657771;line-height:1.4}
+.motion-fallback{font-size:.82rem;text-align:center;color:#9A463B;margin:10px 0}
+.motion-fallback[hidden]{display:none}
+@media(max-width:740px){
+ .animated-hero{max-width:100%}
+ .animated-hero .puzzle-motion-video{border-radius:13px}
+ .hero-motion-controls{margin-top:12px;gap:8px}
+ .hero-motion-replay,.hero-motion-toggle{min-height:41px;padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){.animated-hero .puzzle-motion-video{transition:none}}
