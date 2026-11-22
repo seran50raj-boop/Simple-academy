@@ -172,3 +172,18 @@ test('learning and question card modes remain distinct on desktop',async({page})
  await expect(page.locator('.art-panel.is-playing')).toBeVisible();
  await page.screenshot({path:path.join(capture,'learning-card-desktop.png'),fullPage:true});
 });
+
+test('concept motion is purposeful and reduced-motion accessibility is respected',async({page})=>{
+ await page.getByRole('button',{name:/Start learning/}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await page.getByRole('button',{name:'No',exact:true}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await expect(page.locator('.art-panel[data-art="journey"] .journey-path')).toHaveCount(1);
+ await page.getByRole('button',{name:/Trace the learning path/}).click();
+ const animation=await page.locator('.journey-path').evaluate(el=>getComputedStyle(el).animationName);
+ expect(animation).toContain('traceJourney');
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await expect(page.locator('.scene-controls')).toBeHidden();
+ const reducedAnimation=await page.locator('.journey-path').evaluate(el=>getComputedStyle(el).animationName);
+ expect(reducedAnimation).toBe('none');
+});
