@@ -243,7 +243,9 @@ function renderMap(){
  $("resume").textContent=done?"Review completed module →":furthest?"Continue at card "+(furthest+1)+" →":"Start this module →";
  $("map-summary").textContent=done?"Module complete · You can review any card.":(furthest+1)+" of "+module.cards.length+" cards unlocked";
  $("complete-note").hidden=!done;
- if(done&&module.id==="kolb"){
+ if(done&&module.id==="knowles"){
+  $("next-module").hidden=false;$("next-module").href="./learn.html?module=kolb";$("next-module").textContent="Next module: Kolb’s Learning Cycle →";
+ }else if(done&&module.id==="kolb"){
   $("next-module").hidden=false;$("next-module").href="./learn.html?module=rcdp";$("next-module").textContent="Next module: RCDP →";
  }else if(done){
   $("next-module").hidden=false;$("next-module").href="./academy.html";$("next-module").textContent="Explore all modules →";
