@@ -114,10 +114,69 @@
 </style>
 <link rel="stylesheet" href="./map.css">
 <link rel="stylesheet" href="./lesson.css">
+<link rel="stylesheet" href="./landing.css">
 </head>
 <body>
-<div class="shell"><header class="top"><div class="brand">SIM<span>ple</span> Academy</div><div class="header-actions"><div class="unit">Module 1 · Foundations of Andragogy</div><button class="map-link" id="map-link" type="button" hidden>Course map</button></div></header><main class="main">
-<section class="map-screen" id="map-screen" aria-labelledby="map-title">
+<div class="shell"><header class="top"><div class="brand">SIM<span>ple</span> Academy</div><div class="header-actions"><div class="unit">Foundations of Andragogy</div><a class="header-legal" href="./site-info.html">About &amp; privacy</a><button class="home-link" id="home-link" type="button" hidden>Home</button><button class="map-link" id="map-link" type="button" hidden>Course map</button></div></header><main class="main">
+<section class="welcome-screen" id="welcome-screen" aria-labelledby="welcome-title">
+ <div class="welcome-hero">
+  <div>
+   <div class="welcome-eyebrow">SIMple Academy · Foundations of adult learning</div>
+   <h1 id="welcome-title">Small lessons.<br><em>Big ideas.</em></h1>
+   <p class="welcome-lede">Because your brain deserves better. Explore how adults learn through colourful visual stories, purposeful choices and questions you answer yourself.</p>
+   <div class="welcome-cta"><button class="welcome-start" id="welcome-start" type="button">Begin Andragogy →</button>
+    <small>14 cards · 6 question checkpoints<br>Free learning preview · no sign-in required</small>
+   </div>
+  </div>
+  <div class="welcome-visual">
+   <video id="welcome-preview" autoplay muted loop playsinline preload="metadata" width="400" height="224"
+    aria-label="Animated editorial illustration showing learners fitting a puzzle piece together">
+    <source src="./assets/andragogy-card1-motion.mp4" type="video/mp4">
+   </video>
+   <p>Learn by exploring, thinking and fitting ideas together.</p>
+  </div>
+ </div>
+ <h2 class="welcome-section-title">Learn differently.</h2>
+ <div class="welcome-features">
+  <div class="welcome-feature"><span class="welcome-symbol" aria-hidden="true">✦</span><h3>Explore an idea</h3><p>Short, visually rich cards introduce the essentials of adult learning.</p></div>
+  <div class="welcome-feature"><span class="welcome-symbol" aria-hidden="true">?</span><h3>Make a decision</h3><p>Answer six knowledge checks yourself to unlock what comes next.</p></div>
+  <div class="welcome-feature"><span class="welcome-symbol" aria-hidden="true">↺</span><h3>Learn at your pace</h3><p>Go back whenever you want. Progress is remembered in this browser.</p></div>
+ </div>
+ <div class="welcome-about">
+  <section class="welcome-creator" aria-labelledby="creator-heading">
+   <h2 id="creator-heading">Meet the creator</h2>
+   <strong>Dr. Rajkumar Elanjeran</strong>
+   <text>Emergency Physician · Simulation Educator</text>
+   <p>I created SIMple Academy with a question: why should learning about education itself feel like another lecture? It's an independently conceived educational project built around visual storytelling, interactive practice and reflection.</p>
+   <p><strong>Small lessons. Big ideas.</strong> Let curiosity do the rest.</p>
+  </section>
+  <section class="welcome-disclosure" aria-labelledby="disclosure-heading">
+   <h2 id="disclosure-heading">Before you begin</h2>
+   <p><strong>Educational use only.</strong> The examples are for learning and don't replace professional clinical judgement.</p>
+   <p>This preview does not award accredited CME/CPD credit or certify clinical competency.</p>
+   <p><strong>Privacy:</strong> this version does not ask for your name or email. Course progress stays in your browser, not a synced learner account.</p>
+   <p><a href="./site-info.html">Read our learning, privacy and accreditation notices</a></p>
+  </section>
+ </div>
+ <p class="welcome-minor">Looking for the earlier two-module pilot? <a href="./legacy.html">Open the original pilot</a>. Its account and progress features are separate from this rebuild.</p>
+</section>
+<section class="honour-screen" id="honour-screen" aria-labelledby="honour-title" hidden>
+ <div class="honour-card">
+  <div class="honour-eyebrow">Just one thing before we start</div>
+  <h1 id="honour-title">The learner honour code</h1>
+  <p class="honour-copy">This is a course about self-directed learning. It works best when you give your own brain a chance to do the work.</p>
+  <label class="honour-promise" for="honour-confirm">
+   <input type="checkbox" id="honour-confirm">
+   <span>I will answer the learning activities myself. I won't use AI, answer generators or other outside help to answer the questions. I can revisit explanations whenever I need to.</span>
+  </label>
+  <div class="honour-notice"><p><strong>No account needed.</strong> Your course answers and progress are saved only in this browser. This version does not provide accredited certification or cross-device progress sync. <a href="./site-info.html">Read the full notices.</a></p></div>
+  <div class="honour-actions">
+   <button type="button" id="honour-back" class="honour-back">← Back</button>
+   <button type="button" id="honour-accept" class="honour-accept" disabled>I agree · View the course map →</button>
+  </div>
+ </div>
+</section>
+<section class="map-screen" id="map-screen" aria-labelledby="map-title" hidden>
 <div class="map-eyebrow">Module 1 · Your learning journey</div>
 <h1 id="map-title">Explore Andragogy</h1>
 <p class="map-intro">Follow the route from concept to practice. Each stop is one card. Questions unlock the path forward.</p>
@@ -125,7 +184,7 @@
 <div class="map-legend"><span><b>▤</b> Learning</span><span><b>?</b> Question</span><span><b>✓</b> Completed</span></div>
 <div class="map-actions"><button class="nav primary" id="start-map" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small></div>
 </section>
-<section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
+<section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section><div class="site-notices">SIMple Academy · An independently created educational project · <a href="./site-info.html">Privacy &amp; educational notices</a> · <a href="./legacy.html">Earlier pilot</a></div></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script src="./course.js"></script>
 <script src="./art.js"></script>
 <script src="./lesson-interactions.js"></script>
@@ -134,6 +193,10 @@
 <script src="./map.js"></script>
 <script>
 let current=0,furthest=0;
+let honourAccepted=false;
+const honourKey='simple-academy-learner-honour-v1';
+try{honourAccepted=localStorage.getItem(honourKey)==='yes';}catch(_){}
+
 const completed=new Set(),answers=new Map();
 const $=id=>document.getElementById(id);
 const saveKey='simple-academy-andragogy-foundations-v2';
@@ -158,13 +221,36 @@ function renderMap(){
  $('start-map').textContent=furthest?'Continue learning →':'Start learning →';
  $('map-summary').textContent=(furthest+1)+' of '+cards.length+' cards unlocked';
 }
+function showHome(){
+ $('welcome-screen').hidden=false;$('honour-screen').hidden=true;
+ $('map-screen').hidden=true;$('cards-screen').hidden=true;$('bottom').hidden=true;
+ $('home-link').hidden=true;$('map-link').hidden=true;
+ $('welcome-start').textContent=furthest?'Continue Andragogy →':'Begin Andragogy →';
+ const intro=$('welcome-preview');
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){intro.pause();}
+ else if(intro.paused){intro.play().catch(()=>{});}
+ window.scrollTo(0,0);
+}
+function showHonour(){
+ $('welcome-screen').hidden=true;$('honour-screen').hidden=false;
+ $('map-screen').hidden=true;$('cards-screen').hidden=true;$('bottom').hidden=true;
+ $('home-link').hidden=false;$('map-link').hidden=true;
+ $('welcome-preview').pause();
+ $('honour-confirm').checked=false;$('honour-accept').disabled=true;
+ window.scrollTo(0,0);
+}
 function showMap(){
- $('map-screen').hidden=false;$('cards-screen').hidden=true;$('bottom').hidden=true;$('map-link').hidden=true;
+ if(!honourAccepted){showHonour();return;}
+ $('welcome-screen').hidden=true;$('honour-screen').hidden=true;
+ $('map-screen').hidden=false;$('cards-screen').hidden=true;$('bottom').hidden=true;
+ $('home-link').hidden=false;$('map-link').hidden=true;$('welcome-preview').pause();
  renderMap();window.scrollTo(0,0);
 }
 function showCard(index){
  if(index<0||index>furthest||index>=cards.length)return;
- current=index;$('map-screen').hidden=true;$('cards-screen').hidden=false;$('bottom').hidden=false;$('map-link').hidden=false;
+ current=index;$('welcome-screen').hidden=true;$('honour-screen').hidden=true;
+ $('map-screen').hidden=true;$('cards-screen').hidden=false;$('bottom').hidden=false;
+ $('home-link').hidden=false;$('map-link').hidden=false;$('welcome-preview').pause();
  render();window.scrollTo(0,0);
 }
 function render(){
@@ -240,6 +326,16 @@ function go(direction){
   showCard(next);
  }
 }
+$('welcome-start').addEventListener('click',()=>honourAccepted?showMap():showHonour());
+$('honour-back').addEventListener('click',showHome);
+$('honour-confirm').addEventListener('change',()=>{$('honour-accept').disabled=!$('honour-confirm').checked;});
+$('honour-accept').addEventListener('click',()=>{
+ if(!$('honour-confirm').checked)return;
+ honourAccepted=true;
+ try{localStorage.setItem(honourKey,'yes');}catch(_){}
+ showMap();
+});
+$('home-link').addEventListener('click',showHome);
 $('map-link').addEventListener('click',showMap);
 $('start-map').addEventListener('click',()=>showCard(furthest));
 $('prev').addEventListener('click',()=>go(-1));
@@ -259,6 +355,6 @@ document.querySelector('.card').addEventListener('touchend',event=>{
  if(Math.abs(delta)>70)go(delta<0?1:-1);
  touchStart=null;
 },{passive:true});
-showMap();
+showHome();
 </script>
 </body></html>
