@@ -43,8 +43,8 @@
 .scene-caption{font-size:.77rem;color:#788580}
 .scene-action:focus-visible{outline:3px solid #F2B548;outline-offset:3px}
 
-.card .art-panel.is-playing[data-art="journey"] svg > path:nth-of-type(2){
- stroke-dasharray:14 19;animation:traceJourney 1.65s linear both
+.card .art-panel.is-playing[data-art="journey"] .journey-path{
+ stroke-dasharray:18 14;animation:traceJourney 1.65s ease-in-out both
 }
 @keyframes traceJourney{from{stroke-dashoffset:400;opacity:.2}to{stroke-dashoffset:0;opacity:1}}
 .card .art-panel.is-playing[data-art="lenses"] svg > circle:nth-of-type(1){
