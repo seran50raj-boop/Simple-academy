@@ -63,7 +63,7 @@ function buildPuzzleHeroSVG(){
 }
 function renderAndragogyMotion(container,interaction){
  const figure=document.createElement('figure');
- figure.className='hero-scene vector-hero';
+ figure.className='hero-scene approved-scene vector-hero';
  const panel=document.createElement('div');panel.className='hero-vector is-playing';
  panel.innerHTML=buildPuzzleHeroSVG();
  figure.appendChild(panel);
