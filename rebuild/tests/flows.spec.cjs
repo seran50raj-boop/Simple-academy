@@ -206,6 +206,8 @@ test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assemb
  await page.getByRole('button',{name:/Start learning/}).click();
  await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
  await expect(page.locator('.hero-vector .puzzle-slots path')).toHaveCount(4);
+ const tileColors=await page.locator('.hero-vector .puzzle-piece>path').evaluateAll(paths=>paths.map(path=>getComputedStyle(path).fill));
+ expect(tileColors).toEqual(['rgb(244, 180, 77)','rgb(239, 126, 89)','rgb(75, 168, 158)','rgb(146, 202, 218)']);
  const original=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  await page.waitForTimeout(1650);
  const arrived=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
