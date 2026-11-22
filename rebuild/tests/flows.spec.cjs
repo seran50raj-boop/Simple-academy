@@ -207,7 +207,11 @@ test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assemb
  await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
  await expect(page.locator('.hero-vector .puzzle-slots path')).toHaveCount(4);
  const tileColors=await page.locator('.hero-vector .puzzle-piece>path').evaluateAll(paths=>paths.map(path=>getComputedStyle(path).fill));
- expect(tileColors).toEqual(['url("#goldTile")','url("#coralTile")','url("#tealTile")','url("#blueTile")']);
+ expect(tileColors).toEqual(['url("#card-goldTile")','url("#card-coralTile")','url("#card-tealTile")','url("#card-blueTile")']);
+ const paintServers=await page.locator('.hero-vector svg').evaluate(svg=>[...svg.querySelectorAll('.puzzle-piece>path')].map(p=>{
+  const m=getComputedStyle(p).fill.match(/url\(["']?#([^"')]+)["']?\)/);return !!m&&!!svg.querySelector('[id="'+m[1]+'"]');
+ }));
+ expect(paintServers,'Every card tile must have a usable gradient in its OWN SVG').toEqual([true,true,true,true]);
  const original=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  await page.waitForTimeout(1650);
  const arrived=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
