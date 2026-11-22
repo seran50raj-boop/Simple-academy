@@ -25,7 +25,7 @@ const PUZZLE_PIECES=[
  {id:'autonomy',name:'Autonomy',subtitle:'My choices',fill:'url(#tealTile)',x:194,y:235,sx:-154,sy:65,delay:'2.85s',edges:{top:-1,right:-1}},
  {id:'relevance',name:'Relevance',subtitle:'Use it now',fill:'url(#blueTile)',x:359,y:235,sx:154,sy:65,delay:'4.10s',edges:{top:1,left:1}}
 ];
-function buildPuzzleHeroSVG(){
+function buildPuzzleHeroSVG(prefix="card"){
  const pieces=PUZZLE_PIECES.map((p,i)=>{
    const path=puzzleOutline(p.x,p.y,165,114,p.edges),cx=p.x+82.5;
    const icon=i===0
@@ -70,7 +70,7 @@ function buildPuzzleHeroSVG(){
  '<text x="360" y="421" fill="#173F49" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="28">ANDRAGOGY</text></g>',
  '<rect width="720" height="480" fill="url(#paperGrain)" opacity=".24" pointer-events="none"/>',
  '</svg>'
- ].join('');
+ ].join('').replace(/\\bid="(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)"/g,(_,name)=>'id="'+prefix+'-'+name+'"').replace(/url\\(#(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)\\)/g,(_,name)=>'url(#'+prefix+'-'+name+')');
 }
 function renderAndragogyMotion(container,interaction){
  const figure=document.createElement('figure');
