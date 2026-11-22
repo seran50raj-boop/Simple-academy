@@ -20,45 +20,56 @@ function puzzleOutline(x,y,w,h,edges){
  commands.push('Z');return commands.join(' ');
 }
 const PUZZLE_PIECES=[
- {id:'purpose',name:'Purpose',fill:'#F4B44D',x:178,y:151,sx:-70,sy:-67,delay:'0.3s',edges:{right:1,bottom:1}},
- {id:'experience',name:'Experience',fill:'#EF7E59',x:314,y:151,sx:71,sy:-62,delay:'1.6s',edges:{left:-1,bottom:-1}},
- {id:'autonomy',name:'Autonomy',fill:'#4BA89E',x:178,y:245,sx:-70,sy:58,delay:'2.9s',edges:{top:-1,right:-1}},
- {id:'relevance',name:'Relevance',fill:'#92CADA',x:314,y:245,sx:72,sy:56,delay:'4.2s',edges:{top:1,left:1}}
+ {id:'purpose',name:'Purpose',subtitle:'Why learn?',fill:'url(#goldTile)',x:194,y:121,sx:-154,sy:-48,delay:'0.35s',edges:{right:1,bottom:1}},
+ {id:'experience',name:'Experience',subtitle:'What I know',fill:'url(#coralTile)',x:359,y:121,sx:154,sy:-48,delay:'1.60s',edges:{left:-1,bottom:-1}},
+ {id:'autonomy',name:'Autonomy',subtitle:'My choices',fill:'url(#tealTile)',x:194,y:235,sx:-154,sy:65,delay:'2.85s',edges:{top:-1,right:-1}},
+ {id:'relevance',name:'Relevance',subtitle:'Use it now',fill:'url(#blueTile)',x:359,y:235,sx:154,sy:65,delay:'4.10s',edges:{top:1,left:1}}
 ];
 function buildPuzzleHeroSVG(){
- const slots=PUZZLE_PIECES.map(p=>'<path d="'+puzzleOutline(p.x,p.y,136,94,p.edges)+'" fill="#EEE4D7" stroke="#D9C9B7" stroke-width="2.1"/>').join('');
- const tiles=PUZZLE_PIECES.map(p=>{
-  const x=p.x+68,y=p.y+56;
-  return '<g class="puzzle-piece" data-piece="'+p.id+'" style="--start-x:'+p.sx+'px;--start-y:'+p.sy+'px;--start-delay:'+p.delay+'">'+
-   '<path d="'+puzzleOutline(p.x,p.y,136,94,p.edges)+'" fill="'+p.fill+'" stroke="#FFF9F0" stroke-width="3" filter="url(#puzzleLift)"/>'+
-   '<circle cx="'+x+'" cy="'+(y-22)+'" r="8" fill="none" stroke="#FFF7ED" stroke-width="2.5"/>'+
-   '<text x="'+x+'" y="'+(y+11)+'" fill="#224B50" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="800">'+p.name+'</text></g>';
+ const pieces=PUZZLE_PIECES.map((p,i)=>{
+   const path=puzzleOutline(p.x,p.y,165,114,p.edges),cx=p.x+82.5;
+   const icon=i===0
+    ?'<circle cx="'+cx+'" cy="'+(p.y+36)+'" r="14" fill="none" stroke="#FFF7EB" stroke-width="3.4"/><circle cx="'+cx+'" cy="'+(p.y+36)+'" r="5" fill="#FFF7EB"/><path d="M'+(cx+13)+' '+(p.y+36)+'l12-12" stroke="#FFF7EB" stroke-width="3.5" stroke-linecap="round"/>'
+    :i===1
+    ?'<path d="M'+(cx-16)+' '+(p.y+27)+'q11-6 18 2q9-8 19-2v25q-12-6-19 3q-9-9-18-3Z" stroke="#FFF7EB" stroke-width="3.2" fill="none" stroke-linejoin="round"/>'
+    :i===2
+    ?'<path d="M'+(cx-17)+' '+(p.y+36)+'h35m-10-10 10 10-10 10" stroke="#FFF7EB" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+    :'<path d="M'+(cx-18)+' '+(p.y+44)+'l11-13 12 8 14-19" stroke="#FFF7EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+   return '<g class="puzzle-piece" data-piece="'+p.id+'" style="--start-x:'+p.sx+'px;--start-y:'+p.sy+'px;--start-delay:'+p.delay+'">'+
+    '<path d="'+path+'" fill="'+p.fill+'" stroke="#FFF9EC" stroke-width="3.2" stroke-linejoin="round" />'+icon+
+    '<text x="'+cx+'" y="'+(p.y+78)+'" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="800" fill="#173E49">'+p.name+'</text>'+
+    '<text x="'+cx+'" y="'+(p.y+94)+'" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="640" fill="#23565A">'+p.subtitle+'</text></g>';
  }).join('');
+ const slots=PUZZLE_PIECES.map(p=>'<path d="'+puzzleOutline(p.x,p.y,165,114,p.edges)+'" fill="#D4C3AA" stroke="#AF9B83" stroke-width="2.4"/>').join('');
  return [
- '<svg class="puzzle-svg" viewBox="0 0 640 440" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Four puzzle pieces physically move into precisely matching slots to connect Purpose, Experience, Autonomy and Relevance into Andragogy.">',
- '<defs><filter id="puzzleLift" x="-25%" y="-25%" width="150%" height="165%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#6A5144" flood-opacity=".17"/></filter>',
- '<pattern id="puzzleGrain" width="19" height="19" patternUnits="userSpaceOnUse"><circle cx="4" cy="5" r=".7" fill="#A17A6B" opacity=".23"/><circle cx="12" cy="14" r=".55" fill="#A17A6B" opacity=".2"/></pattern></defs>',
- '<rect width="640" height="440" rx="20" fill="#FCFAF5"/>',
- '<path d="M0 122Q94 2 215 45T481 34Q572 0 640 124V0H0Z" fill="#DFF3EC"/>',
- '<circle cx="562" cy="86" r="62" fill="#D5EDF0"/>',
- '<path d="M22 381Q103 292 189 369L165 439H0V391Z" fill="#FFDDC3"/>',
- /* Four stationary, deliberately faceless learners, anatomically simplified. */
- '<g aria-hidden="true"><path d="M52 267V179Q57 149 92 149Q129 149 140 186L153 260Z" fill="#EC794F"/>',
- '<ellipse cx="102" cy="126" rx="28" ry="30" fill="#EFAE8B"/><path d="M74 122Q68 98 98 97Q127 95 129 121Q105 109 84 120Z" fill="#695044"/>',
- '<path d="M136 194Q155 215 166 239" stroke="#EC794F" stroke-width="23" stroke-linecap="round" fill="none"/><ellipse cx="167" cy="240" rx="13" ry="8" fill="#EFAE8B"/></g>',
- '<g aria-hidden="true"><path d="M271 159V111Q279 80 312 79Q347 78 361 112V158Z" fill="#9BCDDC"/>',
- '<ellipse cx="316" cy="62" rx="27" ry="29" fill="#EFB18D"/><path d="M288 55Q286 28 313 29Q339 28 344 51Q325 42 301 56Z" fill="#704A3D"/></g>',
- '<g aria-hidden="true"><path d="M493 338V174Q497 143 535 139Q575 142 585 178V352H500Z" fill="#CB8167"/>',
- '<ellipse cx="537" cy="119" rx="26" ry="30" fill="#EDAE8E"/><path d="M507 130Q494 87 531 83Q571 79 569 135L549 161L550 111Q531 104 511 129Z" fill="#914D43"/></g>',
- '<g aria-hidden="true"><path d="M32 436Q31 361 83 353Q140 342 175 438Z" fill="#F2B247"/>',
- '<ellipse cx="96" cy="328" rx="28" ry="29" fill="#EDB391"/><path d="M68 332Q55 297 87 292Q119 287 130 318Q95 305 68 332Z" fill="#64493D"/></g>',
- '<rect x="156" y="127" width="316" height="238" rx="23" fill="#FFF7EB" stroke="#DFCFBB" stroke-width="4" filter="url(#puzzleLift)"/>',
- '<rect x="168" y="139" width="292" height="214" rx="17" fill="#FFFBF5"/>',
+ '<svg class="puzzle-svg" viewBox="0 0 720 480" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Four puzzle pieces labelled Purpose, Experience, Autonomy, and Relevance slide into four matching empty cutouts. Once assembled, the label Andragogy appears beneath the board.">',
+ '<defs><linearGradient id="paperSky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E4F9F3"/><stop offset="1" stop-color="#A9DFE2"/></linearGradient>',
+ '<linearGradient id="deskWood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FBE6C8"/><stop offset="1" stop-color="#F2C89F"/></linearGradient>',
+ '<linearGradient id="goldTile" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#FFDD62"/><stop offset="1" stop-color="#F2A83B"/></linearGradient>',
+ '<linearGradient id="coralTile" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#FF9B75"/><stop offset="1" stop-color="#E96C52"/></linearGradient>',
+ '<linearGradient id="tealTile" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6AC9B3"/><stop offset="1" stop-color="#36A499"/></linearGradient>',
+ '<linearGradient id="blueTile" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8DDAF7"/><stop offset="1" stop-color="#5AABDD"/></linearGradient>',
+ '<pattern id="paperGrain" width="21" height="21" patternUnits="userSpaceOnUse"><circle cx="2" cy="5" r=".65" fill="#72574E" opacity=".25"/><circle cx="12" cy="13" r=".6" fill="#72574E" opacity=".22"/><circle cx="18" cy="8" r=".5" fill="#72574E" opacity=".17"/></pattern>',
+ '<filter id="deskShadow" x="-25%" y="-25%" width="150%" height="155%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#62443A" flood-opacity=".19"/></filter></defs>',
+ '<rect width="720" height="480" rx="24" fill="#FDF9F2"/>',
+ '<path d="M0 0H720V173Q520 206 358 156Q150 95 0 171Z" fill="url(#paperSky)"/>',
+ '<path d="M0 339Q170 311 339 345T720 335V480H0Z" fill="url(#deskWood)"/>',
+ '<path d="M18 381Q220 354 702 380M35 424Q360 405 684 434M146 462Q420 441 643 463" stroke="#DAA879" stroke-width="2" stroke-linecap="round" opacity=".44" fill="none"/>',
+ /* Editorial book and desk objects provide scene rather than anatomy. */
+ '<g aria-hidden="true"><rect x="16" y="251" width="126" height="31" rx="7" fill="#2D5880" transform="rotate(-7 16 251)"/><rect x="21" y="248" width="119" height="23" rx="4" fill="#FFF8EB" transform="rotate(-7 21 248)"/><rect x="22" y="274" width="123" height="29" rx="5" fill="#EC7C5D" transform="rotate(-7 22 274)"/>',
+ '<rect x="33" y="263" width="99" height="10" rx="2" fill="#F9E5C5" transform="rotate(-7 33 263)"/><path d="M30 286h91" stroke="#FFE8C7" stroke-width="4" stroke-linecap="round" transform="rotate(-7 30 286)"/></g>',
+ '<g aria-hidden="true"><path d="M601 283q-9-17 0-41 8-14 15-25" stroke="#43866E" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M606 249q29-23 52-8-20 25-52 8ZM604 239q-28-9-30-35 27 8 30 35Z" fill="#6BB98D"/>',
+ '<path d="M574 284h70l-9 73q-25 20-51 0Z" fill="#FAF5EC" stroke="#D5C5B2" stroke-width="3"/><path d="M579 293h61" stroke="#A5D8D8" stroke-width="5"/></g>',
+ '<g aria-hidden="true"><ellipse cx="655" cy="403" rx="45" ry="11" fill="#977963" opacity=".18"/><path d="M625 366h61v34q-29 24-61 0Z" fill="#6EAFC3"/><path d="M688 375q26-2 18 16q-6 11-23 4" fill="none" stroke="#6EAFC3" stroke-width="8" stroke-linecap="round"/></g>',
+ '<path d="M145 88Q258 45 397 72T581 83" fill="none" stroke="#FFFFFF" stroke-width="17" opacity=".45" stroke-linecap="round"/>',
+ '<rect x="173" y="102" width="388" height="270" rx="27" fill="#FFF7EA" stroke="#D3B99B" stroke-width="4" filter="url(#deskShadow)"/>',
+ '<rect x="184" y="111" width="366" height="252" rx="21" fill="#F7ECD9"/>',
  '<g class="puzzle-slots">',slots,'</g>',
- '<g class="puzzle-pieces">',tiles,'</g>',
- '<g class="puzzle-conclusion"><rect x="249" y="230" width="142" height="47" rx="23" fill="#FFF9EE" stroke="#C9B5A0" stroke-width="2.7" filter="url(#puzzleLift)"/>',
- '<text x="320" y="260" fill="#1B464B" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="23">Andragogy</text></g>',
- '<rect width="640" height="440" fill="url(#puzzleGrain)" opacity=".29" pointer-events="none"/></svg>'
+ '<g class="puzzle-pieces">',pieces,'</g>',
+ '<g class="puzzle-conclusion"><rect x="224" y="384" width="272" height="58" rx="25" fill="#FFF9EC" stroke="#3B7A75" stroke-width="3" filter="url(#deskShadow)"/>',
+ '<text x="360" y="421" fill="#173F49" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="28">ANDRAGOGY</text></g>',
+ '<rect width="720" height="480" fill="url(#paperGrain)" opacity=".24" pointer-events="none"/>',
+ '</svg>'
  ].join('');
 }
 function renderAndragogyMotion(container,interaction){
