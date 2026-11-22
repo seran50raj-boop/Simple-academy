@@ -195,25 +195,31 @@ test('Card 1 motion is decoded and really changes pixels, with working replay an
  await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2&&v.videoWidth===400&&v.videoHeight===224&&v.duration>=3.9;});
  const changes=await video.evaluate(async v=>{
   v.pause();
-  async function captureAt(t){
-   if(Math.abs(v.currentTime-t)>.025){
-    const ready=new Promise((resolve,reject)=>{
-     const id=setTimeout(()=>reject(new Error('seek timed out')),4000);
-     v.addEventListener('seeked',()=>{clearTimeout(id);resolve()}, {once:true});
-    });
-    v.currentTime=t;await ready;
-   }
-   const canvas=document.createElement('canvas');canvas.width=v.videoWidth;canvas.height=v.videoHeight;
-   const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(v,0,0);
-   return ctx.getImageData(0,0,canvas.width,canvas.height).data;
-  }
-  const first=await captureAt(0.1),second=await captureAt(1.7);
-  let changed=0,total=0;
-  for(let n=0;n<first.length;n+=4){
-   const d=Math.abs(first[n]-second[n])+Math.abs(first[n+1]-second[n+1])+Math.abs(first[n+2]-second[n+2]);
-   if(d>40)changed++; total+=d;
-  }
-  return {changed,meanChange:total/(first.length/4)};
+  const ready=new Promise((resolve,reject)=>{
+   const timer=setTimeout(()=>reject(new Error('Reset seek timed out')),4000);
+   v.addEventListener('seeked',()=>{clearTimeout(timer);resolve();},{once:true});
+  });
+  v.currentTime=.01;await ready;
+  const canvas=document.createElement('canvas');canvas.width=v.videoWidth;canvas.height=v.videoHeight;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  const frame=()=>{ctx.drawImage(v,0,0);return ctx.getImageData(0,0,canvas.width,canvas.height).data.slice();};
+  let first=null;
+  await v.play();
+  return await new Promise((resolve,reject)=>{
+   const watchdog=setTimeout(()=>reject(new Error('No decoded playback frames')),6500);
+   const onFrame=(_,meta)=>{
+    if(!first && meta.mediaTime>=.2)first=frame();
+    if(first && meta.mediaTime>=1.7){
+     const last=frame();let changed=0;
+     for(let i=0;i<last.length;i+=4){
+      const delta=Math.abs(first[i]-last[i])+Math.abs(first[i+1]-last[i+1])+Math.abs(first[i+2]-last[i+2]);
+      if(delta>40)changed++;
+     }
+     v.pause();clearTimeout(watchdog);resolve({changed});
+    }else{v.requestVideoFrameCallback(onFrame);}
+   };
+   v.requestVideoFrameCallback(onFrame);
+  });
  });
  expect(changes.changed,'Frame comparison detected a still video').toBeGreaterThan(700);
  await page.getByRole('button',{name:/Replay puzzle animation/}).click();
