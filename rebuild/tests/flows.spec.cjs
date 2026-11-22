@@ -229,6 +229,16 @@ test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assemb
  expect(shapes.matching).toBe(true);
  expect(shapes.overlaps,'Geometric puzzle pieces overlap').toBe(0);
  expect(shapes.holes,'Puzzle should form one contiguous board').toBeLessThan(100);
+ const labelOverlaps=await page.locator('.hero-vector svg').evaluate(svg=>{
+  const rect=svg.querySelector('.puzzle-conclusion rect').getBBox();
+  const texts=[...svg.querySelectorAll('.puzzle-piece text')];
+  return texts.filter(t=>{
+   const b=t.getBBox();
+   return b.x<rect.x+rect.width && b.x+b.width>rect.x &&
+          b.y<rect.y+rect.height && b.y+b.height>rect.y;
+  }).map(t=>t.textContent);
+ });
+ expect(labelOverlaps,'Andragogy overlay must not cover its component labels').toEqual([]);
  await page.waitForTimeout(4800);
  await expect(page.locator('.hero-vector .puzzle-conclusion')).toBeVisible();
  const done=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
