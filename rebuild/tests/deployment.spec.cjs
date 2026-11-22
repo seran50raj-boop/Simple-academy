@@ -21,7 +21,7 @@ test('deployed root matches tested rebuild and preserves legacy backup',async()=
  expect(movie.byteLength).toBeGreaterThan(10000);
  expect(fs.existsSync(path.join(root,'legacy.html'))).toBe(true);
  expect(fs.existsSync(path.join(root,'admin.html'))).toBe(true);
- expect(JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).build).toBe('6.2');
+ expect(JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).build).toBe('6.3');
 });
 test('root homepage has valid relative references and the 14-card app',async()=>{
  const source=fs.readFileSync(path.join(root,'course.html'),'utf8');

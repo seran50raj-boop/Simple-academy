@@ -71,3 +71,23 @@ test('restored landing respects privacy and still links to public notices',async
  await expect(page.getByRole('link',{name:/Learning & privacy information/})).toHaveAttribute('href','./site-info.html');
  await expect(page.getByRole('link',{name:/Earlier two-module pilot/})).toHaveAttribute('href','./legacy.html');
 });
+
+test('mobile landscape illustration appears before the Begin section and desktop retains side-by-side layout',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.reload();
+ const picture=page.locator('#profile-view .pilot-login-copy > .pilot-visual-image img');
+ const button=page.getByRole('button',{name:/Begin learning/});
+ await expect(picture).toBeVisible();
+ await expect(button).toBeVisible();
+ const art=await picture.boundingBox(),cta=await button.boundingBox();
+ expect(art.y+art.height,'On mobile the entire landscape illustration must precede Begin').toBeLessThan(cta.y);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+3)).toBe(false);
+ fs.mkdirSync(capture,{recursive:true});
+ await page.screenshot({path:path.join(capture,'mobile-illustration-before-begin.png'),fullPage:true});
+ await page.setViewportSize({width:1320,height:900});
+ const originalSidebar=page.locator('#profile-view .pilot-login-visual > .pilot-visual-image img');
+ await expect(originalSidebar).toBeVisible();
+ const imgRect=await originalSidebar.boundingBox(),ctaRect=await button.boundingBox();
+ expect(imgRect.x).toBeGreaterThan(ctaRect.x+ctaRect.width-10);
+ await page.screenshot({path:path.join(capture,'desktop-original-layout-preserved.png'),fullPage:true});
+});
