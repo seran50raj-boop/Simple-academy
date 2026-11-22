@@ -119,3 +119,52 @@ test('map icons are concept-specific, accessible and separate from progress badg
   await page.screenshot({path:path.join(capture,'illustrated-map-'+width+'.png'),fullPage:true});
  }
 });
+
+test('all 14 learning and question cards render without overflow or progression bypass',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.getByRole('button',{name:/Start learning/}).click();
+ const sequence=await page.evaluate(()=>cards.map(c=>({h:c.h,q:!!c.q,answer:c.q?c.q[c.answer]:null,art:c.art})));
+ for(let i=0;i<sequence.length;i++){
+  const card=sequence[i];
+  await expect(page.getByRole('heading',{name:card.h})).toBeVisible();
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
+  expect(overflow,'Horizontal overflow on card '+i+' '+card.h).toBe(false);
+  if(i>0)await expect(page.locator('.art-panel[data-art="'+card.art+'"] svg.editorial-art')).toBeVisible();
+  if(card.q){
+   await expect(page.locator('.card.is-question')).toBeVisible();
+   await expect(page.locator('.scene-action')).toHaveCount(0);
+   await expect(page.getByRole('button',{name:'Next →'})).toBeDisabled();
+   await page.getByRole('button',{name:card.answer,exact:true}).click();
+   await expect(page.getByRole('button',{name:'Next →'})).toBeEnabled();
+  }else{
+   await expect(page.locator('.card:not(.is-question)')).toBeVisible();
+   const control=page.locator('.scene-action');
+   if(await control.count()){
+    await control.click();
+    await expect(page.locator('.art-panel.is-playing')).toBeVisible();
+   }
+  }
+  if(i<sequence.length-1)await page.getByRole('button',{name:'Next →'}).click();
+ }
+ await expect(page.getByRole('button',{name:'Finish ✓'})).toBeEnabled();
+ fs.mkdirSync(capture,{recursive:true});
+ await page.screenshot({path:path.join(capture,'all-cards-finish-mobile.png'),fullPage:true});
+});
+test('learning and question card modes remain distinct on desktop',async({page})=>{
+ await page.setViewportSize({width:1320,height:900});
+ await page.getByRole('button',{name:/Start learning/}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await expect(page.locator('.card.is-question')).toBeVisible();
+ await expect(page.locator('.choice')).toHaveCount(2);
+ await expect(page.locator('.scene-controls')).toHaveCount(0);
+ await expect(page.locator('.art-panel')).toBeVisible();
+ fs.mkdirSync(capture,{recursive:true});
+ await page.screenshot({path:path.join(capture,'question-card-desktop.png'),fullPage:true});
+ await page.getByRole('button',{name:'No',exact:true}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await expect(page.locator('.card.is-question')).toHaveCount(0);
+ await expect(page.locator('.art-panel[data-art="journey"]')).toBeVisible();
+ await page.getByRole('button',{name:/Trace the learning path/}).click();
+ await expect(page.locator('.art-panel.is-playing')).toBeVisible();
+ await page.screenshot({path:path.join(capture,'learning-card-desktop.png'),fullPage:true});
+});
