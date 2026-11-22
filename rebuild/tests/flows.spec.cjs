@@ -218,11 +218,11 @@ test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assemb
  expect(Math.abs(original.x-arrived.x)+Math.abs(original.y-arrived.y)).toBeGreaterThan(15);
  const shapes=await page.locator('.hero-vector svg').evaluate(svg=>{
   const slots=[...svg.querySelectorAll('.puzzle-slots path')];
-  const pieces=[...svg.querySelectorAll('.puzzle-piece path')];
+  const pieces=[...svg.querySelectorAll('.puzzle-piece > path:first-child')];
   const matching=slots.every((slot,i)=>slot.getAttribute('d')===pieces[i].getAttribute('d'));
   let overlaps=0,holes=0;
   const point=svg.createSVGPoint();
-  for(let x=180;x<450;x+=4)for(let y=154;y<337;y+=4){
+  for(let x=194;x<524;x+=4)for(let y=121;y<349;y+=4){
    point.x=x;point.y=y;
    const count=pieces.filter(piece=>piece.isPointInFill(point)).length;
    if(count>1)overlaps++;
