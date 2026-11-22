@@ -4,9 +4,9 @@
 const svgDefs = `
 <defs>
   <filter id="paperShadow" x="-25%" y="-30%" width="150%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#61443A" flood-opacity=".12"/></filter>
-  <pattern id="matteGrain" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r=".75" fill="#8F624C" opacity=".2"/><circle cx="12" cy="14" r=".6" fill="#8F624C" opacity=".18"/></pattern>
+  <pattern id="matteGrain" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r=".75" fill="#8F624C" opacity=".27"/><circle cx="12" cy="14" r=".6" fill="#8F624C" opacity=".23"/></pattern>
 </defs>`;
-const svgWrap = (body,label) => '<svg class="art editorial-art" viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+label+'">'+svgDefs+'<rect width="640" height="440" fill="#FFFFFF" />'+body+'<rect width="640" height="440" fill="url(#matteGrain)" opacity=".22" pointer-events="none"/></svg>';
+const svgWrap = (body,label) => '<svg class="art editorial-art" viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+label+'">'+svgDefs+'<rect width="640" height="440" fill="#FFFFFF" />'+body+'<rect width="640" height="440" fill="url(#matteGrain)" opacity=".38" pointer-events="none"/></svg>';
 const iconCard = (x,y,w,h,fill,inside) => `<g filter="url(#paperShadow)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="19" fill="${fill}"/>${inside}</g>`;
 const scenes = {
  journey: () => `
