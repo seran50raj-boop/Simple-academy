@@ -31,6 +31,12 @@ function element(tag,className,text){
 }
 function glyph(kind){
  const shapes={
+ assumptions:'<circle cx="18" cy="18" r="12" fill="none" stroke="#7965d6" stroke-width="2"/><circle cx="18" cy="6" r="3" fill="#ef8065"/><circle cx="30" cy="14" r="3" fill="#6ab9a3"/><circle cx="27" cy="27" r="3" fill="#f4be60"/><circle cx="10" cy="27" r="3" fill="#b29fe8"/><circle cx="6" cy="14" r="3" fill="#d77ea4"/><circle cx="18" cy="18" r="4" fill="#fff" stroke="#7965d6" stroke-width="2"/>',
+ need:'<circle cx="18" cy="18" r="13" fill="#ffe5bc" stroke="#e8a751" stroke-width="2"/><path d="M14 14a4 4 0 0 1 8 0c0 4-5 4-5 8" stroke="#997042" stroke-width="2.5" fill="none"/><circle cx="17" cy="27" r="1.8" fill="#997042"/>',
+ self:'<path d="M18 30V15m0 7L7 11m11 11 11-11" stroke="#6d5ad9" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="7" cy="10" r="5" fill="#ef8065"/><circle cx="29" cy="10" r="5" fill="#6ab9a3"/><circle cx="18" cy="30" r="4" fill="#f4be60"/>',
+ readiness:'<rect x="5" y="8" width="26" height="24" rx="4" fill="#d9edff" stroke="#558ba6" stroke-width="2"/><path d="M5 15h26m-19-9v6m12-6v6" stroke="#558ba6" stroke-width="2"/><circle cx="22" cy="23" r="5" fill="#ef8065"/>',
+ orientation:'<circle cx="18" cy="18" r="13" stroke="#38a390" stroke-width="2.5" fill="none"/><circle cx="18" cy="18" r="7" stroke="#38a390" stroke-width="2" fill="none"/><circle cx="18" cy="18" r="2.5" fill="#ef8065"/>',
+ motivation:'<path d="m18 31-11-12a8 8 0 0 1 11-11 8 8 0 0 1 11 11Z" fill="#ffb3b0" stroke="#dd7981" stroke-width="2"/><circle cx="18" cy="18" r="4" fill="#fff"/>',
  cycle:'<circle cx="18" cy="18" r="12" stroke="#6d5ad9" stroke-width="3" fill="none"/><path d="M18 6v6m12 6h-6m-6 12v-6M6 18h6" stroke="#087f79" stroke-width="3" stroke-linecap="round"/>',
  experience:'<rect x="7" y="8" width="22" height="19" rx="4" fill="#d9eff4" stroke="#35698b" stroke-width="2"/><path d="M10 20h5l3-7 3 10 2-4h4" stroke="#ee8067" stroke-width="2" fill="none"/>',
  reflect:'<circle cx="15" cy="15" r="8" stroke="#6d5ad9" stroke-width="3" fill="#eee8ff"/><path d="m21 21 9 9" stroke="#6d5ad9" stroke-width="4" stroke-linecap="round"/>',
@@ -58,7 +64,53 @@ function artwork(card,idx){
  const peach="#f68c71",purple="#7564d6",mint="#65bca6",gold="#f4c56e",ink="#294b52",muted="#738f8b";
  let center="";
  const stage=(x,y,w,label,fill,step)=>'<g class="pulse-dot phase'+step+'">'+box(x,y,w,61,fill,"#ffffff",17)+t(x+w/2,y+36,label,16,ink)+'</g>';
- if(card.kind==="cycle"){
+ if(card.kind==="assumptions"){
+  const items=[["NEED","TO KNOW"],["SELF","CONCEPT"],["EXPERIENCE",""],["READINESS",""],["ORIENTATION",""],["MOTIVATION",""]];
+  const fills=["#ffe4c2","#dcd5ff","#c6ebe2","#ffd4c6","#d6ecff","#f4d5eb"];
+  items.forEach((item,i)=>{
+   const x=33+(i%3)*175,y=66+Math.floor(i/3)*146;
+   center+=box(x,y,144,104,fills[i],"#ffffff",18)+
+    '<circle class="pulse-dot phase'+(i%4+1)+'" cx="'+(x+22)+'" cy="'+(y+23)+'" r="9" fill="'+[peach,purple,mint,gold][i%4]+'"/>'+
+    t(x+72,y+60,item[0],i===2||i===4?13:16,ink)+
+    (item[1]?t(x+72,y+82,item[1],16,ink):"");
+  });
+  center+='<path d="M177 118h25M352 118h25M104 170v42M279 170v42M454 170v42M177 264h25M352 264h25" stroke="#91b5ae" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round" fill="none"/>';
+ }else if(card.kind==="need"){
+  center=box(56,120,179,152,"#fff3da","#eed4a4",22)+
+   '<circle class="pulse-dot" cx="146" cy="165" r="27" fill="'+gold+'"/>'+t(146,176,"?",42,"#fff")+t(146,228,"WHY LEARN?",19,ink)+
+   '<path d="M244 198h62m-16-13 16 13-16 13" stroke="'+mint+'" stroke-width="7" stroke-linecap="round" fill="none"/>'+
+   box(324,120,181,152,"#d6f3e7","#b7dec9",22)+
+   '<circle cx="414" cy="164" r="25" fill="'+mint+'"/>'+t(414,175,"✓",34,"#fff")+t(415,228,"REAL PURPOSE",17,ink);
+ }else if(card.kind==="self"){
+  center=box(182,55,198,76,"#eee5ff","#d4c6ef",20)+t(280,99,"LEARNER",22,ink)+
+   '<path d="M280 131v53m-150 0h300M130 184v37m150-37v37m150-37v37" stroke="'+purple+'" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+   box(60,221,140,87,"#ffe2d3","#ffffff",17)+box(210,221,140,87,"#c5eade","#ffffff",17)+box(360,221,140,87,"#f8e8b8","#ffffff",17)+
+   t(130,265,"GOALS",18,ink)+t(280,265,"PRACTICE",18,ink)+t(430,265,"FEEDBACK",18,ink);
+ }else if(card.kind==="readiness"){
+  center=box(65,90,202,198,"#fff","#d5e2e3",20)+
+   box(78,101,176,45,"#c9e6f5","#a9c9d9",9)+t(166,132,"NEW ROLE",20,ink)+
+   '<path d="M97 170h137m-137 35h137m-137 35h137" stroke="#d9e4e5" stroke-width="8" stroke-linecap="round"/>'+
+   '<circle cx="217" cy="204" r="16" fill="'+peach+'"/>'+
+   '<path d="M275 184h47m-14-13 14 13-14 13" fill="none" stroke="'+mint+'" stroke-width="6" stroke-linecap="round"/>'+
+   box(340,119,169,137,"#ffe7c6","#efcea0",17)+t(425,168,"LEARN",23,ink)+t(425,198,"NOW",23,ink)+
+   '<circle class="pulse-dot" cx="426" cy="228" r="10" fill="'+peach+'"/>';
+ }else if(card.kind==="orientation"){
+  center='<circle cx="280" cy="189" r="100" fill="#c7ede0" stroke="#9dd1c0" stroke-width="5"/>'+
+   '<circle cx="280" cy="189" r="60" fill="#fff"/><circle cx="280" cy="189" r="27" fill="'+peach+'"/>'+
+   '<path d="M280 89v-46m100 146h64m-164 100v48m-100-148h-63" fill="none" stroke="'+mint+'" stroke-width="6" stroke-linecap="round"/>'+
+   box(212,5,136,51,"#f5e4bc","#fff",12)+t(280,37,"REAL TASK",15,ink)+
+   box(430,160,118,59,"#e2d9fb","#fff",12)+t(489,196,"SOLVE",15,ink)+
+   box(215,326,130,49,"#c6e9e0","#fff",12)+t(280,358,"APPLY",15,ink)+
+   box(11,161,119,58,"#ffdad3","#fff",12)+t(70,196,"PROBLEM",13,ink);
+ }else if(card.kind==="motivation"){
+  center='<circle cx="280" cy="190" r="115" fill="#f8e5b3" stroke="#efd494" stroke-width="4"/>'+
+   '<circle class="pulse-dot" cx="280" cy="190" r="58" fill="#fff" stroke="#fff9e5" stroke-width="8"/>'+
+   t(280,180,"WHY",22,ink)+t(280,208,"TRY?",22,ink)+
+   box(36,81,165,67,"#e8deff","#fff",17)+t(118,120,"CURIOSITY",17,ink)+
+   box(359,81,165,67,"#ffe0cc","#fff",17)+t(442,120,"PURPOSE",18,ink)+
+   box(36,248,165,67,"#d4f3e7","#fff",17)+t(118,289,"MASTERY",18,ink)+
+   box(359,248,165,67,"#d9e8ff","#fff",17)+t(442,289,"RECOGNITION",15,ink);
+ }else if(card.kind==="cycle"){
   center='<circle cx="275" cy="183" r="114" fill="none" stroke="#a7d0c6" stroke-width="7" stroke-dasharray="4 15" stroke-linecap="round"/>'+
   '<circle cx="275" cy="183" r="54" fill="#ffffff" stroke="#dce8df" stroke-width="2"/>'+t(275,177,"KOLB",24,ink)+t(275,201,"learn → adapt",12,muted)+
   stage(208,42,135,"EXPERIENCE","#fcd7c8",1)+stage(369,152,145,"REFLECT","#d5cfff",2)+stage(206,282,151,"CONCEPT","#ffe6af",3)+stage(42,153,141,"EXPERIMENT","#bee8dc",4)+
