@@ -226,7 +226,7 @@ function showHome(){
  $('home-link').hidden=true;$('map-link').hidden=true;
  $('welcome-start').textContent=furthest?'Continue Andragogy →':'Begin Andragogy →';
  const intro=$('welcome-preview');
- if(!intro.querySelector('svg'))intro.innerHTML=buildPuzzleHeroSVG();
+ if(!intro.querySelector('svg'))intro.innerHTML=buildPuzzleHeroSVG('welcome');
  window.scrollTo(0,0);
 }
 function showHonour(){
