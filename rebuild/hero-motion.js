@@ -56,8 +56,8 @@ function buildPuzzleHeroSVG(){
  '<rect x="168" y="139" width="292" height="214" rx="17" fill="#FFFBF5"/>',
  '<g class="puzzle-slots">',slots,'</g>',
  '<g class="puzzle-pieces">',tiles,'</g>',
- '<g class="puzzle-conclusion"><rect x="231" y="217" width="178" height="58" rx="28" fill="#FFF9EE" stroke="#C9B5A0" stroke-width="2.7" filter="url(#puzzleLift)"/>',
- '<text x="320" y="251" fill="#1B464B" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="23">Andragogy</text></g>',
+ '<g class="puzzle-conclusion"><rect x="249" y="230" width="142" height="47" rx="23" fill="#FFF9EE" stroke="#C9B5A0" stroke-width="2.7" filter="url(#puzzleLift)"/>',
+ '<text x="320" y="260" fill="#1B464B" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="23">Andragogy</text></g>',
  '<rect width="640" height="440" fill="url(#puzzleGrain)" opacity=".29" pointer-events="none"/></svg>'
  ].join('');
 }
