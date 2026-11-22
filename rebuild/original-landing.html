@@ -4606,6 +4606,12 @@ body.clean-deck-v566 .lesson-layout{
 body.original-landing{margin:0;min-height:100vh;background:#f7f4ee;color:#252b42}
 body.original-landing .app-shell{display:block!important;margin:0!important;max-width:none!important;width:100%!important;padding:0!important;min-height:100vh}
 body.original-landing .restored-stage{display:none!important}
+body.original-landing #profile-view.restored-stage:not(.is-current),
+body.original-landing #facilitator-view.restored-stage:not(.is-current),
+body.original-landing #honor-view.restored-stage:not(.is-current){
+ display:none!important;visibility:hidden!important;opacity:0!important;height:0!important;
+ max-height:0!important;min-height:0!important;padding:0!important;margin:0!important;overflow:hidden!important
+}
 body.original-landing #profile-view.restored-stage.is-current{display:grid!important;visibility:visible!important;opacity:1!important}
 body.original-landing .intro-view.restored-stage.is-current{display:block!important;visibility:visible!important;opacity:1!important}
 body.original-landing #profile-view{min-height:calc(100vh - 68px)!important}
@@ -4639,10 +4645,10 @@ body.original-landing button:focus-visible{outline:3px solid #eba944;outline-off
       </div>
 
       <div class="pilot-login-intro">
-        <p class="pilot-kicker">TWO-MODULE PILOT · FOUNDATIONS OF ADULT LEARNING</p>
+        <p class="pilot-kicker">MODULE 01 · FOUNDATIONS OF ADULT LEARNING</p>
         <h1 id="welcome-title">Small lessons.<br><em>Big ideas.</em></h1>
         <p class="pilot-tagline">Because your brain deserves better.</p>
-        <p class="pilot-login-explainer">Enter your details once. We’ll email you a six-digit code so your progress can follow you across devices.</p>
+        <p class="pilot-login-explainer">Explore illustrated lessons, make your own learning choices and progress at your pace. No sign-in required.</p>
       </div>
 
       <div class="pilot-login-form" aria-label="Begin learning">
@@ -4661,7 +4667,7 @@ body.original-landing button:focus-visible{outline:3px solid #eba944;outline-off
         <cite>— Malcolm Knowles</cite>
       </div>
       <div class="pilot-visual-image"><img alt="Illustrated learning landscape with a brain-shaped tree and winding river" src="assets/v566-asset-01.png"/></div>
-      <div class="pilot-visual-footer"><span>MODULE 01</span><strong>Andragogy</strong><span class="pilot-arrow">→</span><span>MODULE 02</span><strong>Experiential Learning</strong></div>
+      <div class="pilot-visual-footer"><span>MODULE 01</span><strong>Andragogy</strong><span class="pilot-arrow">→</span><span>14 CARDS</span><strong>6 Questions</strong></div>
     </aside>
   </div>
 </section>
@@ -4693,7 +4699,7 @@ body.original-landing button:focus-visible{outline:3px solid #eba944;outline-off
 <picture><source media="(max-width: 760px)" srcset="assets/v566-asset-03.webp" /><img alt="Dr Rajkumar smiling in navy scrubs and pointing toward the learner agreement in a simulation suite" loading="eager" src="assets/v566-asset-04.webp"/></picture>
 </aside>
 </div>
-<p class="honor-footnote">This is a trust-based learning agreement. For this pilot, your name, email, login activity and module progress are recorded for course evaluation.</p>
+<p class="honor-footnote">This is a trust-based learning agreement. In this rebuild, answers and progress remain in this browser. No email sign-in or cross-device sync is used.</p>
 </div>
 </section>
 
