@@ -65,5 +65,15 @@ Before declaring any course art ready, **render and review the image** at deskto
 - Replaced the overly schematic learner slide illustration with a **flat layered-paper learning route**: vibrant coral, mustard, teal, sky blue, cream paper, gentle shadows, and fine grain. It contains **no human figures**, avoiding the earlier distorted anatomy entirely.
 - Replaced the ambiguous patient/manikin silhouette on the simulation slide with a clean empty clinical bed and monitor graphic; improved the visible matte grain and scale without distorting the SVG aspect ratio.
 - Conducted an **actual rendered browser screenshot review** of information, question, learner, assumptions, history and simulation cards on desktop/mobile. This is different from the earlier text-only syntax inspections.
-- The eight Chromium automated tests pass on the latest revision; tests cover all 14 cards, all six mandatory questions, progress persistence, map alignment, non-overflow on mobile, question/information separation, concept replay and reduced-motion behaviour.
+- The eight Chromium automated tests passed at that milestone; newer integration tests extend this coverage. tests cover all 14 cards, all six mandatory questions, progress persistence, map alignment, non-overflow on mobile, question/information separation, concept replay and reduced-motion behaviour.
 - **Still provisional:** text, concept art and visual quality beyond this 14-card Foundations module. Do not merge or deploy without user reviewing actual new screens. No new full-body SVG artwork should be added until anatomy and visual approval requirements are met.
+
+## Card 1 moving-puzzle implementation — 22 November 2026
+
+- Integrated **the real four-second moving-centre-puzzle animation** into the Andragogy intro card. It is an H.264 MP4, shipped as a small repo-owned binary at `rebuild/assets/andragogy-card1-motion.mp4` (400×224 compressed preview).
+- `hero-motion.js` renders the real video with muted, inline, looped autoplay where allowed, plus explicit **Replay** and **Pause/Play** controls. A native video URL is available if decoding fails.
+- For learners requesting reduced motion, the video **does not autoplay**; it remains paused until the learner chooses Play. A separate replay starts at the beginning, whereas Play resumes from pause.
+- New browser tests decode and compare **actual presented video frames** at different playback times; a moving video clock alone does not count as animation. The test also covers replay, pause, mobile sizing and reduced-motion behaviour.
+- Kept the visually approved map, 14-card sequence, progress indicators, question gating and saved answers unchanged.
+- Removed the previous generic, static clinician image from the Card 1 implementation and from the rebuild codebase. The original full-resolution illustration and layered SVG are not yet included: this MP4 is an **actual moving and deliberately compressed preview**, not a final independently editable vector animation.
+- This remains an **unmerged draft PR**, with no live website changes.
