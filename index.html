@@ -4626,6 +4626,22 @@ body.original-landing .restored-site-footer a{color:#146d69;text-decoration:unde
 body.original-landing .pilot-login-visual{min-width:0}
 body.original-landing .pilot-login-visual img{max-width:100%;height:auto}
 body.original-landing .pilot-login-intro h1{overflow:visible}
+/* On phones, reveal the original purple landscape before the Begin action. */
+@media(max-width:960px){
+ body.original-landing #profile-view .pilot-login-copy > .pilot-visual-image{
+  width:100%;height:clamp(190px,53vw,270px);min-height:0!important;
+  flex:0 0 auto;overflow:hidden;border-radius:16px;
+  margin:11px 0 18px;box-shadow:0 9px 22px rgba(71,47,132,.11)
+ }
+ body.original-landing #profile-view .pilot-login-copy > .pilot-visual-image img{
+  display:block;width:100%;height:100%!important;min-height:0!important;
+  object-fit:cover;object-position:center 53%;max-width:100%
+ }
+ body.original-landing #profile-view .pilot-login-visual{
+  display:flex;flex-direction:column;grid-template-rows:none
+ }
+}
+
 body.original-landing .honor-card.hidden{display:none!important}
 body.original-landing .honor-card:not(.hidden){display:block!important}
 body.original-landing button:focus-visible{outline:3px solid #eba944;outline-offset:3px}
@@ -4715,6 +4731,22 @@ body.original-landing button:focus-visible{outline:3px solid #eba944;outline-off
   Object.entries(stages).forEach(([name,node])=>node.classList.toggle('is-current',which===name));
   window.scrollTo(0,0);
  }
+ function placeLandscape(){
+  const image=document.querySelector('#profile-view .pilot-visual-image');
+  const copy=document.querySelector('#profile-view .pilot-login-copy');
+  const sidebar=document.querySelector('#profile-view .pilot-login-visual');
+  const form=document.querySelector('#profile-view .pilot-login-form');
+  const footer=document.querySelector('#profile-view .pilot-visual-footer');
+  if(!image||!copy||!sidebar||!form||!footer)return;
+  if(window.matchMedia('(max-width:960px)').matches){
+   if(image.parentElement!==copy)copy.insertBefore(image,form);
+  }else if(image.parentElement!==sidebar){
+   sidebar.insertBefore(image,footer);
+  }
+ }
+ placeLandscape();
+ window.addEventListener('resize',placeLandscape,{passive:true});
+
  function openCourse(){
   window.location.assign('./course.html#map');
  }
