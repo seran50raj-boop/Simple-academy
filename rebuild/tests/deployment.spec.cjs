@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const root=path.resolve(__dirname,'../..');
 test('deployed root matches tested rebuild and preserves legacy backup',async()=>{
- const names=['index.html','course.js','art.js','map.js','map.css','map-icons.js','lesson.css','lesson-interactions.js','hero-motion.js'];
+ const names=['index.html','course.js','art.js','map.js','map.css','map-icons.js','lesson.css','lesson-interactions.js','hero-motion.js','landing.css','site-info.html'];
  for(const name of names){
   const from=fs.readFileSync(path.join(root,'rebuild',name));
   const to=fs.readFileSync(path.join(root,name));
@@ -15,7 +15,7 @@ test('deployed root matches tested rebuild and preserves legacy backup',async()=
  expect(movie.byteLength).toBeGreaterThan(10000);
  expect(fs.existsSync(path.join(root,'legacy.html'))).toBe(true);
  expect(fs.existsSync(path.join(root,'admin.html'))).toBe(true);
- expect(JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).build).toBe('6.0');
+ expect(JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).build).toBe('6.1');
 });
 test('root homepage has valid relative references and the 14-card app',async()=>{
  const source=fs.readFileSync(path.join(root,'index.html'),'utf8');
