@@ -181,7 +181,7 @@
 <p class="map-intro">Follow the route from concept to practice. Each stop is one card. Questions unlock the path forward.</p>
 <nav class="route-grid" id="route-grid" aria-label="Andragogy card map"></nav>
 <div class="map-legend"><span><b>▤</b> Learning</span><span><b>?</b> Question</span><span><b>✓</b> Completed</span></div>
-<div class="map-actions"><button class="nav primary" id="start-map" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small></div>
+<div class="map-actions"><button class="nav primary" id="start-map" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small><a id="andragogy-continue" class="nav primary" href="./learn.html?module=knowles" hidden>Next: Knowles’s Six Assumptions →</a></div>
 </section>
 <section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section><div class="site-notices">SIMple Academy · An independently created educational project · <a href="./site-info.html">Privacy &amp; educational notices</a> · <a href="./legacy.html">Earlier pilot</a></div></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script src="./course.js"></script>
@@ -219,6 +219,7 @@ function renderMap(){
  renderCourseMap($('route-grid'),cards,furthest,completed,showCard);
  $('start-map').textContent=furthest?'Continue learning →':'Start learning →';
  $('map-summary').textContent=(furthest+1)+' of '+cards.length+' cards unlocked';
+ $('andragogy-continue').hidden=furthest!==cards.length-1;
 }
 function showHome(){
  $('welcome-screen').hidden=false;$('honour-screen').hidden=true;
