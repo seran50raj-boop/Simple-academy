@@ -113,6 +113,7 @@
 @media(max-width:740px){.approved-hero-img{width:min(100%,300px)}}
 </style>
 <link rel="stylesheet" href="./map.css">
+<link rel="stylesheet" href="./lesson.css">
 </head>
 <body>
 <div class="shell"><header class="top"><div class="brand">SIM<span>ple</span> Academy</div><div class="header-actions"><div class="unit">Module 1 · Foundations of Andragogy</div><button class="map-link" id="map-link" type="button" hidden>Course map</button></div></header><main class="main">
@@ -127,6 +128,7 @@
 <section id="cards-screen" hidden><article class="card" aria-live="polite"><div><div class="kicker" id="kicker"></div><h1 id="heading"></h1><p id="body"></p><div id="interaction"></div></div><div id="visual"></div></article><div class="mobilehint">Swipe to navigate unlocked cards</div></section></main><footer class="bottom" id="bottom" hidden><nav class="milestones" id="milestones" aria-label="Course card progress"></nav><button class="nav" id="prev">← Back</button><div class="progress"><small id="count"></small><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav primary" id="next">Next →</button></footer></div>
 <script src="./course.js"></script>
 <script src="./art.js"></script>
+<script src="./lesson-interactions.js"></script>
 <script src="./approved-hero.js"></script>
 <script src="./map-icons.js"></script>
 <script src="./map.js"></script>
@@ -184,7 +186,10 @@ function render(){
   caption.textContent='Experience · Autonomy · Purpose';
   figure.appendChild(caption);
   $('visual').appendChild(figure);
- }else{$('visual').innerHTML='<div class="art-panel">'+artFor(c.art)+'</div>';}
+ }else{
+  const panel=renderConceptArtwork($('visual'),c);
+  addConceptAction($('interaction'),c,panel);
+ }
  if(c.q){
   const wrap=document.createElement('div');wrap.className='choices';
   c.q.forEach((option,i)=>{
