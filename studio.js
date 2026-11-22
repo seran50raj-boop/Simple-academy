@@ -289,7 +289,7 @@ function renderOrder(card,area){
    row.append(element("span","num",String(i+1)),element("span","phrase",phrase));
    [-1,1].forEach((delta)=>{
     const btn=element("button","move",delta===-1?"↑":"↓");
-    btn.type="button";btn.disabled=isSolved||i+delta<0||i+delta>=orders[current].length;
+    btn.type="button";btn.disabled=solved.has(current)||i+delta<0||i+delta>=orders[current].length;
     btn.setAttribute("aria-label","Move "+phrase+(delta===-1?" up":" down"));
     btn.addEventListener("click",()=>{const swap=i+delta;[orders[current][i],orders[current][swap]]=[orders[current][swap],orders[current][i]];draw();});
     row.appendChild(btn);
