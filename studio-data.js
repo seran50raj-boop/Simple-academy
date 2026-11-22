@@ -1,8 +1,36 @@
 /* SIMple Academy · module content · version 1.0
    Independent educational modules; answer keys remain client-side for formative practice. */
 window.SIMPLE_ACADEMY_MODULES = {
+  knowles: {
+    id:"knowles", number:"02", title:"Knowles’s Six Assumptions", short:"Knowles and Andragogy",
+    eyebrow:"MODULE 02 · THE ADULT LEARNER",
+    strap:"Six design questions, not six labels for every adult.",
+    description:"Build on Andragogy Foundations. Discover the six assumptions in Knowles’s developed model and apply them to realistic healthcare teaching decisions.",
+    theme:"violet", minutes:"15–20 min",
+    references:[
+      {label:"Adult Learning Assumptions · CDC",url:"https://www.cdc.gov/healthyschools/professional_development/e-learning/pd201/videos/transcripts/06_Adult_Learning_Assumptions.html"},
+      {label:"Andragogy in Practice · Biomedical Research Education",url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC11008574/"},
+      {label:"Andragogy: Past and Present Potential · New Directions for Adult and Continuing Education",url:"https://doi.org/10.1002/ace.20546"}
+    ],
+    cards:[
+      {word:"Framework",kind:"assumptions",title:"Meet Malcolm Knowles’s six assumptions",copy:"Knowles’s adult-learning model is often introduced through six assumptions: need to know, self-concept, experience, readiness, orientation and motivation. These are prompts for designing learning, not fixed traits of all adults.",note:"Our original pilot introduced five. This expanded lesson includes the later ‘need to know’ assumption as well.",type:"learn"},
+      {word:"Why",kind:"need",title:"1 · Need to know",copy:"An adult learner may ask: Why learn this, and what will it help me do? Start a course by making the purpose and consequences understandable.",note:"Before a resuscitation workshop, show the real decision that the skill will help the learner make.",type:"learn"},
+      {word:"Relevance",kind:"need",title:"Show the reason before the syllabus",copy:"Your residents have never used a defibrillator. Which opening best addresses ‘need to know’?",type:"choice",options:["List all device specifications before explaining their relevance","Show a brief arrest scenario and explain what timely shock delivery changes","Ask residents to memorise model numbers without context"],correct:1,explain:"The scenario gives learners a meaningful reason to engage with the skill before the details.",wrong:"Need to know is about why the learning matters and what it helps a learner do."},
+      {word:"Agency",kind:"self",title:"2 · Self-concept",copy:"Adults may value being treated as capable, self-directing partners. Offer real decisions about goals, cases or practice order while preserving essential competencies and safety rules.",note:"Learner autonomy and educator guidance can coexist. The degree of choice can vary.",type:"learn"},
+      {word:"Choice",kind:"self",title:"Where can learners decide?",copy:"A clinical skills workshop has a mandatory safety standard. What should the educator do?",type:"choice",options:["Let every learner set their own safety threshold","Keep the safety threshold fixed, but let learners choose which scenarios to practise first","Remove learner choice because the group is adult"],correct:1,explain:"Self-direction can shape the route even when required clinical outcomes stay fixed.",wrong:"A meaningful choice does not require relaxing non-negotiable standards."},
+      {word:"Experience",kind:"experience",title:"3 · Role of experience",copy:"Learners bring clinical episodes, personal theories and habits. Invite them to connect new concepts with what they already know—and to question habits that may be inaccurate.",note:"Experience is a resource, not a guarantee of correct knowledge. Prior misconceptions may need careful examination.",type:"learn"},
+      {word:"Timing",kind:"readiness",title:"4 · Readiness to learn",copy:"A clinician transferring to ICU next week may become especially interested in ventilator troubleshooting. A new role or urgent task can create a timely learning need.",note:"Readiness is about why the learning feels necessary now; it overlaps with, but is not identical to, motivation.",type:"learn"},
+      {word:"Readiness",kind:"readiness",title:"Why is learning needed now?",copy:"A nurse signs up for ventilator training because they begin an ICU rotation on Monday. Which assumption most directly explains the timing?",type:"choice",options:["Readiness to learn","Orientation to learning","Role of experience"],correct:0,explain:"The new role makes this learning immediately timely: readiness to learn.",wrong:"Focus on the approaching responsibility, not just how the topic is taught."},
+      {word:"Problems",kind:"orientation",title:"5 · Orientation to learning",copy:"Learning organised around authentic tasks and problems can make knowledge easier to use. Teach haemodynamic reasoning through a shock case rather than only a disconnected list of definitions.",note:"Problem-centred learning can still include direct explanations, demonstrations and deliberate practice.",type:"learn"},
+      {word:"Motives",kind:"motivation",title:"6 · Motivation to learn",copy:"Professional growth, confidence, curiosity, mastery and purpose can motivate learning. External influences—assessment, recognition or job requirements—may matter too.",note:"Knowles emphasised internal motivation, but do not assume external incentives or circumstances are irrelevant.",type:"learn"},
+      {word:"Matching",kind:"match",title:"Match the six assumptions",copy:"Match each assumption to its most distinctive teaching design question.",type:"match",pairs:[["Need to know","Why does this matter?"],["Self-concept","Where can learners choose?"],["Experience","What do they already bring?"],["Readiness","Why is this needed now?"],["Orientation","What authentic problem can organise learning?"],["Motivation","What makes the effort worthwhile?"]],explain:"The six assumptions invite different but complementary teaching decisions."},
+      {word:"Combine",kind:"design",title:"One workshop. Six design decisions.",copy:"For a sepsis workshop, show why early recognition matters, offer case choices, surface prior experiences, match role demands, organise around a patient problem and recognise learners’ goals.",note:"You need not apply every assumption in exactly the same way. Use the ones that improve this group’s learning.",type:"learn"},
+      {word:"Judgement",kind:"design",title:"Choose the strongest course design",copy:"You are leading airway training for experienced residents with different backgrounds. Which opening makes the most sense?",type:"choice",options:["Assume everyone has the same baseline expertise and motivation","Ask about prior experience, explain the clinical goal and offer appropriate practice pathways","Treat experience as proof that no one needs practice"],correct:1,explain:"Good design respects experience and autonomy without assuming uniform competence.",wrong:"Knowles’s assumptions help you explore learner differences, not erase them."},
+      {word:"Nuance",kind:"transfer",title:"Are the assumptions universal laws?",copy:"A junior resident asks for tightly guided training instead of independent learning. What is the most appropriate response?",type:"choice",options:["Insist on self-directed learning because all adults are self-directed","Provide suitable structure, then expand choice as confidence and competence develop","Exclude the resident because the model does not apply to them"],correct:1,explain:"Knowles’s assumptions are flexible design lenses. Adult learners differ, and structured guidance is often appropriate.",wrong:"Use the assumptions responsively; they are not universal prescriptions for every learner."}
+    ]
+  },
   kolb: {
-    id:"kolb", number:"02", title:"Kolb’s Learning Cycle", short:"Experiential Learning",
+    id:"kolb", number:"03", title:"Kolb’s Learning Cycle", short:"Experiential Learning",
     eyebrow:"MODULE 02 · LEARNING FROM EXPERIENCE",
     strap:"Experience is the starting point. Reflection makes it useful.",
     description:"Move through a four-stage cycle and design a simulation activity that turns experience into better decisions.",
@@ -29,7 +57,7 @@ window.SIMPLE_ACADEMY_MODULES = {
     ]
   },
   rcdp: {
-    id:"rcdp", number:"03", title:"Rapid Cycle Deliberate Practice", short:"RCDP",
+    id:"rcdp", number:"04", title:"Rapid Cycle Deliberate Practice", short:"RCDP",
     eyebrow:"MODULE 03 · COACHING IN THE MOMENT",
     strap:"Pause. Coach. Rewind. Try again.",
     description:"Learn when to interrupt a scenario, give targeted feedback and repeat a skill before increasing difficulty.",
