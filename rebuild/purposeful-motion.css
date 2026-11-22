@@ -72,3 +72,8 @@
 .hero-vector .puzzle-piece[data-piece="experience"]>path{fill:#EF7E59!important}
 .hero-vector .puzzle-piece[data-piece="autonomy"]>path{fill:#4BA89E!important}
 .hero-vector .puzzle-piece[data-piece="relevance"]>path{fill:#92CADA!important}
+
+/* Ensure the final educational concept is visibly a completed centre tile,
+   not text over the joint between four coloured pieces. */
+.hero-vector .puzzle-conclusion rect{filter:none!important;fill:#FFF9EE!important;stroke:#C9B5A0!important}
+.hero-vector .puzzle-conclusion text{fill:#1B464B!important}
