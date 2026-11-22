@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Interactive SIMple Academy lessons on experiential learning and rapid cycle deliberate practice.">
+<title>Learn · SIMple Academy</title>
+<link rel="stylesheet" href="./studio.css">
+</head>
+<body>
+<header class="topbar">
+ <a class="logo" href="./academy.html" aria-label="SIMple Academy module library">SIM<span>ple</span> Academy</a>
+ <div class="topactions"><a href="./academy.html">All modules</a><button id="map-button" type="button" hidden>Module map</button></div>
+</header>
+<main class="wrap">
+ <section id="overview" aria-label="Module map">
+  <div class="module-hero">
+   <div>
+    <div class="eyebrow" id="module-eyebrow"></div>
+    <h1 id="module-title"></h1>
+    <p class="lead" id="module-desc"></p>
+    <p class="smallprint" id="module-strap"></p>
+    <div class="pillrow">
+     <span class="pill" id="module-time"></span><span class="pill" id="module-count"></span><span class="pill" id="module-questions"></span>
+    </div>
+    <button id="resume" class="cta" type="button">Start this module →</button>
+    <div class="success-note" id="complete-note" hidden>Module completed. Revisit any card or continue to another module.</div>
+    <p><a id="next-module" href="./academy.html" hidden>Next module →</a></p>
+   </div>
+   <div id="module-art" class="illustration" aria-hidden="true"></div>
+  </div>
+  <section class="map-section" aria-labelledby="journey-heading">
+   <div class="eyebrow">YOUR LEARNING JOURNEY</div><h2 id="journey-heading">Explore the cards</h2>
+   <p class="summary" id="map-summary" aria-live="polite"></p>
+   <nav id="journey" class="journey" aria-label="Module card map"></nav>
+  </section>
+  <section class="more" aria-labelledby="reading-heading">
+   <h3 id="reading-heading">Further reading</h3>
+   <div id="references"></div>
+   <p class="smallprint">For educational practice only. This lesson is not an accredited certification or a substitute for supervised clinical training. Progress is stored in this browser, not in an account.</p>
+  </section>
+ </section>
+ <section id="lesson" class="lesson-viewport" aria-label="Lesson" hidden>
+  <div class="lesson-top"><span class="eyebrow">Small lessons. Big ideas.</span><span class="progress-label">Illustrated learning · your pace</span></div>
+  <article id="lesson-card" class="lesson-card" aria-live="polite">
+   <div class="lesson-copy">
+    <div id="lesson-kicker" class="eyebrow"></div>
+    <h1 id="lesson-title"></h1>
+    <p id="lesson-copy" class="bodycopy"></p>
+    <div id="activity"></div>
+    <p id="lesson-note" class="hint" hidden></p>
+   </div>
+   <div>
+    <div id="visual" class="illustration"></div>
+    <div class="art-actions"><button id="replay" type="button" class="replay" aria-label="Replay illustration animation">↺ Replay illustration</button></div>
+    <p class="art-caption">Purposeful vector motion · no video required</p>
+   </div>
+  </article>
+ </section>
+</main>
+<footer id="lesson-controls" class="lesson-controls" hidden>
+ <nav id="step-dots" class="step-dots" aria-label="Card navigation"></nav>
+ <div class="control-row">
+  <button class="navbtn" id="back" type="button">← Back</button>
+  <div class="meter"><div id="counter" aria-live="polite">Card 1</div><div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div></div>
+  <button class="navbtn primary" id="next" type="button">Next →</button>
+ </div>
+</footer>
+<script src="./studio-data.js"></script>
+<script src="./studio.js"></script>
+</body>
+</html>
