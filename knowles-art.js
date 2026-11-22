@@ -6,10 +6,10 @@ function knowlesArtwork(card,index){
  const f=(x)=>Number(x).toFixed(1);
  const box=(x,y,w,h,color,r=18)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'" fill="'+color+'" stroke="#ffffff" stroke-width="3" filter="url(#km-shadow)"/>';
  const txt=(x,y,str,size=20,color=K.ink,weight=800,anchor="middle")=>'<text x="'+x+'" y="'+y+'" fill="'+color+'" text-anchor="'+anchor+'" font-size="'+size+'" font-weight="'+weight+'" font-family="Segoe UI,Arial,sans-serif">'+str+'</text>';
- const step=(delay,shape)=>'<g class="km-step" style="--km-delay:'+delay+'s">'+shape+'</g>';
- const move=(delay,x,y,shape)=>'<g class="km-move" style="--km-delay:'+delay+'s;--km-x:'+x+'px;--km-y:'+y+'px">'+shape+'</g>';
- const trace=(delay,path,color=K.teal,width=6)=>'<path class="km-connector" style="--km-delay:'+delay+'s" d="'+path+'" fill="none" stroke="'+color+'" stroke-width="'+width+'" stroke-linecap="round" stroke-linejoin="round"/>';
- const stage=(delay,shape)=>'<g class="km-stage" style="--km-delay:'+delay+'s">'+shape+'</g>';
+ const step=(delay,shape)=>'<g class="km-step" style="--km-delay:'+(delay*2).toFixed(2)+'s">'+shape+'</g>';
+ const move=(delay,x,y,shape)=>'<g class="km-move" style="--km-delay:'+(delay*2).toFixed(2)+'s;--km-x:'+x+'px;--km-y:'+y+'px">'+shape+'</g>';
+ const trace=(delay,path,color=K.teal,width=6)=>'<path class="km-connector" style="--km-delay:'+(delay*2).toFixed(2)+'s" d="'+path+'" fill="none" stroke="'+color+'" stroke-width="'+width+'" stroke-linecap="round" stroke-linejoin="round"/>';
+ const stage=(delay,shape)=>'<g class="km-stage" style="--km-delay:'+(delay*2).toFixed(2)+'s">'+shape+'</g>';
  const pill=(x,y,w,text,fill=K.paper)=>box(x,y,w,49,fill,13)+txt(x+w/2,y+31,text,15);
  const chevron=(x,y)=>'<path d="m'+x+' '+(y-11)+' 12 11-12 11" fill="none" stroke="'+K.ink+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>';
  const clinicalMonitor=(x,y)=>box(x,y,175,122,"#23545a",13)+
