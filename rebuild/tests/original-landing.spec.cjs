@@ -31,12 +31,15 @@ test('restored original welcome artwork and typography display on desktop and ph
 
 test('original creator and double-confirmation honour code lead to rebuilt map',async({page})=>{
  await page.getByRole('button',{name:/Begin learning/}).click();
+ await expect(page.locator('#profile-view')).toBeHidden();
  await expect(page.locator('#facilitator-view')).toBeVisible();
  await expect(page.getByRole('heading',{name:/Hello, I.m Dr. Rajkumar Elanjeran/})).toBeVisible();
  await expect(page.locator('#facilitator-view .facilitator-art img')).toBeVisible();
  fs.mkdirSync(capture,{recursive:true});
  await page.screenshot({path:path.join(capture,'restored-original-creator-desktop.png'),fullPage:true});
  await page.getByRole('button',{name:/Sounds good/}).click();
+ await expect(page.locator('#facilitator-view')).toBeHidden();
+ await expect(page.locator('#profile-view')).toBeHidden();
  await expect(page.locator('#honor-view')).toBeVisible();
  await expect(page.getByRole('heading',{name:'The learner honour code'})).toBeVisible();
  await page.getByRole('button',{name:'Yes, I agree'}).click();
@@ -61,6 +64,9 @@ test('returning learner can bypass the original honour code and resume course',a
 
 test('restored landing respects privacy and still links to public notices',async({page})=>{
  await expect(page.getByText(/Your answers and progress stay in this browser/)).toBeVisible();
+ await expect(page.getByText(/No sign-in required/).first()).toBeVisible();
+ await expect(page.getByText(/14 CARDS/)).toBeVisible();
+ await expect(page.getByText(/6 Questions/)).toBeVisible();
  await expect(page.getByText(/does not award accredited CME/)).toBeVisible();
  await expect(page.getByRole('link',{name:/Learning & privacy information/})).toHaveAttribute('href','./site-info.html');
  await expect(page.getByRole('link',{name:/Earlier two-module pilot/})).toHaveAttribute('href','./legacy.html');
