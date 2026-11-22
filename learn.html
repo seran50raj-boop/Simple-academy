@@ -2,69 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Interactive SIMple Academy lessons on experiential learning and rapid cycle deliberate practice.">
-<title>Learn · SIMple Academy</title>
+<meta name="description" content="SIMple Academy interactive learning modules. Same illustrated map and card navigation as Foundations of Andragogy.">
+<title>SIMple Academy · Learning module</title>
 <link rel="stylesheet" href="./studio.css">
+<link rel="stylesheet" href="./foundation-core.css">
+<link rel="stylesheet" href="./map.css">
+<link rel="stylesheet" href="./lesson.css">
+<link rel="stylesheet" href="./purposeful-motion.css">
+<link rel="stylesheet" href="./studio-matched.css">
 </head>
-<body>
-<header class="topbar">
- <a class="logo" href="./academy.html" aria-label="SIMple Academy module library">SIM<span>ple</span> Academy</a>
- <div class="topactions"><a href="./academy.html">All modules</a><button id="map-button" type="button" hidden>Module map</button></div>
+<body class="academy-course">
+<div class="shell">
+<header class="top">
+  <a class="brand" href="./academy.html" aria-label="SIMple Academy module library">SIM<span>ple</span> Academy</a>
+  <div class="header-actions"><div class="unit" id="module-title-nav">Learning module</div><a class="map-link" href="./academy.html">All modules</a><button class="map-link" id="map-button" type="button" hidden>Course map</button></div>
 </header>
-<main class="wrap">
- <section id="overview" aria-label="Module map">
-  <div class="module-hero">
-   <div>
-    <div class="eyebrow" id="module-eyebrow"></div>
-    <h1 id="module-title"></h1>
-    <p class="lead" id="module-desc"></p>
-    <p class="smallprint" id="module-strap"></p>
-    <div class="pillrow">
-     <span class="pill" id="module-time"></span><span class="pill" id="module-count"></span><span class="pill" id="module-questions"></span>
-    </div>
-    <button id="resume" class="cta" type="button">Start this module →</button>
-    <div class="success-note" id="complete-note" hidden>Module completed. Revisit any card or continue to another module.</div>
-    <p><a id="next-module" href="./academy.html" hidden>Next module →</a></p>
-   </div>
-   <div id="module-art" class="illustration" aria-hidden="true"></div>
-  </div>
-  <section class="map-section" aria-labelledby="journey-heading">
-   <div class="eyebrow">YOUR LEARNING JOURNEY</div><h2 id="journey-heading">Explore the cards</h2>
-   <p class="summary" id="map-summary" aria-live="polite"></p>
-   <nav id="journey" class="journey" aria-label="Module card map"></nav>
-  </section>
-  <section class="more" aria-labelledby="reading-heading">
-   <h3 id="reading-heading">Further reading</h3>
-   <div id="references"></div>
-   <p class="smallprint">For educational practice only. This lesson is not an accredited certification or a substitute for supervised clinical training. Progress is stored in this browser, not in an account.</p>
-  </section>
+<main class="main">
+ <section id="overview" class="map-screen" aria-labelledby="module-title">
+  <div class="map-eyebrow" id="module-eyebrow"></div>
+  <h1 id="module-title">Explore the ideas</h1>
+  <p class="map-intro" id="module-desc"></p>
+  <p class="studio-strap" id="module-strap"></p>
+  <div class="studio-stats" aria-label="Module details"><span id="module-time"></span><span id="module-count"></span><span id="module-questions"></span></div>
+  <nav id="journey" class="route-grid" aria-label="Learning cards along the illustrated route"></nav>
+  <div class="map-legend"><span><b>▤</b> Learning</span><span><b>?</b> Question</span><span><b>✓</b> Completed</span></div>
+  <div class="map-actions"><button id="resume" class="nav primary" type="button">Start learning →</button><small id="map-summary" aria-live="polite"></small><a id="next-module" class="nav primary" hidden href="./academy.html">Next module →</a></div>
+  <div class="studio-finish" id="complete-note" hidden role="status">Module completed. Revisit any card or continue to the next module.</div>
+  <details class="studio-reading"><summary>Further reading and course information</summary><div id="references"></div><p>This is formative education only, not accredited certification or proof of clinical competence. Your progress remains in this browser.</p></details>
  </section>
- <section id="lesson" class="lesson-viewport" aria-label="Lesson" hidden>
-  <div class="lesson-top"><span class="eyebrow">Small lessons. Big ideas.</span><span class="progress-label">Illustrated learning · your pace</span></div>
-  <article id="lesson-card" class="lesson-card" aria-live="polite">
-   <div class="lesson-copy">
-    <div id="lesson-kicker" class="eyebrow"></div>
-    <h1 id="lesson-title"></h1>
-    <p id="lesson-copy" class="bodycopy"></p>
-    <div id="activity"></div>
-    <p id="lesson-note" class="hint" hidden></p>
-   </div>
-   <div>
-    <div id="visual" class="illustration"></div>
-    <div class="art-actions"><button id="replay" type="button" class="replay" aria-label="Replay illustration animation">↺ Replay illustration</button></div>
-    <p class="art-caption">Purposeful vector motion · no video required</p>
-   </div>
-  </article>
+ <section id="lesson" hidden>
+   <article id="lesson-card" class="card" aria-live="polite">
+     <div class="studio-card-copy">
+       <div class="kicker" id="lesson-kicker"></div>
+       <h1 id="lesson-title"></h1>
+       <p id="lesson-copy"></p>
+       <div id="activity"></div>
+       <p id="lesson-note" class="studio-note" hidden></p>
+     </div>
+     <div id="studio-visual-column"><div id="visual" class="studio-art-panel"></div><div class="scene-controls"><button type="button" class="scene-action" id="replay">↺ Replay illustration</button><span class="scene-caption">Purposeful SVG movement · replay any time</span></div></div>
+   </article>
+   <p class="mobilehint">Swipe to navigate unlocked cards</p>
  </section>
+ <div class="site-notices">SIMple Academy · Independent educational project · <a href="./site-info.html">Privacy &amp; educational notices</a></div>
 </main>
-<footer id="lesson-controls" class="lesson-controls" hidden>
- <nav id="step-dots" class="step-dots" aria-label="Card navigation"></nav>
- <div class="control-row">
-  <button class="navbtn" id="back" type="button">← Back</button>
-  <div class="meter"><div id="counter" aria-live="polite">Card 1</div><div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div></div>
-  <button class="navbtn primary" id="next" type="button">Next →</button>
- </div>
+<footer class="bottom" id="lesson-controls" hidden>
+ <nav class="milestones" id="step-dots" aria-label="Course card progress"></nav>
+ <button class="nav" type="button" id="back">← Back</button>
+ <div class="progress"><small id="counter" aria-live="polite"></small><div class="track"><div class="fill" id="meter-fill"></div></div></div>
+ <button class="nav primary" type="button" id="next">Next →</button>
 </footer>
+</div>
+<script src="./map-icons.js"></script>
+<script src="./studio-map-icons.js"></script>
+<script src="./map.js"></script>
 <script src="./studio-data.js"></script>
 <script src="./studio.js"></script>
 </body>
