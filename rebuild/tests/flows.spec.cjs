@@ -344,3 +344,27 @@ test('public educational and privacy notice is accurate and accessible',async({p
  await expect(page.getByText(/does not send those answers/)).toBeVisible();
  await expect(page.getByText(/does not award accredited CME/)).toBeVisible();
 });
+
+test('complete desktop visual QA: capture all 14 cards after meaningful motion settles',async({page})=>{
+ test.setTimeout(160000);
+ await page.setViewportSize({width:1366,height:900});
+ await page.getByRole('button',{name:/Start learning/}).click();
+ const seq=await page.evaluate(()=>cards.map(c=>({heading:c.h,q:!!c.q,answer:c.q?c.q[c.answer]:null,art:c.art})));
+ expect(seq).toHaveLength(14);
+ fs.mkdirSync(capture,{recursive:true});
+ for(let i=0;i<seq.length;i++){
+  const c=seq[i];
+  await expect(page.locator('#heading')).toHaveText(c.heading);
+  if(c.q){
+   await expect(page.locator('.card')).toHaveClass(/is-question/);
+   await page.getByRole('button',{name:c.answer,exact:true}).click();
+  }else{
+   await expect(page.locator('.card')).not.toHaveClass(/is-question/);
+   if(i===0)await page.waitForTimeout(6150); else await page.waitForTimeout(5500);
+  }
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
+  expect(overflow,'Horizontal overflow on card '+(i+1)).toBe(false);
+  await page.screenshot({path:path.join(capture,'full-visual-card-'+String(i+1).padStart(2,'0')+'-'+(c.q?'question':'lesson')+'.png'),fullPage:true});
+  if(i<13)await page.getByRole('button',{name:'Next →'}).click();
+ }
+});
