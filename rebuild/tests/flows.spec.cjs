@@ -2,7 +2,17 @@ const {test,expect} = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const capture=path.join(__dirname,'..','artifacts');
-test.beforeEach(async({page})=>{await page.goto('/');await page.evaluate(()=>localStorage.clear());await page.reload();});
+test.beforeEach(async({page})=>{
+ await page.goto('/');
+ await page.evaluate(()=>localStorage.clear());
+ await page.reload();
+ await expect(page.getByRole('heading',{name:/Small lessons/})).toBeVisible();
+ await page.locator('#welcome-start').click();
+ await expect(page.getByRole('button',{name:/I agree · View/})).toBeDisabled();
+ await page.locator('#honour-confirm').check();
+ await page.locator('#honour-accept').click();
+ await expect(page.getByRole('heading',{name:'Explore Andragogy'})).toBeVisible();
+});
 test('14-point map, distinct question markers and gated learning',async({page})=>{
   await expect(page.getByRole('heading',{name:'Explore Andragogy'})).toBeVisible();
   await expect(page.locator('.stop')).toHaveCount(14);
@@ -29,6 +39,8 @@ test('14-point map, distinct question markers and gated learning',async({page})=
   await page.getByRole('button',{name:'Next →'}).click();
   await expect(page.getByRole('button',{name:'Next →'})).toBeEnabled();
   await page.reload();
+  await expect(page.getByRole('heading',{name:/Small lessons/})).toBeVisible();
+  await page.locator('#welcome-start').click();
   await page.getByRole('button',{name:/Continue learning/}).click();
   await expect(page.getByRole('heading',{name:'Start with the adult learner.'})).toBeVisible();
 });
@@ -63,6 +75,8 @@ test('route passes exactly through every marker centre on desktop and mobile',as
  for(const [width,height] of [[1320,900],[390,844]]){
   await page.setViewportSize({width,height});
   await page.reload();
+  await page.locator('#welcome-start').click();
+  await expect(page.getByRole('heading',{name:'Explore Andragogy'})).toBeVisible();
   const distances=await page.evaluate(()=>{
    const mobile=matchMedia('(max-width:740px)').matches;
    const cls=mobile?'.aligned-route-mobile':'.aligned-route-desktop';
@@ -236,6 +250,7 @@ test('Card 1 motion is decoded and really changes pixels, with working replay an
 test('reduced-motion preference leaves Card 1 still until user starts playback',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.reload();
+ await page.locator('#welcome-start').click();
  await page.getByRole('button',{name:/Start learning/}).click();
  const video=page.locator('.puzzle-motion-video');
  await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2;});
@@ -243,4 +258,56 @@ test('reduced-motion preference leaves Card 1 still until user starts playback',
  await expect(page.getByRole('button',{name:/Play puzzle animation/})).toBeVisible();
  await page.getByRole('button',{name:/Play puzzle animation/}).click();
  await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&!v.paused;});
+});
+
+test('welcome, creator and disclosures appear before the course',async({page})=>{
+ await page.reload();
+ await expect(page.getByRole('heading',{name:/Small lessons/})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Meet the creator'})).toBeVisible();
+ await expect(page.getByText('Dr. Rajkumar Elanjeran')).toBeVisible();
+ await expect(page.getByText(/does not award accredited CME/)).toBeVisible();
+ await expect(page.getByText(/does not ask for your name or email/)).toBeVisible();
+ await expect(page.locator('#map-screen')).toBeHidden();
+ await expect(page.locator('#cards-screen')).toBeHidden();
+ await expect(page.locator('#welcome-preview')).toBeVisible();
+ const link=page.getByRole('link',{name:/Read our learning, privacy/});
+ await expect(link).toHaveAttribute('href','./site-info.html');
+ fs.mkdirSync(capture,{recursive:true});
+ await page.screenshot({path:path.join(capture,'welcome-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ await expect(page.locator('#welcome-start')).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2)).toBe(false);
+ await page.screenshot({path:path.join(capture,'welcome-mobile.png'),fullPage:true});
+});
+test('honour acknowledgement is required once and returning learners keep progress',async({page})=>{
+ await page.evaluate(()=>localStorage.removeItem('simple-academy-learner-honour-v1'));
+ await page.reload();
+ await page.locator('#welcome-start').click();
+ await expect(page.getByRole('heading',{name:'The learner honour code'})).toBeVisible();
+ await expect(page.locator('#honour-accept')).toBeDisabled();
+ await expect(page.getByText(/answer the learning activities myself/)).toBeVisible();
+ await page.locator('#honour-confirm').check();
+ await expect(page.locator('#honour-accept')).toBeEnabled();
+ await page.locator('#honour-accept').click();
+ await expect(page.getByRole('heading',{name:'Explore Andragogy'})).toBeVisible();
+ await page.getByRole('button',{name:/Start learning/}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await page.getByRole('button',{name:'No',exact:true}).click();
+ await page.getByRole('button',{name:'Next →'}).click();
+ await page.getByRole('button',{name:'Home',exact:true}).click();
+ await expect(page.getByRole('heading',{name:/Small lessons/})).toBeVisible();
+ await page.reload();
+ await page.locator('#welcome-start').click();
+ await expect(page.locator('#honour-screen')).toBeHidden();
+ await page.getByRole('button',{name:/Continue learning/}).click();
+ await expect(page.getByRole('heading',{name:'Start with the adult learner.'})).toBeVisible();
+});
+test('public educational and privacy notice is accurate and accessible',async({page})=>{
+ await page.goto('/site-info.html');
+ await expect(page.getByRole('heading',{name:'Important information.'})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Educational disclaimer'})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Privacy and progress in this version'})).toBeVisible();
+ await expect(page.getByText(/does not require a name, email address or account/)).toBeVisible();
+ await expect(page.getByText(/does not send those answers/)).toBeVisible();
+ await expect(page.getByText(/does not award accredited CME/)).toBeVisible();
 });
