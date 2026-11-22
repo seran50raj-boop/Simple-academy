@@ -10,14 +10,32 @@ const svgWrap = (body,label) => '<svg class="art editorial-art" viewBox="0 0 640
 const iconCard = (x,y,w,h,fill,inside) => `<g filter="url(#paperShadow)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="19" fill="${fill}"/>${inside}</g>`;
 const scenes = {
  journey: () => `
-  <path d="M89 352Q165 62 329 107Q468 115 538 328" fill="none" stroke="#E8F4EF" stroke-width="84" stroke-linecap="round"/>
-  <path d="M111 343Q183 161 329 202Q456 219 515 323" fill="none" stroke="#D8906A" stroke-width="8" stroke-dasharray="14 19" stroke-linecap="round"/>
-  <circle cx="117" cy="332" r="40" fill="#EA7950"/>
-  <circle cx="328" cy="198" r="44" fill="#9BCAD9"/>
-  <circle cx="520" cy="324" r="43" fill="#F0AD4A"/>
-  <path d="M96 335l14 14 24-31M308 199l13 14 24-31M500 324l13 14 24-31" stroke="#FFF7ED" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="328" cy="87" r="27" fill="#EAB58E"/>
-  <path d="M289 142Q295 115 328 113Q361 115 367 142Z" fill="#85B5BB"/> `,
+  <!-- Adult learner direction: a tactile paper route with meaningful choice nodes. -->
+  <path d="M94 134Q190 36 387 74Q542 114 552 258Q538 383 322 396Q122 405 87 271Z" fill="#E3F2EC"/>
+  <ellipse cx="327" cy="377" rx="236" ry="27" fill="#68483C" opacity=".10"/>
+  <path d="M102 226L364 94L560 270L300 398Z" fill="#FFF4E6" stroke="#E8D6C5" stroke-width="3" filter="url(#paperShadow)"/>
+  <path d="M137 227L370 115L526 262L297 366Z" fill="#FBE7D0"/>
+  <path d="M161 261L403 148M209 309L461 196M257 349L502 240" fill="none" stroke="#E9C8A8" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+  <!-- Curved learning journey: direction determined by the learner. -->
+  <path class="journey-path" d="M193 255Q255 201 327 224T452 265" fill="none" stroke="#36988C" stroke-width="13" stroke-linecap="round" stroke-dasharray="18 14"/>
+  <g filter="url(#paperShadow)">
+   <circle cx="191" cy="254" r="37" fill="#EF754A"/>
+   <circle cx="325" cy="222" r="39" fill="#F2B247"/>
+   <circle cx="458" cy="263" r="37" fill="#96CADA"/>
+  </g>
+  <path d="M176 253l12 12 24-28M311 224l12 12 23-29M444 263l12 12 23-27" stroke="#FFF8ED" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Distinct illustrative learning materials imply meaningful choices. -->
+  <g transform="translate(136 114) rotate(-12 0 0)" filter="url(#paperShadow)">
+   <rect x="0" y="0" width="76" height="94" rx="10" fill="#EF7951"/>
+   <rect x="12" y="17" width="52" height="12" rx="6" fill="#FFF6EB"/>
+   <path d="M15 45h43m-43 13h30m-30 13h37" stroke="#FFDEC6" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(408 94) rotate(9 0 0)" filter="url(#paperShadow)">
+   <rect x="0" y="0" width="71" height="83" rx="11" fill="#92CBD9"/>
+   <circle cx="36" cy="30" r="14" fill="#FFF7E9"/>
+   <path d="M16 56h40" stroke="#FFF7E9" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <path d="M97 338l33-9M504 356l30 5" fill="none" stroke="#B89E8B" stroke-width="4" stroke-linecap="round" opacity=".55"/> `,
  experience: () => `
   <path d="M107 137Q247 30 469 139Q536 197 506 349H103Z" fill="#E8F5F0"/>
   ${iconCard(94,115,135,188,'#F2AB44','<path d="M123 170h78m-78 24h52m-52 24h65" stroke="#FFF8EE" stroke-width="8" stroke-linecap="round"/>')}
