@@ -56,3 +56,14 @@ Before declaring any course art ready, **render and review the image** at deskto
 - **Marker centres and dotted-path anchors continue to share exact coordinates** on desktop and mobile, and the forward answer gate and unrestricted backward navigation remain unchanged.
 - Added Playwright checks for icon count, 14 distinct SVGs, six question accents, saved completion states, responsive no-overflow and 1.5px path alignment.
 - Before approval: inspect the final browser-rendered illustrated map and verify contrast, icon recognition, visual consistency and mobile labels. The design should not be considered approved solely because tests pass.
+
+## Learning-card visual pass — 22 November 2026
+
+- Kept the previously approved fourteen-stop course map, distinct miniature vector markers, one-word labels, question accents and precise SVG route alignment.
+- Added `lesson.css` to **visually separate information and mandatory Yes/No question cards**, with a large two-answer interaction and smaller supporting question artwork.
+- Added `lesson-interactions.js` for seven optional concept replays: learner route, assumptions, book, timeline, autonomy spectrum, simulated ECG, and three-part recap. They do **not** unlock mandatory questions. All effects respect `prefers-reduced-motion`.
+- Replaced the overly schematic learner slide illustration with a **flat layered-paper learning route**: vibrant coral, mustard, teal, sky blue, cream paper, gentle shadows, and fine grain. It contains **no human figures**, avoiding the earlier distorted anatomy entirely.
+- Replaced the ambiguous patient/manikin silhouette on the simulation slide with a clean empty clinical bed and monitor graphic; improved the visible matte grain and scale without distorting the SVG aspect ratio.
+- Conducted an **actual rendered browser screenshot review** of information, question, learner, assumptions, history and simulation cards on desktop/mobile. This is different from the earlier text-only syntax inspections.
+- The eight Chromium automated tests pass on the latest revision; tests cover all 14 cards, all six mandatory questions, progress persistence, map alignment, non-overflow on mobile, question/information separation, concept replay and reduced-motion behaviour.
+- **Still provisional:** text, concept art and visual quality beyond this 14-card Foundations module. Do not merge or deploy without user reviewing actual new screens. No new full-body SVG artwork should be added until anatomy and visual approval requirements are met.
