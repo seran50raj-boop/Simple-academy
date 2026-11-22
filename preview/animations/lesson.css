@@ -1,0 +1,131 @@
+/* SIMple Academy / Foundations: clean editorial learning-card treatment.
+   Illustrations are distinct from questions and never force human anatomy. */
+
+.card{transition:border-color .18s ease;background:#fff;overflow:visible}
+.card:not(.is-question) #visual{isolation:isolate}
+.card .art-panel{position:relative;width:100%;border-radius:24px;overflow:hidden;
+ background:#F9F7F1;border:1px solid #E8E5DB;padding:10px 14px}
+.card .art-panel[data-art="journey"],
+.card .art-panel[data-art="lenses"],
+.card .art-panel[data-art="simulation"]{background:#EEF7F3;border-color:#DEEBE5}
+.card .art-panel[data-art="history"],
+.card .art-panel[data-art="meaning"]{background:#FFF7EB;border-color:#F0E6D4}
+.card .art-panel[data-art="spectrum"],
+.card .art-panel[data-art="summary"]{background:#F5F4F0}
+.card .art-panel svg{height:auto;width:100%;max-height:330px;display:block}
+.card .art-panel .editorial-art{max-height:none}
+/* Fill the card more confidently without cropping or deforming aspect ratio. */
+.card:not(.is-question) .art-panel[data-art="journey"] .editorial-art,
+.card:not(.is-question) .art-panel[data-art="history"] .editorial-art,
+.card:not(.is-question) .art-panel[data-art="simulation"] .editorial-art{transform:scale(1.10);transform-origin:center}
+.card:not(.is-question) .art-panel[data-art="lenses"] .editorial-art{transform:scale(1.04);transform-origin:center}
+.art-topic{position:absolute;bottom:12px;left:16px;z-index:2;background:#FFFFFFDE;
+ color:#356963;border-radius:99px;font-size:.68rem;line-height:1.3;letter-spacing:.09em;
+ text-transform:uppercase;font-weight:800;padding:6px 11px}
+.card .art-panel .editorial-art > rect:first-of-type{fill:transparent}
+
+.card.is-question{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+ border-top:5px solid #E88B62;background:#FFFEFC}
+.card.is-question #visual{align-self:start}
+.card.is-question .art-panel{max-width:400px;margin:auto;padding:0 9px;
+ background:#FFF7EF;border-color:#EEDCCD}
+.card.is-question .art-panel .editorial-art{max-height:235px}
+.card.is-question .art-topic{display:none}
+.card.is-question h1{font-size:clamp(1.85rem,3.7vw,3.05rem);line-height:1.13}
+.card.is-question .choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card.is-question .choice{text-align:center;min-height:70px;border:2px solid #E1E6E2;
+ border-radius:16px;font-weight:800;font-size:1.08rem;background:#fff;
+ transition:background .15s ease,border-color .15s ease,transform .15s ease}
+.card.is-question .choice:hover:not(:disabled){transform:translateY(-2px);border-color:#DE845F}
+.card.is-question .choice.selected{background:#FFF0E4;border-color:#DB825C}
+.card.is-question .choice:disabled{opacity:1}
+.card.is-question .feedback{font-size:.96rem;line-height:1.45;margin-top:20px}
+
+.scene-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.scene-action{border:1.5px solid #E7BC9D;border-radius:28px;background:#FFF3E9;
+ color:#85482E;font-size:.93rem;font-weight:750;padding:10px 16px}
+.scene-action:hover{background:#FFE8D7;border-color:#CE865C}
+.scene-caption{font-size:.77rem;color:#788580}
+.scene-action:focus-visible{outline:3px solid #F2B548;outline-offset:3px}
+
+.card .art-panel.is-playing[data-art="journey"] .journey-path{
+ stroke-dasharray:18 14;animation:traceJourney 1.65s ease-in-out both
+}
+@keyframes traceJourney{from{stroke-dashoffset:400;opacity:.2}to{stroke-dashoffset:0;opacity:1}}
+.card .art-panel.is-playing[data-art="lenses"] svg > circle:nth-of-type(1){
+ animation:lensYellow .7s ease-out both}
+.card .art-panel.is-playing[data-art="lenses"] svg > circle:nth-of-type(2){
+ animation:lensBlue .8s ease-out both}
+.card .art-panel.is-playing[data-art="lenses"] svg > circle:nth-of-type(3){
+ animation:lensCoral .9s ease-out both}
+@keyframes lensYellow{from{transform:translate(-14px,-7px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes lensBlue{from{transform:translate(14px,-7px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes lensCoral{from{transform:translate(0,16px);opacity:.4}to{transform:none;opacity:1}}
+.card .art-panel.is-playing[data-art="meaning"] svg > path:nth-of-type(1){
+ animation:pageLeft .75s ease-out both;transform-origin:320px 240px}
+.card .art-panel.is-playing[data-art="meaning"] svg > path:nth-of-type(2){
+ animation:pageRight .75s .08s ease-out both;transform-origin:320px 240px}
+@keyframes pageLeft{from{transform:translateX(12px) scaleX(.94);opacity:.4}to{transform:none;opacity:1}}
+@keyframes pageRight{from{transform:translateX(-12px) scaleX(.94);opacity:.4}to{transform:none;opacity:1}}
+.card .art-panel.is-playing[data-art="history"] svg > circle:nth-of-type(1){
+ animation:historyPoint .65s ease-out both}
+.card .art-panel.is-playing[data-art="history"] svg > circle:nth-of-type(2){
+ animation:historyPoint .65s .45s ease-out both}
+@keyframes historyPoint{from{transform:scale(.55);transform-origin:center;opacity:.4}to{transform:scale(1);opacity:1}}
+.card .art-panel.is-playing[data-art="spectrum"] svg > circle:nth-of-type(2){
+ animation:spectrumPoint 1.1s ease-in-out both}
+@keyframes spectrumPoint{from{transform:translateX(-100px);opacity:.5}to{transform:none;opacity:1}}
+.card .art-panel.is-playing[data-art="simulation"] .ecg-beat{
+ animation:traceECG 1.4s ease-in-out both}
+@keyframes traceECG{from{stroke-dasharray:230;stroke-dashoffset:230}to{stroke-dasharray:230;stroke-dashoffset:0}}
+.card .art-panel.is-playing[data-art="summary"] .summary-piece{
+ animation:summaryArrive .8s ease-out both}
+@keyframes summaryArrive{from{transform:translateY(-14px);opacity:.4}to{transform:translateY(0);opacity:1}}
+
+@media(max-width:740px){
+ .card.is-question{grid-template-columns:1fr}
+ .card.is-question #visual{order:2;max-width:100%}
+ .card.is-question .art-panel{max-width:285px}
+ .card.is-question .art-panel .editorial-art{max-height:165px}
+ .card.is-question h1{font-size:clamp(1.75rem,6.1vw,2.35rem)}
+ .card.is-question .choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .card.is-question .choice{min-height:60px}
+ .card:not(.is-question) #visual{order:-1}
+ .scene-controls{margin-top:14px}
+ .scene-caption{font-size:.72rem}
+ .card .art-panel .editorial-art{max-height:260px}
+}
+@media(prefers-reduced-motion:reduce){
+ .card,.scene-action,.choice{transition:none!important}
+ .card .art-panel.is-playing svg *{animation:none!important}
+ .scene-controls{display:none}
+}
+
+/* Card 1: actual approved 4-second MP4 motion, not SVG simulated movement. */
+.animated-hero{width:100%;max-width:600px;margin:0 auto;display:block}
+.animated-hero .puzzle-motion-video{
+ display:block;width:100%;height:auto;aspect-ratio:25/14;object-fit:contain;
+ background:#D8F1F1;border:1px solid #D5E9E6;border-radius:17px;
+ box-shadow:0 8px 24px rgba(57,96,93,.11)
+}
+.animated-hero .art-caption{text-align:center;line-height:1.5;margin:12px 0 0;
+ font-size:.78rem;color:#556E68}
+.hero-motion-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.hero-motion-replay,.hero-motion-toggle{
+ min-height:43px;padding:10px 15px;border-radius:14px;
+ font-size:.91rem;font-weight:760;line-height:1.2;cursor:pointer;
+ border:1.5px solid #B9D9D1;background:#fff;color:#206F64
+}
+.hero-motion-replay{background:#E6F5EF;border-color:#A5D0C4}
+.hero-motion-replay:hover,.hero-motion-toggle:hover{background:#D6EFE7}
+.hero-motion-replay:disabled{cursor:default;opacity:.6}
+.hero-motion-caption{font-size:.78rem;color:#657771;line-height:1.4}
+.motion-fallback{font-size:.82rem;text-align:center;color:#9A463B;margin:10px 0}
+.motion-fallback[hidden]{display:none}
+@media(max-width:740px){
+ .animated-hero{max-width:100%}
+ .animated-hero .puzzle-motion-video{border-radius:13px}
+ .hero-motion-controls{margin-top:12px;gap:8px}
+ .hero-motion-replay,.hero-motion-toggle{min-height:41px;padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){.animated-hero .puzzle-motion-video{transition:none}}
