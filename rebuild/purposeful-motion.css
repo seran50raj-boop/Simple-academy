@@ -1,0 +1,74 @@
+/* Scalable instructional motion. Nothing repeats automatically.
+   Seven concept effects + one four-piece jigsaw. Each concludes in a legible state. */
+.vector-hero{margin:0 auto;max-width:710px;width:100%;overflow:visible}
+.hero-vector{background:#FCFAF5;border:1px solid #E6EBE4;border-radius:22px;
+ box-shadow:0 14px 35px rgba(37,66,53,.08);width:100%;overflow:hidden}
+.hero-vector .puzzle-svg{width:100%;height:auto;display:block;aspect-ratio:16/11}
+.vector-hero .art-caption{text-align:center;color:#476B63;font-size:.82rem;line-height:1.5;margin:12px 0 0}
+.hero-vector.is-playing .puzzle-piece{animation:puzzleSnap 1.05s cubic-bezier(.16,.84,.32,1) var(--start-delay) both}
+@keyframes puzzleSnap{
+ 0%{transform:translate(var(--start-x),var(--start-y));opacity:.94}
+ 72%{transform:translate(1px,-1px);opacity:1}
+ 100%{transform:translate(0,0);opacity:1}
+}
+.hero-vector.is-playing .puzzle-conclusion{animation:puzzleReveal .55s ease-out 5.55s both}
+@keyframes puzzleReveal{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+.vector-hero~.hero-motion-controls{margin-top:17px}
+.hero-motion-replay{background:#ECF7F0;border-color:#B0D8CB;color:#136B60}
+.hero-motion-replay:hover{background:#D9F0E5}
+.hero-motion-caption{line-height:1.4;font-size:.79rem}
+.art-panel.is-playing .motion-learner{animation:learnerRoute 5.2s ease-in-out .25s both}
+@keyframes learnerRoute{
+ 0%,12%{transform:translate(0,0)}
+ 47%,59%{transform:translate(134px,-31px)}
+ 94%,100%{transform:translate(265px,8px)}
+}
+.art-panel.is-playing[data-art="journey"] .journey-path{animation:traceJourney 5.1s ease-in-out both}
+.art-panel.is-playing[data-art="lenses"] .editorial-art>circle:nth-of-type(1){animation:lensStoryOne 4.8s ease-out both}
+.art-panel.is-playing[data-art="lenses"] .editorial-art>circle:nth-of-type(2){animation:lensStoryTwo 4.8s ease-out both}
+.art-panel.is-playing[data-art="lenses"] .editorial-art>circle:nth-of-type(3){animation:lensStoryThree 4.8s ease-out both}
+@keyframes lensStoryOne{0%,10%{transform:translate(-55px,-8px)}45%,100%{transform:none}}
+@keyframes lensStoryTwo{0%,30%{transform:translate(55px,-8px)}65%,100%{transform:none}}
+@keyframes lensStoryThree{0%,50%{transform:translate(0,60px)}85%,100%{transform:none}}
+.art-panel.is-playing[data-art="meaning"] .editorial-art>path:nth-of-type(1){animation:pageOpenLeft 4.7s ease-out both;transform-origin:320px 118px}
+.art-panel.is-playing[data-art="meaning"] .editorial-art>path:nth-of-type(2){animation:pageOpenRight 4.7s ease-out both;transform-origin:320px 118px}
+@keyframes pageOpenLeft{0%,10%{transform:scaleX(.22)}45%,100%{transform:scaleX(1)}}
+@keyframes pageOpenRight{0%,29%{transform:scaleX(.22)}72%,100%{transform:scaleX(1)}}
+.art-panel.is-playing .motion-history-point{animation:historyTravel 4.5s ease-in-out .5s both}
+@keyframes historyTravel{0%,10%{transform:translateX(0)}85%,100%{transform:translateX(247px)}}
+.art-panel.is-playing .motion-spectrum-token{animation:spectrumShared 5s ease-in-out both}
+@keyframes spectrumShared{
+ 0%,14%{transform:translateX(0)}
+ 50%,62%{transform:translateX(150px)}
+ 84%,95%{transform:translateX(306px)}
+ 100%{transform:translateX(150px)}
+}
+.art-panel.is-playing .motion-sim-a{animation:choiceReveal 5s ease-out both}
+.art-panel.is-playing .motion-sim-b{animation:choiceRevealB 5s ease-out both}
+@keyframes choiceReveal{0%,12%{opacity:0;transform:translateY(20px)}37%,100%{opacity:1;transform:none}}
+@keyframes choiceRevealB{0%,44%{opacity:0;transform:translateY(20px)}70%,100%{opacity:1;transform:none}}
+.art-panel.is-playing[data-art="summary"] path.summary-piece:nth-of-type(1){animation:recapOne 4.8s ease-out both}
+.art-panel.is-playing[data-art="summary"] path.summary-piece:nth-of-type(2){animation:recapTwo 4.8s ease-out both}
+.art-panel.is-playing[data-art="summary"] path.summary-piece:nth-of-type(3){animation:recapThree 4.8s ease-out both}
+@keyframes recapOne{0%,15%{transform:translate(-67px,-40px)}40%,100%{transform:none}}
+@keyframes recapTwo{0%,35%{transform:translate(70px,-36px)}67%,100%{transform:none}}
+@keyframes recapThree{0%,60%{transform:translate(0,72px)}90%,100%{transform:none}}
+.motion-explanation{font-size:.83rem;line-height:1.55;max-width:43ch;color:#486C64;margin-top:10px}
+.card.is-question .feedback.good{animation:answerNotice .24s ease-out both}
+@keyframes answerNotice{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:740px){.vector-hero{max-width:100%}.hero-vector{border-radius:16px}.vector-hero~.hero-motion-controls{margin-top:11px}.motion-explanation{font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){
+ .hero-vector .puzzle-piece,.hero-vector .puzzle-conclusion,
+ .art-panel .motion-learner,.art-panel .motion-history-point,.art-panel .motion-spectrum-token,
+ .art-panel .motion-sim-a,.art-panel .motion-sim-b,
+ .art-panel .editorial-art>circle,.art-panel .editorial-art>path,
+ .card.is-question .feedback.good{animation:none!important;transform:none!important;opacity:1!important}
+}
+
+/* Piece gradients are authored in the vector, not overwritten by CSS. */
+.hero-vector .puzzle-piece>path{filter:drop-shadow(0 3px 3px rgba(52,53,49,.14))}
+
+/* Ensure the final educational concept is visibly a completed centre tile,
+   not text over the joint between four coloured pieces. */
+.hero-vector .puzzle-conclusion rect{filter:none!important;fill:#FFF9EE!important;stroke:#C9B5A0!important}
+.hero-vector .puzzle-conclusion text{fill:#1B464B!important}

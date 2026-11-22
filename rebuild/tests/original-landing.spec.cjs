@@ -51,7 +51,7 @@ test('original creator and double-confirmation honour code lead to rebuilt map',
  await expect(page.locator('.stop')).toHaveCount(14);
  await page.getByRole('button',{name:/Start learning/}).click();
  await expect(page.getByRole('heading',{name:'What is Andragogy?'})).toBeVisible();
- await expect(page.locator('.puzzle-motion-video')).toBeVisible();
+ await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
 });
 
 test('returning learner can bypass the original honour code and resume course',async({page})=>{

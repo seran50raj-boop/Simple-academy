@@ -20,8 +20,8 @@ test('14-point map, distinct question markers and gated learning',async({page})=
   await expect(page.locator('.stop').filter({has:page.locator('.stop-kind', {hasText:'Question'})})).toHaveCount(6);
   await page.getByRole('button',{name:/Start learning/}).click();
   await expect(page.getByRole('heading',{name:'What is Andragogy?'})).toBeVisible();
-  await expect(page.locator('.puzzle-motion-video')).toBeVisible();
-  await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2&&v.videoWidth===400&&v.duration>=3.9});
+  await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
+  await expect(page.locator('.hero-vector svg.puzzle-svg')).toBeVisible();
   await expect(page.getByRole('button',{name:'Next →'})).toBeEnabled();
   await page.getByRole('button',{name:'Next →'}).click();
   await expect(page.getByRole('heading',{name:'Adults arrive as a blank slate.'})).toBeVisible();
@@ -51,8 +51,8 @@ test('mobile layout, reachable map and animated Card 1',async({page})=>{
   const mapOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
   expect(mapOverflow).toBe(false);
   await page.getByRole('button',{name:/Start learning/}).click();
-  await expect(page.locator('.puzzle-motion-video')).toBeVisible();
-  await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2&&v.videoWidth===400&&v.duration>=3.9});
+  await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
+  await expect(page.locator('.hero-vector svg.puzzle-svg')).toBeVisible();
   const cardOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
   expect(cardOverflow).toBe(false);
   await expect(page.locator('.approved-scene .art-caption')).toContainText('Experience');
@@ -202,64 +202,96 @@ test('concept motion is purposeful and reduced-motion accessibility is respected
  expect(reducedAnimation).toBe('none');
 });
 
-test('Card 1 motion is decoded and really changes pixels, with working replay and pause',async({page})=>{
+test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assembled',async({page})=>{
  await page.getByRole('button',{name:/Start learning/}).click();
- const video=page.locator('.puzzle-motion-video');
- await expect(video).toBeVisible();
- await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2&&v.videoWidth===400&&v.videoHeight===224&&v.duration>=3.9;});
- const changes=await video.evaluate(async v=>{
-  v.pause();
-  const ready=new Promise((resolve,reject)=>{
-   const timer=setTimeout(()=>reject(new Error('Reset seek timed out')),4000);
-   v.addEventListener('seeked',()=>{clearTimeout(timer);resolve();},{once:true});
-  });
-  v.currentTime=.01;await ready;
-  const canvas=document.createElement('canvas');canvas.width=v.videoWidth;canvas.height=v.videoHeight;
-  const ctx=canvas.getContext('2d',{willReadFrequently:true});
-  const frame=()=>{ctx.drawImage(v,0,0);return ctx.getImageData(0,0,canvas.width,canvas.height).data.slice();};
-  let first=null;
-  await v.play();
-  return await new Promise((resolve,reject)=>{
-   const watchdog=setTimeout(()=>reject(new Error('No decoded playback frames')),6500);
-   const onFrame=(_,meta)=>{
-    if(!first && meta.mediaTime>=.2)first=frame();
-    if(first && meta.mediaTime>=1.7){
-     const last=frame();let changed=0;
-     for(let i=0;i<last.length;i+=4){
-      const delta=Math.abs(first[i]-last[i])+Math.abs(first[i+1]-last[i+1])+Math.abs(first[i+2]-last[i+2]);
-      if(delta>40)changed++;
-     }
-     v.pause();clearTimeout(watchdog);resolve({changed});
-    }else{v.requestVideoFrameCallback(onFrame);}
-   };
-   v.requestVideoFrameCallback(onFrame);
-  });
+ await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
+ await expect(page.locator('.hero-vector .puzzle-slots path')).toHaveCount(4);
+ const tileColors=await page.locator('.hero-vector .puzzle-piece').evaluateAll(groups=>groups.map(g=>getComputedStyle(g.querySelector(':scope > path:first-child')).fill));
+ expect(tileColors).toEqual(['url("#card-goldTile")','url("#card-coralTile")','url("#card-tealTile")','url("#card-blueTile")']);
+ const paintServers=await page.locator('.hero-vector svg').evaluate(svg=>[...svg.querySelectorAll('.puzzle-piece')].map(g=>{const p=g.querySelector(':scope > path:first-child');
+  const m=getComputedStyle(p).fill.match(/url\(["']?#([^"')]+)["']?\)/);return !!m&&!!svg.querySelector('[id="'+m[1]+'"]');
+ }));
+ expect(paintServers,'Every card tile must have a usable gradient in its OWN SVG').toEqual([true,true,true,true]);
+ const original=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
+ await page.waitForTimeout(1650);
+ const arrived=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
+ expect(Math.abs(original.x-arrived.x)+Math.abs(original.y-arrived.y)).toBeGreaterThan(15);
+ const shapes=await page.locator('.hero-vector svg').evaluate(svg=>{
+  const slots=[...svg.querySelectorAll('.puzzle-slots path')];
+  const pieces=[...svg.querySelectorAll('.puzzle-piece > path:first-child')];
+  const matching=slots.every((slot,i)=>slot.getAttribute('d')===pieces[i].getAttribute('d'));
+  let overlaps=0,holes=0;
+  const point=svg.createSVGPoint();
+  for(let x=194;x<524;x+=4)for(let y=121;y<349;y+=4){
+   point.x=x;point.y=y;
+   const count=pieces.filter(piece=>piece.isPointInFill(point)).length;
+   if(count>1)overlaps++;
+   if(count===0)holes++;
+  }
+  return {matching,overlaps,holes};
  });
- expect(changes.changed,'Frame comparison detected a still video').toBeGreaterThan(700);
- await page.getByRole('button',{name:/Replay puzzle animation/}).click();
- await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&!v.paused;});
- const t1=await video.evaluate(v=>v.currentTime);
- await page.waitForTimeout(450);
- const t2=await video.evaluate(v=>v.currentTime);
- expect(t2).toBeGreaterThan(t1+.10);
- await page.getByRole('button',{name:'Pause animation'}).click();
- await expect(video).toHaveJSProperty('paused',true);
+ expect(shapes.matching).toBe(true);
+ expect(shapes.overlaps,'Geometric puzzle pieces overlap').toBe(0);
+ expect(shapes.holes,'Puzzle should form one contiguous board').toBeLessThan(100);
+ const labelOverlaps=await page.locator('.hero-vector svg').evaluate(svg=>{
+  const rect=svg.querySelector('.puzzle-conclusion rect').getBBox();
+  const texts=[...svg.querySelectorAll('.puzzle-piece text')];
+  return texts.filter(t=>{
+   const b=t.getBBox();
+   return b.x<rect.x+rect.width && b.x+b.width>rect.x &&
+          b.y<rect.y+rect.height && b.y+b.height>rect.y;
+  }).map(t=>t.textContent);
+ });
+ expect(labelOverlaps,'Andragogy overlay must not cover its component labels').toEqual([]);
+ await page.waitForTimeout(4800);
+ await expect(page.locator('.hero-vector .puzzle-conclusion')).toBeVisible();
+ const done=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
+ await page.waitForTimeout(350);
+ const held=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
+ expect(Math.abs(done.x-held.x)+Math.abs(done.y-held.y)).toBeLessThan(.1);
+ await page.getByRole('button',{name:'Replay puzzle assembly'}).click();
+ const restarting=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
+ expect(Math.abs(restarting.x-held.x)+Math.abs(restarting.y-held.y)).toBeGreaterThan(15);
  fs.mkdirSync(capture,{recursive:true});
- await page.screenshot({path:path.join(capture,'card1-animated-desktop.png'),fullPage:true});
+ await page.screenshot({path:path.join(capture,'vector-card1-in-motion-desktop.png'),fullPage:true});
+ await page.waitForTimeout(6350);
+ await page.screenshot({path:path.join(capture,'vector-card1-completed-desktop.png'),fullPage:true});
 });
-test('reduced-motion preference leaves Card 1 still until user starts playback',async({page})=>{
+test('reduced-motion preference shows completed vector without animations',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.reload();
  await page.locator('#welcome-start').click();
  await page.getByRole('button',{name:/Start learning/}).click();
- const video=page.locator('.puzzle-motion-video');
- await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&v.readyState>=2;});
- await expect(video).toHaveJSProperty('paused',true);
- await expect(page.getByRole('button',{name:/Play puzzle animation/})).toBeVisible();
- await page.getByRole('button',{name:/Play puzzle animation/}).click();
- await page.waitForFunction(()=>{const v=document.querySelector('.puzzle-motion-video');return v&&!v.paused;});
+ const panel=page.locator('.hero-vector');
+ await expect(panel.locator('.puzzle-piece')).toHaveCount(4);
+ await expect(page.getByRole('button',{name:'Replay puzzle assembly'})).toBeHidden();
+ const state=await panel.locator('.puzzle-piece').first().evaluate(el=>({
+  animation:getComputedStyle(el).animationName,
+  transform:getComputedStyle(el).transform
+ }));
+ expect(state.animation).toBe('none');
+ expect(state.transform).toBe('none');
 });
-
+test('each learning concept gets specific one-time movement and pedagogical explanation',async({page})=>{
+ await page.getByRole('button',{name:/Start learning/}).click();
+ const sequence=await page.evaluate(()=>cards.map(c=>({q:!!c.q,answer:c.q?c.q[c.answer]:null,art:c.art})));
+ for(let i=0;i<sequence.length;i++){
+  const c=sequence[i];
+  if(c.q){
+   await expect(page.locator('.scene-action')).toHaveCount(0);
+   await page.getByRole('button',{name:c.answer,exact:true}).click();
+  }else if(i>0){
+   const plan=await page.evaluate(key=>lessonSceneActions[key],c.art);
+   expect(plan&&plan.meaning).toBeTruthy();
+   await expect(page.locator('.motion-explanation')).toContainText(plan.meaning);
+   const btn=page.getByRole('button',{name:plan.label,exact:true});
+   await expect(btn).toBeVisible();
+   await btn.click();
+   await expect(page.locator('.art-panel.is-playing')).toBeVisible();
+  }
+  if(i<sequence.length-1)await page.getByRole('button',{name:'Next →'}).click();
+ }
+});
 test('welcome, creator and disclosures appear before the course',async({page})=>{
  await page.reload();
  await expect(page.getByRole('heading',{name:/Small lessons/})).toBeVisible();
@@ -315,4 +347,28 @@ test('public educational and privacy notice is accurate and accessible',async({p
  await expect(page.getByText(/does not require a name, email address or account/)).toBeVisible();
  await expect(page.getByText(/does not send those answers/)).toBeVisible();
  await expect(page.getByText(/does not award accredited CME/)).toBeVisible();
+});
+
+test('complete desktop visual QA: capture all 14 cards after meaningful motion settles',async({page})=>{
+ test.setTimeout(160000);
+ await page.setViewportSize({width:1366,height:900});
+ await page.getByRole('button',{name:/Start learning/}).click();
+ const seq=await page.evaluate(()=>cards.map(c=>({heading:c.h,q:!!c.q,answer:c.q?c.q[c.answer]:null,art:c.art})));
+ expect(seq).toHaveLength(14);
+ fs.mkdirSync(capture,{recursive:true});
+ for(let i=0;i<seq.length;i++){
+  const c=seq[i];
+  await expect(page.locator('#heading')).toHaveText(c.heading);
+  if(c.q){
+   await expect(page.locator('.card')).toHaveClass(/is-question/);
+   await page.getByRole('button',{name:c.answer,exact:true}).click();
+  }else{
+   await expect(page.locator('.card')).not.toHaveClass(/is-question/);
+   if(i===0)await page.waitForTimeout(6150); else await page.waitForTimeout(5500);
+  }
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
+  expect(overflow,'Horizontal overflow on card '+(i+1)).toBe(false);
+  await page.screenshot({path:path.join(capture,'full-visual-card-'+String(i+1).padStart(2,'0')+'-'+(c.q?'question':'lesson')+'.png'),fullPage:true});
+  if(i<13)await page.getByRole('button',{name:'Next →'}).click();
+ }
 });

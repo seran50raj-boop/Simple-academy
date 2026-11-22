@@ -115,6 +115,7 @@
 </style>
 <link rel="stylesheet" href="./map.css">
 <link rel="stylesheet" href="./lesson.css">
+<link rel="stylesheet" href="./purposeful-motion.css">
 <link rel="stylesheet" href="./landing.css">
 </head>
 <body>
@@ -130,10 +131,7 @@
    </div>
   </div>
   <div class="welcome-visual">
-   <video id="welcome-preview" autoplay muted loop playsinline preload="metadata" width="400" height="224"
-    aria-label="Animated editorial illustration showing learners fitting a puzzle piece together">
-    <source src="./assets/andragogy-card1-motion.mp4" type="video/mp4">
-   </video>
+   <div id="welcome-preview" class="welcome-static-vector" aria-label="Completed four-part Andragogy illustration"></div>
    <p>Learn by exploring, thinking and fitting ideas together.</p>
   </div>
  </div>
@@ -228,15 +226,14 @@ function showHome(){
  $('home-link').hidden=true;$('map-link').hidden=true;
  $('welcome-start').textContent=furthest?'Continue Andragogy →':'Begin Andragogy →';
  const intro=$('welcome-preview');
- if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){intro.pause();}
- else if(intro.paused){intro.play().catch(()=>{});}
+ if(!intro.querySelector('svg'))intro.innerHTML=buildPuzzleHeroSVG('welcome');
  window.scrollTo(0,0);
 }
 function showHonour(){
  $('welcome-screen').hidden=true;$('honour-screen').hidden=false;
  $('map-screen').hidden=true;$('cards-screen').hidden=true;$('bottom').hidden=true;
  $('home-link').hidden=false;$('map-link').hidden=true;
- $('welcome-preview').pause();
+ 
  $('honour-confirm').checked=false;$('honour-accept').disabled=true;
  window.scrollTo(0,0);
 }
@@ -244,14 +241,14 @@ function showMap(){
  if(!honourAccepted){showHonour();return;}
  $('welcome-screen').hidden=true;$('honour-screen').hidden=true;
  $('map-screen').hidden=false;$('cards-screen').hidden=true;$('bottom').hidden=true;
- $('home-link').hidden=false;$('map-link').hidden=true;$('welcome-preview').pause();
+ $('home-link').hidden=false;$('map-link').hidden=true;
  renderMap();window.scrollTo(0,0);
 }
 function showCard(index){
  if(index<0||index>furthest||index>=cards.length)return;
  current=index;$('welcome-screen').hidden=true;$('honour-screen').hidden=true;
  $('map-screen').hidden=true;$('cards-screen').hidden=false;$('bottom').hidden=false;
- $('home-link').hidden=false;$('map-link').hidden=false;$('welcome-preview').pause();
+ $('home-link').hidden=false;$('map-link').hidden=false;
  render();window.scrollTo(0,0);
 }
 function render(){
