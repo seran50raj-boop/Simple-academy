@@ -61,6 +61,7 @@ function glyph(kind){
 const t=(x,y,value,size=17,color="#284e50",weight=800)=>'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="'+weight+'" font-size="'+size+'" fill="'+color+'">'+value+'</text>';
 const box=(x,y,w,h,fill="#fff",stroke="#d3e7df",r=20)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2"/>';
 function artwork(card,idx){
+ if(module.id==="knowles")return knowlesArtwork(card,idx);
  const peach="#f68c71",purple="#7564d6",mint="#65bca6",gold="#f4c56e",ink="#294b52",muted="#738f8b";
  let center="";
  const stage=(x,y,w,label,fill,step)=>'<g class="pulse-dot phase'+step+'">'+box(x,y,w,61,fill,"#ffffff",17)+t(x+w/2,y+36,label,16,ink)+'</g>';
@@ -224,31 +225,20 @@ function updatePage(){
  $("module-time").textContent=module.minutes;
  $("module-count").textContent=module.cards.length+" illustrated cards";
  $("module-questions").textContent=module.cards.filter(interactive).length+" checkpoints";
- $("module-art").innerHTML=artwork(module.cards[0],0);
- $("module-art").classList.add("is-animating");
+ $("module-title-nav").textContent=module.title;
  const ref=$("references");ref.replaceChildren();
  module.references.forEach(item=>{const a=element("a",null,item.label);a.href=item.url;a.target="_blank";a.rel="noopener noreferrer";ref.appendChild(a);});
  renderMap();
 }
 function renderMap(){
- const journey=$("journey");journey.replaceChildren();
- module.cards.forEach((card,i)=>{
-  const isSolved=solved.has(i),available=i<=furthest;
-  const btn=element("button","journey-step "+(available?"available ":"locked ")+(isSolved?"solved":""));
-  btn.type="button";btn.disabled=!available;btn.setAttribute("aria-label","Card "+(i+1)+": "+card.title+(available?"":"; locked"));
-  const node=element("span","node");node.innerHTML=glyph(card.kind);
-  const copy=element("span","stepcopy");copy.append(element("strong",null,card.word+" · "+card.title),element("small",null,(interactive(card)?"Practice question":"Illustrated learning card")+(isSolved?" · completed":"")));
-  btn.append(node,copy);btn.addEventListener("click",()=>showLesson(i));journey.appendChild(btn);
- });
- $("resume").textContent=done?"Review completed module →":furthest?"Continue at card "+(furthest+1)+" →":"Start this module →";
- $("map-summary").textContent=done?"Module complete · You can review any card.":(furthest+1)+" of "+module.cards.length+" cards unlocked";
+ const adapted=module.cards.map(c=>({word:c.word,q:interactive(c)?["Question"]:null}));
+ renderCourseMap($("journey"),adapted,furthest,solved,showLesson);
+ $("resume").textContent=done?"Review completed module →":furthest?"Continue learning →":"Start learning →";
+ $("map-summary").textContent=done?"All "+module.cards.length+" cards completed":(furthest+1)+" of "+module.cards.length+" cards unlocked";
  $("complete-note").hidden=!done;
- if(done&&module.id==="knowles"){
-  $("next-module").hidden=false;$("next-module").href="./learn.html?module=kolb";$("next-module").textContent="Next module: Kolb’s Learning Cycle →";
- }else if(done&&module.id==="kolb"){
-  $("next-module").hidden=false;$("next-module").href="./learn.html?module=rcdp";$("next-module").textContent="Next module: RCDP →";
- }else if(done){
-  $("next-module").hidden=false;$("next-module").href="./academy.html";$("next-module").textContent="Explore all modules →";
+ if(done){
+  const following={knowles:["./learn.html?module=kolb","Next: Kolb’s Learning Cycle →"],kolb:["./learn.html?module=rcdp","Next: RCDP →"],rcdp:["./academy.html","Explore all modules →"]};
+  const next=following[module.id];$("next-module").hidden=false;$("next-module").href=next[0];$("next-module").textContent=next[1];
  }else{$("next-module").hidden=true;}
 }
 function showOverview(){
@@ -263,9 +253,9 @@ function feedbackNode(parent){
  const n=element("div","feedback");n.id="feedback";n.setAttribute("role","status");n.setAttribute("aria-live","polite");parent.appendChild(n);return n;
 }
 function renderChoice(card,area){
- const wrap=element("div","options");
+ const wrap=element("div","choices");
  card.options.forEach((option,i)=>{
-  const btn=element("button","option"+(solved.has(current)&&i===card.correct?" correct":""),option);
+  const btn=element("button","choice"+(solved.has(current)&&i===card.correct?" correct":""),option);
   btn.type="button";btn.disabled=solved.has(current);
   btn.addEventListener("click",()=>{
    if(solved.has(current))return;
@@ -349,16 +339,16 @@ function showLesson(index){
 function updateControls(){
  const card=module.cards[current],dots=$("step-dots");dots.replaceChildren();
  module.cards.forEach((item,i)=>{
-  const dot=element("button","step-dot"+(i===current?" current":"")+(solved.has(i)?" solved":""));
-  dot.type="button";dot.disabled=i>furthest;dot.title="Card "+(i+1)+": "+item.word;
+  const dot=element("button","milestone"+(i===current?" current":"")+(solved.has(i)?" complete":""));
+  dot.type="button";dot.disabled=i>furthest;dot.textContent=solved.has(i)?"✓":interactive(item)?"?":"▤";dot.title="Card "+(i+1)+": "+item.word;
   dot.setAttribute("aria-label","Go to card "+(i+1)+(i>furthest?" (locked)":""));
   if(i===current)dot.setAttribute("aria-current","step");
   dot.addEventListener("click",()=>showLesson(i));dots.appendChild(dot);
  });
- $("back").textContent=current===0?"← Module map":"← Back";
+ $("back").textContent=current===0?"← Map":"← Back";
  $("next").textContent=current===module.cards.length-1?"Finish module ✓":"Next →";
  $("next").disabled=interactive(card)&&!solved.has(current);
- $("counter").textContent="Card "+(current+1)+" / "+module.cards.length;
+ $("counter").textContent="Card "+(current+1)+" of "+module.cards.length;
  $("meter-fill").style.width=((current+1)/module.cards.length*100)+"%";
 }
 function go(direction){
