@@ -73,17 +73,18 @@ const scenes = {
   <path d="M123 312H517" stroke="#74534A" stroke-width="12" stroke-linecap="round"/>
   <rect x="154" y="202" width="330" height="103" rx="24" fill="#9DCBD8"/>
   <rect x="175" y="193" width="89" height="38" rx="19" fill="#FAF5EE"/>
-  <path d="M236 244Q290 226 385 244" stroke="#E9B595" stroke-width="38" fill="none" stroke-linecap="round"/>
-  <circle cx="220" cy="238" r="24" fill="#E9B595"/>
+  <rect x="252" y="221" width="174" height="55" rx="17" fill="#F4F1E8" stroke="#FFF9F3" stroke-width="5"/>
+  <rect x="181" y="214" width="58" height="49" rx="17" fill="#FFF8F0"/>
+  <path d="M266 232h133m-133 15h111" stroke="#A6CFD5" stroke-width="5" stroke-linecap="round"/>
   <rect x="414" y="109" width="92" height="70" rx="13" fill="#305D58"/>
-  <path d="M425 147h15l7-20 9 35 8-14h25" stroke="#A7E8C4" fill="none" stroke-width="5" stroke-linejoin="round"/>
+  <path class="ecg-beat" d="M425 147h15l7-20 9 35 8-14h25" stroke="#A7E8C4" fill="none" stroke-width="5" stroke-linejoin="round"/>
   <path d="M310 172l14-35 14 35" stroke="#EF7A4F" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="325" cy="115" r="30" fill="#F2AF4C"/><path d="M316 114h18m-9-9v18" stroke="#FFF8EC" stroke-width="7" stroke-linecap="round"/> `,
  summary: () => `
   <circle cx="317" cy="211" r="158" fill="#E9F4EF"/>
-  <path d="M163 170L307 106L372 172L275 220L225 258Z" fill="#EF7747"/>
-  <path d="M307 106L448 179L399 290L275 220L372 172Z" fill="#9ACDDD"/>
-  <path d="M225 258L275 220L399 290L302 366L171 288Z" fill="#F1B04B"/>
+  <path class="summary-piece" d="M163 170L307 106L372 172L275 220L225 258Z" fill="#EF7747"/>
+  <path class="summary-piece" d="M307 106L448 179L399 290L275 220L372 172Z" fill="#9ACDDD"/>
+  <path class="summary-piece" d="M225 258L275 220L399 290L302 366L171 288Z" fill="#F1B04B"/>
   <path d="M264 233l44 47 75-85" stroke="#FFF8ED" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <path d="M124 84l25 27M474 89l30 21M480 351l31-15M125 345l-26 22" stroke="#CE8A69" stroke-width="7" stroke-linecap="round" opacity=".68"/> `,
  structure: () => `
