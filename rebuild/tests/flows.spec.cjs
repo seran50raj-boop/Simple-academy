@@ -286,6 +286,11 @@ test('honour acknowledgement is required once and returning learners keep progre
  await expect(page.getByRole('heading',{name:'The learner honour code'})).toBeVisible();
  await expect(page.locator('#honour-accept')).toBeDisabled();
  await expect(page.getByText(/answer the learning activities myself/)).toBeVisible();
+ fs.mkdirSync(capture,{recursive:true});
+ await page.screenshot({path:path.join(capture,'honour-code-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2)).toBe(false);
+ await page.screenshot({path:path.join(capture,'honour-code-mobile.png'),fullPage:true});
  await page.locator('#honour-confirm').check();
  await expect(page.locator('#honour-accept')).toBeEnabled();
  await page.locator('#honour-accept').click();
