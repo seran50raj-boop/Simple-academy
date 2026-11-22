@@ -205,10 +205,10 @@ test('concept motion is purposeful and reduced-motion accessibility is respected
 test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assembled',async({page})=>{
  await page.getByRole('button',{name:/Start learning/}).click();
  await expect(page.locator('.hero-vector .puzzle-piece')).toHaveCount(4);
- await expect(page.locator('.puzzle-slots path')).toHaveCount(4);
- const original=await page.locator('.puzzle-piece').first().boundingBox();
+ await expect(page.locator('.hero-vector .puzzle-slots path')).toHaveCount(4);
+ const original=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  await page.waitForTimeout(1650);
- const arrived=await page.locator('.puzzle-piece').first().boundingBox();
+ const arrived=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  expect(Math.abs(original.x-arrived.x)+Math.abs(original.y-arrived.y)).toBeGreaterThan(15);
  const shapes=await page.locator('.hero-vector svg').evaluate(svg=>{
   const slots=[...svg.querySelectorAll('.puzzle-slots path')];
@@ -228,13 +228,13 @@ test('Card 1 vector pieces travel into reciprocal puzzle slots and remain assemb
  expect(shapes.overlaps,'Geometric puzzle pieces overlap').toBe(0);
  expect(shapes.holes,'Puzzle should form one contiguous board').toBeLessThan(100);
  await page.waitForTimeout(4800);
- await expect(page.locator('.puzzle-conclusion')).toBeVisible();
- const done=await page.locator('.puzzle-piece').first().boundingBox();
+ await expect(page.locator('.hero-vector .puzzle-conclusion')).toBeVisible();
+ const done=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  await page.waitForTimeout(350);
- const held=await page.locator('.puzzle-piece').first().boundingBox();
+ const held=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  expect(Math.abs(done.x-held.x)+Math.abs(done.y-held.y)).toBeLessThan(.1);
  await page.getByRole('button',{name:'Replay puzzle assembly'}).click();
- const restarting=await page.locator('.puzzle-piece').first().boundingBox();
+ const restarting=await page.locator('.hero-vector .puzzle-piece').first().boundingBox();
  expect(Math.abs(restarting.x-held.x)+Math.abs(restarting.y-held.y)).toBeGreaterThan(15);
  fs.mkdirSync(capture,{recursive:true});
  await page.screenshot({path:path.join(capture,'vector-card1-in-motion-desktop.png'),fullPage:true});
