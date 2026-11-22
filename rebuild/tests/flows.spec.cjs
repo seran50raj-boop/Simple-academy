@@ -144,6 +144,10 @@ test('all 14 learning and question cards render without overflow or progression 
     await expect(page.locator('.art-panel.is-playing')).toBeVisible();
    }
   }
+  if([2,4,7,11].includes(i)){
+   fs.mkdirSync(capture,{recursive:true});
+   await page.screenshot({path:path.join(capture,'concept-card-'+(i+1)+'-mobile.png'),fullPage:true});
+  }
   if(i<sequence.length-1)await page.getByRole('button',{name:'Next →'}).click();
  }
  await expect(page.getByRole('button',{name:'Finish ✓'})).toBeEnabled();
