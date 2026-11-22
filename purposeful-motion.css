@@ -64,3 +64,11 @@
  .art-panel .editorial-art>circle,.art-panel .editorial-art>path,
  .card.is-question .feedback.good{animation:none!important;transform:none!important;opacity:1!important}
 }
+
+/* Force actual coloured vector pieces to remain clearly visible. The original
+   per-path SVG filter hid their paint in Chromium; shadows belong on the board. */
+.hero-vector .puzzle-piece>path{filter:none!important}
+.hero-vector .puzzle-piece[data-piece="purpose"]>path{fill:#F4B44D!important}
+.hero-vector .puzzle-piece[data-piece="experience"]>path{fill:#EF7E59!important}
+.hero-vector .puzzle-piece[data-piece="autonomy"]>path{fill:#4BA89E!important}
+.hero-vector .puzzle-piece[data-piece="relevance"]>path{fill:#92CADA!important}
