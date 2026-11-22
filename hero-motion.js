@@ -70,7 +70,7 @@ function buildPuzzleHeroSVG(prefix="card"){
  '<text x="360" y="421" fill="#173F49" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="850" font-size="28">ANDRAGOGY</text></g>',
  '<rect width="720" height="480" fill="url(#paperGrain)" opacity=".24" pointer-events="none"/>',
  '</svg>'
- ].join('').replace(/\\bid="(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)"/g,(_,name)=>'id="'+prefix+'-'+name+'"').replace(/url\\(#(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)\\)/g,(_,name)=>'url(#'+prefix+'-'+name+')');
+ ].join('').replace(/\bid="(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)"/g,(_,name)=>'id="'+prefix+'-'+name+'"').replace(/url\(#(paperSky|deskWood|goldTile|coralTile|tealTile|blueTile|paperGrain|deskShadow)\)/g,(_,name)=>'url(#'+prefix+'-'+name+')');
 }
 function renderAndragogyMotion(container,interaction){
  const figure=document.createElement('figure');
