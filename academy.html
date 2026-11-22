@@ -14,7 +14,7 @@ main{max-width:1160px;margin:auto;padding:65px 24px 90px}.eyebrow{font-size:.78r
 h1{font-size:clamp(2.8rem,7vw,5.2rem);line-height:1.06;letter-spacing:-.06em;margin:14px 0 19px;max-width:730px}h1 em{color:#0f817a;font-style:normal}
 .lead{font-size:clamp(1.03rem,2vw,1.3rem);line-height:1.6;color:#536f6c;max-width:660px}
 .header-section{margin-bottom:48px}.legend{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:24px}.legend span{background:white;border:1px solid #d6e7df;border-radius:999px;padding:8px 13px;font-size:.83rem;color:#54746e;font-weight:750}
-.modules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .module{display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:25px;border:1px solid #dce7e1;box-shadow:0 17px 50px #26423c0e;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}.module:hover{transform:translateY(-6px);box-shadow:0 24px 54px #26423c1b}.art{height:238px;display:grid;place-items:center;padding:18px;overflow:hidden}.art svg{display:block;width:100%;height:100%;max-width:330px;overflow:visible}.andragogy .art{background:#e7f5ec}.kolb .art{background:#f2ecff}.rcdp .art{background:#fff0e3}
 .module-main{padding:24px 24px 18px;flex:1}.no{font-size:.75rem;letter-spacing:.16em;font-weight:900;color:#668581}.module h2{font-size:clamp(1.55rem,2.4vw,2rem);line-height:1.13;letter-spacing:-.045em;margin:11px 0 12px}.module p{font-size:.98rem;line-height:1.6;color:#526d6a;margin:0}.module-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:0 24px 22px;border-top:1px solid #e9efec;padding-top:17px}.meta{font-size:.79rem;color:#64807a;font-weight:750}.open{font-weight:850;color:#087f79;white-space:nowrap}
 .after{max-width:780px;padding:24px 28px;background:#fffefa;border:1px solid var(--line);border-radius:20px;margin-top:35px;color:#526b67;line-height:1.6}.after strong{color:#214c4b}
@@ -32,7 +32,7 @@ footer{padding:25px;text-align:center;font-size:.82rem;color:#69807a;border-top:
 <section class="header-section" aria-labelledby="page-title">
  <div class="eyebrow">THE LEARNING LIBRARY</div><h1 id="page-title">Pick an idea.<br><em>Make it yours.</em></h1>
  <p class="lead">Short, illustrated learning journeys that ask you to think, choose and try. Follow any module at your own pace — no account needed.</p>
- <div class="legend"><span>3 available modules</span><span>42 illustrated cards</span><span>18 practice checkpoints</span><span>Local progress</span></div>
+ <div class="legend"><span>4 available modules</span><span>56 illustrated cards</span><span>24 practice checkpoints</span><span>Local progress</span></div>
 </section>
 <section class="modules" aria-label="Choose a module">
  <a href="./course.html#map" class="module andragogy" aria-label="Open Module 1: Foundations of Andragogy">
@@ -44,6 +44,22 @@ footer{padding:25px;text-align:center;font-size:.82rem;color:#69807a;border-top:
   <div class="module-main"><div class="no">MODULE 01 · ADULT LEARNING</div><h2>Foundations of Andragogy</h2><p>Why do adults learn differently? Explore purpose, prior experience and self-direction.</p></div>
   <div class="module-footer"><span class="meta" id="p-andragogy">14 cards · 6 questions</span><span class="open">Explore →</span></div>
  </a>
+ <a href="./learn.html?module=knowles" class="module kolb" aria-label="Open Module 2: Knowles's Six Assumptions">
+  <div class="art"><svg class="v-animation" viewBox="0 0 360 230" role="img" aria-label="Six colourful assumption cards connected around an adult learning idea">
+   <circle cx="181" cy="113" r="84" fill="none" stroke="#cbbef1" stroke-width="4" stroke-dasharray="3 10"/>
+   <g class="tile float"><rect x="115" y="8" width="129" height="51" rx="15" fill="#ffcfac"/><text x="179" y="38" font-family="Segoe UI,Arial" font-size="14" font-weight="800" fill="#654432" text-anchor="middle">NEED TO KNOW</text></g>
+   <g class="tile float"><rect x="223" y="61" width="129" height="51" rx="15" fill="#d1c4fa"/><text x="288" y="92" font-family="Segoe UI,Arial" font-size="14" font-weight="800" fill="#51457f" text-anchor="middle">SELF-CONCEPT</text></g>
+   <g class="tile float"><rect x="222" y="151" width="130" height="51" rx="15" fill="#afe5cf"/><text x="287" y="183" font-family="Segoe UI,Arial" font-size="14" font-weight="800" fill="#325f55" text-anchor="middle">EXPERIENCE</text></g>
+   <g class="tile float"><rect x="114" y="178" width="129" height="44" rx="14" fill="#f9d6c6"/><text x="179" y="205" font-family="Segoe UI,Arial" font-size="13" font-weight="800" fill="#7e4e42" text-anchor="middle">READINESS</text></g>
+   <g class="tile float"><rect x="9" y="151" width="129" height="51" rx="15" fill="#c3e4fd"/><text x="73" y="183" font-family="Segoe UI,Arial" font-size="13" font-weight="800" fill="#466682" text-anchor="middle">ORIENTATION</text></g>
+   <g class="tile float"><rect x="9" y="61" width="129" height="51" rx="15" fill="#ffe5b0"/><text x="73" y="92" font-family="Segoe UI,Arial" font-size="14" font-weight="800" fill="#76592d" text-anchor="middle">MOTIVATION</text></g>
+   <circle cx="180" cy="117" r="35" fill="#fff" stroke="#e9e1fc" stroke-width="4"/>
+   <text x="180" y="112" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="800" fill="#6956bb">KNOWLES</text>
+   <text x="180" y="130" text-anchor="middle" font-family="Segoe UI,Arial" font-size="11" font-weight="700" fill="#557a71">6 IDEAS</text>
+   </svg></div>
+  <div class="module-main"><div class="no">MODULE 02 · ADULT LEARNING</div><h2>Knowles’s Six Assumptions</h2><p>Why learn, who chooses, what experience matters, and how readiness, relevance and motivation shape teaching.</p></div>
+  <div class="module-footer"><span class="meta" id="p-knowles">14 cards · 6 questions</span><span class="open">Explore →</span></div>
+ </a>
  <a href="./learn.html?module=kolb" class="module kolb" aria-label="Open Module 2: Kolb's Experiential Learning Cycle">
   <div class="art"><svg class="v-animation" viewBox="0 0 360 230" role="img" aria-label="Four colorful stages in a connected experiential learning cycle">
     <circle cx="180" cy="115" r="80" fill="none" stroke="#d0c8ee" stroke-width="6" stroke-dasharray="4 12" stroke-linecap="round"/>
@@ -53,7 +69,7 @@ footer{padding:25px;text-align:center;font-size:.82rem;color:#69807a;border-top:
     <g class="tile float"><rect x="5" y="86" width="119" height="51" rx="17" fill="#f8d5bc"/><text x="65" y="116" font-family="Segoe UI,Arial" font-size="15" fill="#6b4e43" font-weight="800" text-anchor="middle">TRY AGAIN</text></g>
     <circle cx="180" cy="115" r="39" fill="#fff"/><path d="m166 111 11 13 21-27" stroke="#7965d6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
    </svg></div>
-  <div class="module-main"><div class="no">MODULE 02 · EXPERIENTIAL LEARNING</div><h2>Kolb’s Learning Cycle</h2><p>Turn a simulation into a cycle of experience, reflection, explanation and experimentation.</p></div>
+  <div class="module-main"><div class="no">MODULE 03 · EXPERIENTIAL LEARNING</div><h2>Kolb’s Learning Cycle</h2><p>Turn a simulation into a cycle of experience, reflection, explanation and experimentation.</p></div>
   <div class="module-footer"><span class="meta" id="p-kolb">14 cards · 6 questions</span><span class="open">Explore →</span></div>
  </a>
  <a href="./learn.html?module=rcdp" class="module rcdp" aria-label="Open Module 3: Rapid Cycle Deliberate Practice">
@@ -63,7 +79,7 @@ footer{padding:25px;text-align:center;font-size:.82rem;color:#69807a;border-top:
     <rect class="tile" x="91" y="58" width="178" height="75" rx="19" fill="#fff"/><rect x="141" y="77" width="19" height="34" rx="5" fill="#f17d67"/><rect x="171" y="77" width="19" height="34" rx="5" fill="#f17d67"/><path d="M204 96a22 22 0 1 1-5-17" fill="none" stroke="#8d7cd9" stroke-width="5"/><path d="m199 70 7 10-12 2" fill="#8d7cd9"/>
     <text x="180" y="221" text-anchor="middle" font-size="14" font-family="Segoe UI,Arial" font-weight="800" fill="#a45a47">PAUSE · COACH · RETRY</text>
    </svg></div>
-  <div class="module-main"><div class="no">MODULE 03 · SIMULATION METHODS</div><h2>Rapid Cycle Deliberate Practice</h2><p>Coach at the moment of difficulty, rewind, retry and progress toward reliable performance.</p></div>
+  <div class="module-main"><div class="no">MODULE 04 · SIMULATION METHODS</div><h2>Rapid Cycle Deliberate Practice</h2><p>Coach at the moment of difficulty, rewind, retry and progress toward reliable performance.</p></div>
   <div class="module-footer"><span class="meta" id="p-rcdp">14 cards · 6 questions</span><span class="open">Explore →</span></div>
  </a>
 </section>
@@ -72,7 +88,7 @@ footer{padding:25px;text-align:center;font-size:.82rem;color:#69807a;border-top:
 <footer>SIMple Academy · Small lessons. Big ideas. · <a href="./site-info.html">Privacy &amp; education notice</a></footer>
 <script>
 (function(){
- const entries=[["kolb","simple-academy-module-kolb-v1"],["rcdp","simple-academy-module-rcdp-v1"]];
+ const entries=[["knowles","simple-academy-module-knowles-v1"],["kolb","simple-academy-module-kolb-v1"],["rcdp","simple-academy-module-rcdp-v1"]];
  entries.forEach(function(entry){try{var x=JSON.parse(localStorage.getItem(entry[1])||"null");if(!x)return;var n=document.getElementById("p-"+entry[0]);n.textContent=x.done?"Completed · Review anytime":Math.max(1,Math.min(14,(x.furthest||0)+1))+" of 14 cards unlocked";}catch(_){}});
  try{var x=JSON.parse(localStorage.getItem("simple-academy-andragogy-foundations-v2")||"null");if(x){document.getElementById("p-andragogy").textContent=Math.max(1,Math.min(14,(x.furthest||0)+1))+" of 14 cards unlocked";}}catch(_){}
 })();
