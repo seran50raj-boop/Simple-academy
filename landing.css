@@ -78,3 +78,7 @@
  .welcome-feature{padding:16px}
 }
 @media(prefers-reduced-motion:reduce){.welcome-visual video{animation:none}}
+
+/* Keep hero preview compact on wide screens; do not enlarge the compressed animation. */
+@media(min-width:741px){.welcome-visual{align-self:center;min-height:340px}}
+.welcome-minor a{color:#08766f;text-underline-offset:3px}
